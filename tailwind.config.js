@@ -28,6 +28,9 @@ export default {
       },
       borderRadius:{
         'small': '3px',
+      },
+      boxShadow: {
+        'bg-main-shadow': '2px 2px 5px #BFBFBF, -2px -2px 5px #BFBFBF '
       }
     },
   },
