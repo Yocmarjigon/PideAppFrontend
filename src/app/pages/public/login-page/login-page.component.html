@@ -1,0 +1,17 @@
+<section class="login-page-container">
+  <div class="img-top"></div>
+  <div class="form-section-container">
+    <img src="../../../assets/images/Logo.svg" alt="">
+    <div class="form-container">
+      <h3>Inicia sesión para continuar</h3>
+      <form (ngSubmit)="login()">
+        <app-input-text id="username" class="w-full" label="Usuario" icon="pi pi-user" placeholder="Ingrese el nombre de usuario" />
+        <app-input-text id="password" class="w-full" [active]="true"  label="Contraseña" icon="pi pi-key" placeholder="Ingrese su contraseña"/>
+        <app-button label="Ingresar" type="submit"/>
+      </form>
+      <a href="">¿Olvidaste tu contraseña?</a>
+      <a href="">¿Olvidaste tu usuario?</a>
+    </div>
+    <a href="">¿Aun no tienes una cuenta? Regístrate</a>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+@import "../../../../styles/variables";
+.input-continer {
+  width: 100%;
+  label {
+  }
+
+  .input {
+    position: relative;
+
+    input {
+      padding: 15px;
+      outline: none;
+      width: 100%;
+      border: 1px solid $blue-gray;
+      padding: 10px;
+      padding-left: 30px;
+    }
+    input::placeholder {
+      color: $black-gray-ligh;
+    }
+    input[type="password"]::-ms-reveal, /* Para Edge */
+    input[type="password"]::-webkit-textfield-decoration-container {
+      /* Para Chrome/Safari */
+      display: none;
+    }
+    button {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-50%);
+      color: $black-gray-ligh;
+    }
+
+    li {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: $black-gray-ligh;
+    }
+  }
+}
