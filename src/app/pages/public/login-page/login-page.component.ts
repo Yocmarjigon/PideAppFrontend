@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { InputTextComponent } from '../../../components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '../../../components/buttons/button/button.component';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [
-    InputTextComponent,
-    ButtonComponent,
-    FormsModule
-    ],
+  imports: [InputTextComponent, ButtonComponent, FormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   onVisual = false;
 
+  constructor(private readonly router: Router) {}
+
   login() {
-    console.log('hola');
+    this.router.navigateByUrl("/layout/home-page")
+    
   }
 
   changeVisual() {

@@ -1,0 +1,28 @@
+@import "@styles/_variables.scss";
+
+nav {
+  background: $red-main;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  padding: 10px;
+  border-radius: 10px;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    li {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      span {
+        font-size: 30px;
+      }
+      p{
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonCarComponent } from "../../buttons/button-car/button-car.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar-top',
@@ -9,5 +10,14 @@ import { ButtonCarComponent } from "../../buttons/button-car/button-car.componen
   styleUrl: './nav-bar-top.component.scss'
 })
 export class NavBarTopComponent {
+
+  constructor(
+    private readonly router:Router
+  ){
+
+  }
+  logout(){
+    this.router.navigateByUrl("/login-page")
+  }
 
 }

@@ -1,5 +1,19 @@
+@import "@styles/_variables.scss";
+
 nav{
+  box-shadow: $shadow-ligh-all;
   display: flex;
+  
+  justify-content: space-around;
+  padding: 10px 10px 15px 10px;
+
   button{
+    background-color: $red-main;
+    color: $yellow-main;
+    padding: 5px 8px;
+    li{
+      font-size: 25px;
+      
+    }
   }
 }
