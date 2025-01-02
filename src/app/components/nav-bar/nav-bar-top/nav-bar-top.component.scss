@@ -3,10 +3,13 @@
 nav{
   box-shadow: $shadow-ligh-all;
   display: flex;
+  position: fixed;
+  width: 100%;
   
   justify-content: space-around;
   padding: 10px 10px 15px 10px;
-
+  z-index: 10;
+  background-color: white;
   button{
     background-color: $red-main;
     color: $yellow-main;

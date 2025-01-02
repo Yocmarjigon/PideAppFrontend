@@ -1,0 +1,24 @@
+@import "@styles/_variables.scss";
+
+.img-top{
+  display: flex;
+  background-image: url("/assets/images/top-image.svg");
+  background-size: cover; // La imagen cubrirá toda la pantalla
+  background-position:  bottom; // Centrado en la parte superior
+  background-repeat: no-repeat; // Sin repetir la imagen
+  max-height:100%; // Puedes ajustar este valor según el diseño que necesites
+  min-height: 70%;
+  width: 100%;
+  div{
+    padding: 70px 0px 0px 20px;
+    h2, p{
+      font-size: 2em;
+      font-weight: 600;
+      color: $yellow-main;
+    }
+    p{
+      text-decoration: underline;
+    }
+  }
+  
+}

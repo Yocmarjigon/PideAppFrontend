@@ -18,6 +18,7 @@ export class NavBarTopComponent {
   }
   logout(){
     this.router.navigateByUrl("/login-page")
+    console.log("kjksdjf")
   }
 
 }

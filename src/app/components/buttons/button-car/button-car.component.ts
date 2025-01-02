@@ -10,4 +10,9 @@ import { Component } from '@angular/core';
 export class ButtonCarComponent {
 cantProduct = 0;
 
+addProductCar(){
+  this.cantProduct++
+  console.log("sfd")
+}
+
 }

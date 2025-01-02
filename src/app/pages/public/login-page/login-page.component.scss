@@ -8,7 +8,7 @@
   grid-template-rows: fit 1fr;
   position: relative;
 
-  .img-top{
+/*   .img-top{
     display: flex;
     background-image: url("/assets/images/top-image.svg");
     background-size: cover; // La imagen cubrirá toda la pantalla
@@ -16,7 +16,7 @@
     background-repeat: no-repeat; // Sin repetir la imagen
     height:90%; // Puedes ajustar este valor según el diseño que necesites
     width: 100%;
-  }
+  } */
   .form-section-container{
     display: flex;
     flex-direction: column;

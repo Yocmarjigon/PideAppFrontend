@@ -3,6 +3,10 @@ import { LoginPageComponent } from './pages/public/login-page/login-page.compone
 import { LayoutComponent } from './pages/private/layout/layout.component';
 import { HomePageComponent } from './pages/private/home-page/home-page.component';
 import { RegisterPageComponent } from './pages/public/register-page/register-page.component';
+import { CarPageComponent } from './pages/private/car-page/car-page.component';
+import { ProfilePageComponent } from './pages/private/profile-page/profile-page.component';
+import { OrderPageComponent } from './pages/private/order-page/order-page.component';
+import { SearchPageComponent } from './pages/private/search-page/search-page.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +24,22 @@ export const routes: Routes = [
       {
         path: 'home-page',
         component: HomePageComponent
+      },
+      {
+        path: 'car-page',
+        component: CarPageComponent
+      },
+      {
+        path: 'profile-page',
+        component: ProfilePageComponent
+      },
+      {
+        path: 'order-page',
+        component: OrderPageComponent
+      },
+      {
+        path: 'search-page',
+        component: SearchPageComponent
       },
       {
         path: 'layout',
