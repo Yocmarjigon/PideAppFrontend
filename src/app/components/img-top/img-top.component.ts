@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './img-top.component.scss'
 })
 export class ImgTopComponent {
+ @Input() title = '';
 
 }
