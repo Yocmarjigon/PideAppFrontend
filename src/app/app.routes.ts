@@ -7,8 +7,12 @@ import { ProfilePageComponent } from './pages/private/profile-page/profile-page.
 import { OrderPageComponent } from './pages/private/order-page/order-page.component';
 import { SearchPageComponent } from './pages/private/search-page/search-page.component';
 import { RegisterSelectPageComponent } from './pages/public/register/register-select-page/register-select-page.component';
-import { RegisterUserPageComponent } from './pages/public/register/register-user-page/register-user-page.component';
-import { RegisterDeliveryPageComponent } from './pages/public/register/register-delivery-page/register-delivery-page.component';
+
+import { DescriptionProductPageComponent } from './pages/private/description-product-page/description-product-page.component';
+import { RegisterUserForm1Component } from './pages/public/register/register-user-page/register-user-form1/register-user-form1.component';
+import { RegisterUserForm2Component } from './pages/public/register/register-user-page/register-user-form2/register-user-form2.component';
+import { RegisterDeliveryForm1Component } from './pages/public/register/register-delivery-page/register-delivery-form1/register-delivery-form1.component';
+import { RegisterDeliveryForm2Component } from './pages/public/register/register-delivery-page/register-delivery-form2/register-delivery-form2.component';
 
 export const routes: Routes = [
   {
@@ -20,12 +24,20 @@ export const routes: Routes = [
     component: RegisterSelectPageComponent
   },
   {
-    path: 'register-user-page',
-    component: RegisterUserPageComponent
+    path: 'register-user-form1',
+    component: RegisterUserForm1Component
   },
   {
-    path: 'register-delivery-page',
-    component: RegisterDeliveryPageComponent
+    path: "register-user-form2",
+    component: RegisterUserForm2Component
+  },
+  {
+    path: 'register-delivery-form1',
+    component: RegisterDeliveryForm1Component
+  },
+  {
+    path: 'register-delivery-form2',
+    component: RegisterDeliveryForm2Component
   },
   {
     path: 'layout',
@@ -57,6 +69,10 @@ export const routes: Routes = [
         pathMatch: "full"
       }
     ]
+  },
+  {
+    path: 'description-product-page',
+    component: DescriptionProductPageComponent
   },
   {
     path: '',

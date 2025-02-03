@@ -24,10 +24,14 @@
     background-color: #00000075;
     transform: floor($number: 0);
 
+    h3, p{
+      width: fit-content;
+    }
     h3{
       color: $white;
       font-size: 1.2em;
-      font-weight: 500;  
+      font-weight: 500;
+        
     }
      p{
       font-size: 1.3em;

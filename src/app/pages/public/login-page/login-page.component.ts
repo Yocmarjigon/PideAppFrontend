@@ -12,9 +12,10 @@ import { ImgTopComponent } from "../../../components/img-top/img-top.component";
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
+
 export class LoginPageComponent {
   onVisual = false;
-
+  
   constructor(private readonly router: Router) {}
 
   login() {

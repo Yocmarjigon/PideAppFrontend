@@ -1,0 +1,26 @@
+<section class="description-product-page">
+  <div class="top-container">
+    <div class="container-btn-angle">
+      <a routerLink="/layout/home-page" class="pi pi-angle-left"></a>
+    </div>
+  </div>
+  <div class="description-container">
+    
+    <div class="content">
+      <div class="img-container">
+        <img [src]="product.img" alt="" />
+      </div>
+      <div class="description-content">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price }}</p>
+      </div>
+      <p>{{ product.description }}</p>
+    </div>
+    <div class="btn-container">
+      <button>
+        Agregar al carrito
+        <li class="pi pi-plus-circle"></li>
+      </button>
+    </div>
+  </div>
+</section>

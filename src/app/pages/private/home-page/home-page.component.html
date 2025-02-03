@@ -13,9 +13,7 @@
       <ng-template let-product pTemplate="item" >
         <div class="container-cards">
           <app-product-card
-            [title]="product.title"
-            [price]="product.price"
-            [img]="product.img"
+          [product]="product"
           />
         </div>
       </ng-template>
@@ -27,9 +25,7 @@
     <div>
       @for (product of products; track $index) {
         <app-product-card
-        [title]="product.title"
-        [price]="product.price"
-        [img]="product.img"
+        [product]="product"
       />
       }
     </div>

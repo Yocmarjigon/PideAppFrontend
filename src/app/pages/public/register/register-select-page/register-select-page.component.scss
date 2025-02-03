@@ -2,18 +2,8 @@
 section{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  .container-btn-angle{
-    padding-left:50px ;
-    width: 100%;
-    a{
-      font-size: 2.5em;
-      text-decoration: none;
-      color: $red-main;
-      justify-self: start;
-    }
-  }
+
+  
   div{
     width: 100%;
     .container-img{

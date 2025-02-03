@@ -23,6 +23,7 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class HomePageComponent implements OnInit {
   products: Product[] = [];
+  
   responsiveOptions = [
     {
       breakpoint: '800px',
@@ -44,42 +45,49 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.products = [
       {
-        title: 'Arepa de huevo',
+        id: 1,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
+        id: 2,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
+        id: 3,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
+        id: 4,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
+        id: 5,
+        name: 'Arepa de huevo',
+        img: '/assets/images/arepa-de-huevo.jpeg',
+        price: 2000,
+      },
+      {id: 6,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
+        id: 7,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        title: 'Arepa de huevo',
+        id: 8,
+        name: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
