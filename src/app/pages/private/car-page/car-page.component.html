@@ -1,2 +1,26 @@
-<app-img-top [title]="'Carrito'"></app-img-top>
-<h1>Home Page</h1>
+<section class="car-page-container">
+  <app-img-top [title]="'Carrito'"></app-img-top>
+  <div class="total-container">
+    <h4>
+      Total:
+      <span>$ {{ total }}</span>
+    </h4>
+    <app-button
+      [label]="'Comprar'"
+      [iconActive]="true"
+      [icon]="'pi pi-shopping-bag'"
+    ></app-button>
+  </div>
+  <div class="products-container">
+    <div class="product">
+      <div class="img-container">
+        <img src="/assets/images/arepa-de-huevo.jpeg" alt="" />
+      </div>
+      <div class="txt-container">
+        <h3>Arepa de huevo</h3>
+        <span>$ 5000</span>
+      </div>
+      <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,6 @@
-<button [type]="type" (click)="ejClick()">{{label}}</button>
+<button [type]="type" (click)="ejClick()">
+  {{ label }}
+  @if (iconActive) {
+  <li [class]="icon"></li>
+  }
+</button>
