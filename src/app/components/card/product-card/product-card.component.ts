@@ -13,7 +13,7 @@ import { DescriptionSendDataComponentService } from 'src/app/service/utils/descr
 export class ProductCardComponent {
   
   @Input() product:Product ={
-    name: '',
+    nameProduct: '',
     price: 0,
     img: ''
   }

@@ -1,5 +1,6 @@
 @import "@styles/_variables.scss";
 .description-product-page {
+  
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -21,7 +22,7 @@
     .btn-container {
       display: flex;
       justify-content: end;
-      button{
+      button {
         background-color: $yellow-main;
         font-size: 1.1em;
         padding: 10px;
@@ -30,18 +31,14 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
-        li{
+        li {
           color: $red-main;
           font-weight: 600;
           font-size: 1.2em;
-      
-          
         }
       }
-
     }
-    
-    
+
     .content {
       .img-container {
         width: 100%; // Asegura que el contenedor ocupe el ancho completo
@@ -50,7 +47,13 @@
         position: relative;
         border-radius: 10px;
         box-shadow: $shadow-ligh-inset-all;
-  
+        ::ng-deep .btn-number{
+          width: 70px !important;
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+         }
+
         img {
           position: absolute;
           width: 100%; // Ajusta el ancho automáticamente

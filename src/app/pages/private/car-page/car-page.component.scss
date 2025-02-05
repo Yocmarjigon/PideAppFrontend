@@ -22,7 +22,7 @@
   }
   .products-container {
     margin: 40px 10px 0px;
-    
+
     .product {
       height: 90px;
       display: flex;
@@ -32,11 +32,17 @@
       justify-content: space-between;
       align-items: center;
       overflow: hidden;
-      padding-right:10px ;
-
-      gap: 15px;
+      padding-right: 10px;
+      ::ng-deep .btn-number {
+        width: 40px !important;
+        button{
+          padding: 2px;
+          
+        }
+      }
+      gap: 5px;
       .txt-container {
-        width: 300px;
+        width: auto;
         h3 {
           font-size: 1.2em;
           font-weight: 600;
@@ -49,12 +55,11 @@
         }
       }
       .img-container {
-        width: 100%; // Asegura que el contenedor ocupe el ancho completo
+        width: 130px; // Asegura que el contenedor ocupe el ancho completo
         min-height: 100%; // Establece una altura mínima para el contenedor
         overflow: hidden; // Evita que la imagen se desborde del contenedor
         position: relative;
         box-shadow: $shadow-ligh-inset-all;
-        
 
         img {
           position: absolute;

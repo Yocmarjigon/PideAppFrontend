@@ -20,6 +20,18 @@
         <h3>Arepa de huevo</h3>
         <span>$ 5000</span>
       </div>
+      <div><p-inputNumber
+        [(ngModel)]="value"
+        [showButtons]="true"
+        styleClass="btn-number"
+        buttonLayout="vertical"
+        spinnerMode="vertical"
+        inputId="vertical"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        min="1"
+        max="100"
+      /></div>
       <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
     </div>
   </div>
