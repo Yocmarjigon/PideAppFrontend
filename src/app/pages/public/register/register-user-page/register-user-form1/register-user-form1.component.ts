@@ -18,10 +18,7 @@ export class RegisterUserForm1Component {
   ){
 
   }
-
   nextForm(){
     this.router.navigate(["/register-user-form2"])
   }
-
-
 }
