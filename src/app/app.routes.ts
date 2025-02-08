@@ -3,7 +3,7 @@ import { LoginPageComponent } from './pages/public/login-page/login-page.compone
 import { LayoutComponent } from './pages/private/layout/layout.component';
 import { HomePageComponent } from './pages/private/home-page/home-page.component';
 import { CarPageComponent } from './pages/private/car-page/car-page.component';
-import { ProfilePageComponent } from './pages/private/profile-page/profile-page.component';
+
 import { OrderPageComponent } from './pages/private/order-page/order-page.component';
 import { SearchPageComponent } from './pages/private/search-page/search-page.component';
 import { RegisterSelectPageComponent } from './pages/public/register/register-select-page/register-select-page.component';
@@ -13,6 +13,7 @@ import { RegisterUserForm1Component } from './pages/public/register/register-use
 import { RegisterUserForm2Component } from './pages/public/register/register-user-page/register-user-form2/register-user-form2.component';
 import { RegisterDeliveryForm1Component } from './pages/public/register/register-delivery-page/register-delivery-form1/register-delivery-form1.component';
 import { RegisterDeliveryForm2Component } from './pages/public/register/register-delivery-page/register-delivery-form2/register-delivery-form2.component';
+import { PerfilPageComponent } from './pages/private/perfil-page/perfil-page.component';
 
 export const routes: Routes = [
   {
@@ -47,13 +48,13 @@ export const routes: Routes = [
         path: 'home-page',
         component: HomePageComponent
       },
-      {
+      /* {
         path: 'car-page',
         component: CarPageComponent
-      },
+      }, */
       {
-        path: 'profile-page',
-        component: ProfilePageComponent
+        path: "perfil-page",
+        component: PerfilPageComponent
       },
       {
         path: 'order-page',
@@ -74,9 +75,11 @@ export const routes: Routes = [
     path: 'description-product-page',
     component: DescriptionProductPageComponent
   },
+ 
   {
     path: '',
     redirectTo: '/login-page',
     pathMatch: "full"
-  }
+  },
+  
 ];
