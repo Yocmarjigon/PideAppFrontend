@@ -48,10 +48,10 @@ export const routes: Routes = [
         path: 'home-page',
         component: HomePageComponent
       },
-      /* {
+      {
         path: 'car-page',
         component: CarPageComponent
-      }, */
+      },
       {
         path: "perfil-page",
         component: PerfilPageComponent
