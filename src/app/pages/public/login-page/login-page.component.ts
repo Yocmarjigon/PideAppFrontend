@@ -4,11 +4,14 @@ import { ButtonComponent } from '../../../components/buttons/button/button.compo
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ImgTopComponent } from "../../../components/img-top/img-top.component";
+import { InputIconModule } from 'primeng/inputicon';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [InputTextComponent, ButtonComponent, FormsModule, ImgTopComponent, RouterLink],
+  imports: [InputTextComponent, ButtonComponent, FormsModule, ImgTopComponent, RouterLink, InputIconModule, IconFieldModule,InputTextModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })

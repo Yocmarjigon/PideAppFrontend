@@ -6,6 +6,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputTextModule } from 'primeng/inputtext';
 import { StyleClassModule } from 'primeng/styleclass';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-page',
@@ -17,6 +18,7 @@ import { StyleClassModule } from 'primeng/styleclass';
     StyleClassModule,
     ImgTopComponent,
     ProductCardComponent,
+    FormsModule
 
   ],
   templateUrl: './search-page.component.html',
@@ -24,6 +26,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 })
 export class SearchPageComponent {
   products: Product[] = [];
+value: any;
   ngOnInit() {
     this.products = [
       {

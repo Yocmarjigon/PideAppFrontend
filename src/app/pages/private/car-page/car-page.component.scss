@@ -24,7 +24,7 @@
     margin: 40px 10px 0px;
 
     .product {
-      height: 90px;
+      height: 110px;
       display: flex;
       border: 0.5px;
       box-shadow: $shadow-ligh-all;
@@ -33,10 +33,17 @@
       align-items: center;
       overflow: hidden;
       padding-right: 10px;
+      width: auto;
+      
       ::ng-deep .btn-number {
+        
         width: 40px !important;
-        button{
+        input{
           padding: 2px;
+          margin: 4px 0px 4px 0px;
+        }
+        button{
+          padding: 5px;
           
         }
       }

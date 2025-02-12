@@ -5,12 +5,12 @@
       <p-inputIcon styleClass="pi pi-search" />
       <input type="text" pInputText placeholder="Search" />
     </p-iconField>
-    <ul cl1ass="nav">
+    <ul class="nav">
       <li><a href="">Proceso</a></li>
       <li><a href="">Entregados</a></li>
     </ul>
   </div>
-  <div class="container-menu">
+  <div class="container-products">
     <div>
       @for (product of products; track $index) {
       <app-product-card [product]="product" />
