@@ -1,0 +1,44 @@
+<section class="description-product-page">
+  <div class="top-container">
+    <div class="container-btn-angle">
+      <a routerLink="/layout/home-page" class="pi pi-home"></a>
+    </div>
+  </div>
+  <div class="description-container">
+    <div class="content">
+      <div class="img-container relative">
+        <img [src]="product.img" alt="" />
+        <div class="absolute z-10 bottom-2 right-2">
+          <p-inputnumber
+            [min]="1"
+            [max]="100"
+            [showButtons]="true"
+            buttonLayout="vertical"
+            spinnerMode="vertical"
+            inputId="vertical"
+            [inputStyle]="{ width: '3rem', height: '1.9em' }"
+          >
+            <ng-template #incrementbuttonicon>
+              <span class="pi pi-plus"></span>
+            </ng-template>
+            <ng-template #decrementbuttonicon>
+              <span class="pi pi-minus"></span>
+            </ng-template>
+          </p-inputnumber>
+        </div>
+        <div></div>
+      </div>
+      <div class="description-content">
+        <h2>{{ product.nameProduct }}</h2>
+        <p>{{ product.price }}</p>
+      </div>
+      <p>{{ product.description }}</p>
+    </div>
+    <div class="btn-container">
+      <button>
+        Agregar al carrito
+        <li class="pi pi-plus-circle"></li>
+      </button>
+    </div>
+  </div>
+</section>

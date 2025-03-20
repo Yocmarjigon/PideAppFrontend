@@ -1,0 +1,24 @@
+<section>
+  <!-- Imagen superior -->
+  <app-img-top></app-img-top>
+  <!-- Botón para ir atrás -->
+  <div>
+    <a routerLink="/login-page" class="pi pi-angle-left"></a>
+  </div>
+
+  <!-- Contenedor de los botones -->
+  <div class="flex w-full flex-col items-center gap-5">
+    <div class="container-img">
+      <img src="../../../assets/images/Logo.svg" alt="" />
+    </div>
+    <div class="flex items-center gap-11">
+      <a routerLink="/register-user-form1" class="btn-select"
+        ><li class="pi pi-user"></li>
+        Usuario</a
+      >
+      <a class="btn-select" routerLink="/register-delivery-form1"
+        ><img src="/assets/images/deliveryman.svg" alt="" /> Repartidor</a
+      >
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+@import "../../../../styles/variables";
+
+button{
+  background-color: $red-main;
+  color: white;
+  border: none;
+  width: 150px;
+  padding: 13px;
+  box-shadow: $shadow-ligh-right;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  li{
+    margin-left: 5px;
+    font-size: 1.1em;
+  }
+    
+}
+button:active{
+  transition: 0.3s;
+  background-color: $red-secundary;
+}

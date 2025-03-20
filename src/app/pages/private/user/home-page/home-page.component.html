@@ -1,0 +1,33 @@
+<section class="container-home-page">
+  <app-img-top></app-img-top>
+  <div class="container-carrousel">
+    <h2>Lo mas comprado</h2>
+    <p-carousel
+      [value]="products"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+    >
+      >
+      <ng-template let-product pTemplate="item" >
+        <div class="container-cards m-1">
+          <app-product-card
+          [product]="product"
+          />
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div class="container-products">
+    <h2>Menú general</h2>
+    <div>
+      @for (product of products; track $index) {
+        <app-product-card
+        [product]="product"
+      />
+      }
+    </div>
+  </div>
+</section>

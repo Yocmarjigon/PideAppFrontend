@@ -1,0 +1,87 @@
+@import "@styles/_variables.scss";
+
+.description-product-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .top-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-shadow: $shadow-ligh-all;
+    padding: 10px 0px 10px 0px;
+  }
+
+  .description-container {
+    padding: 15px 15px 30px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    .btn-container {
+      display: flex;
+      justify-content: end;
+      button {
+        background-color: $yellow-main;
+        font-size: 1.1em;
+        padding: 10px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        li {
+          color: $red-main;
+          font-weight: 600;
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    .content {
+      .img-container {
+        width: 100%; // Asegura que el contenedor ocupe el ancho completo
+        min-height: 400px; // Establece una altura mínima para el contenedor
+        overflow: hidden; // Evita que la imagen se desborde del contenedor
+        position: relative;
+        border-radius: 10px;
+        box-shadow: $shadow-ligh-inset-all;
+        ::ng-deep .btn-number{
+          width: 70px !important;
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+         }
+
+        img {
+          position: absolute;
+          width: 100%; // Ajusta el ancho automáticamente
+          height: 100%; // Ajusta la altura automáticamente
+          object-fit: cover; // Asegura que la imagen cubra el contenedor sin distorsionarse
+          top: 0;
+          left: 0;
+        }
+      }
+      .description-content {
+        display: flex;
+        background-color: $yellow-main;
+        padding: 5px;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0px 10px 0px;
+
+        h2 {
+          font-size: 1.4em;
+          color: $red-main;
+          font-weight: 700;
+        }
+        p {
+          font-size: 1.5em;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

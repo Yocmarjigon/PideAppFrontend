@@ -1,0 +1,27 @@
+<section class="login-page-container">
+  <!-- <div class="img-top"></div> -->
+   <app-img-top></app-img-top>
+   <div class="container-btn-angle">
+    <a routerLink="/register-delivery-form1" class="pi pi-angle-left"></a>
+  </div>
+  <div class="form-section-container">
+    <img src="../../../assets/images/Logo.svg" alt="">
+    <div class="form-container">
+      <h3>Completa los campos para continuar</h3>
+      <form >
+        <p-inputgroup>
+          <p-inputgroup-addon>
+              <i class="pi pi-envelope"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Correo" />
+      </p-inputgroup>
+
+      <app-input-password [placeholder]="'Contraseña'"></app-input-password>
+      <app-input-password [placeholder]="'Repetir Contraseña'"></app-input-password>
+
+        <app-button label="Registrarse" [click]="registerDelivery"/>
+      </form>
+    </div>
+  </div>
+</section>
+

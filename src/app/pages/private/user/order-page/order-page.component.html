@@ -1,0 +1,36 @@
+<section class="order-page-container">
+  <app-img-top [title]="'Pedido'"></app-img-top>
+  <div class="nav-container">
+    <div class="total-container">
+      <h4>
+        Total:
+        <span>$ {{ total }}</span>
+      </h4>
+    </div>
+    <ul class="nav">
+      <li><a href="">Proceso</a></li>
+      <li><a href="">Entregados</a></li>
+    </ul>
+  </div>
+  <div class="products-container">
+    @for (item of [1,1]; track $index) {
+    <div class="product">
+      <div class="img-container">
+        <img src="/assets/images/arepa-de-huevo.jpeg" alt="" />
+      </div>
+      <div class="txt-container">
+        <h3>Arepa de huevo</h3>
+        <span>$ 5000</span>
+      </div>
+
+      <div class="state-container">
+        <h3>Estado</h3>
+        <span>PROCESO</span>
+      </div>
+      <div class="btn-container">
+        <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
+      </div>
+    </div>
+    }
+  </div>
+</section>

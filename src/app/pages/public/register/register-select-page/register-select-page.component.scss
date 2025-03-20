@@ -1,0 +1,14 @@
+.btn-select::after {
+  content: '';
+  @apply h-[5px] w-full bg-orange_primary absolute bottom-0;
+}
+
+.btn-select {
+  @apply rounded-lg overflow-hidden flex relative  justify-around  flex-col items-center w-[110px] h-[130px] shadow-xl border-gray-400 border-solid border-[0.2px] p-3;
+  li {
+    @apply text-orange_primary text-[3.7em];
+  }
+  img {
+    @apply w-[80px] h-[80px];
+  }
+}

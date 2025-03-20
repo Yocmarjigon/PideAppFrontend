@@ -1,0 +1,41 @@
+@import "@styles/_variables.scss";
+/* .box-product-container{
+  display: flex;
+  width: 100%;
+} */
+
+.container-home-page{
+  div{
+    h2{
+      font-size: 2em;
+      color: $red-main;
+      padding: 3px 20px;
+    }
+    
+
+  }
+  .container-carrousel::after{
+    content: '';
+    height: 10px;
+    width: 100%;
+    background-color: $red-main;
+  }
+
+  .container-products{
+    margin: 60px 0px 100px 0px;
+    
+    flex: 1 1 100px;
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 15px;
+    }
+  }
+  
+}
+ .container-cards{
+  display: flex;
+  position: relative;
+  
+ }

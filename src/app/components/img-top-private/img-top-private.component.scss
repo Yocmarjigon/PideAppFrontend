@@ -1,0 +1,49 @@
+@import "@styles/_variables.scss";
+
+.img-top {
+  display: flex;
+  width: 100%;
+  position: relative;
+  img {
+    display: block;
+    max-height: 400px;
+    
+    height: auto;
+    width: 100% ;
+  }
+  div {
+    /* padding: 70px 0px 0px 20px; */
+    position: absolute;
+    z-index: 2;
+    h2,
+    p {
+      font-size: 2em;
+      font-weight: 600;
+      color: $yellow-main;
+    }
+    p {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* @media (max-width: 250px) and (min-width: 0px) {
+  .img-top {
+    background-image: url("/assets/images/top-image-small.svg");
+  }
+}
+@media (max-width: 361px) and (min-width: 250px) {
+  .img-top {
+    background-image: url("/assets/images/top-image-normal.svg");
+  }
+}
+@media (max-width: 450px) and (min-width: 361px) {
+  .img-top {
+    background-image: url("/assets/images/top-image-medium.svg");
+  }
+}
+@media (max-width: 550px) and (min-width: 450px) {
+  .img-top {
+    background-image: url("/assets/images/top-image-large.svg");
+  }
+} */

@@ -1,0 +1,35 @@
+<div class="login-page-container">
+  <app-img-top [title]="perfil"> </app-img-top>
+  <div class="form-section-container p-5" >
+    <div class="form-container ">
+      <form action="" class="flex flex-col items-center gap-5">
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-user"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Nombre de usuario" />
+        </p-inputgroup>
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-phone"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Teléfono" />
+        </p-inputgroup>
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-envelope"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Correo" />
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-send"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Dirección" />
+        </p-inputgroup>
+        <app-button label="Actualizar" [click]="nextForm"> </app-button>
+      </form>
+    </div>
+  </div>
+</div>

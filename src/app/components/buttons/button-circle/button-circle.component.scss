@@ -1,0 +1,10 @@
+@import "@styles/_variables.scss";
+button{
+  background-color: $yellow-main;
+  padding: 7px;
+  border-radius: 10px;
+  li{
+    font-size: 2em;
+    color: $red-main;
+  }
+}

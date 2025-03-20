@@ -1,0 +1,20 @@
+<section class="container-category-page flex flex-col items-center gap-4">
+  <app-img-top [title]="'Categoria'"></app-img-top>
+  <div class="input-search-container w-[90%] flex flex-col gap-4">
+    <p-iconField iconPosition="left" pStyleClass="input" >
+      <p-inputIcon styleClass="pi pi-search" />
+      <input type="text" pInputText placeholder="Search"  class="w-full"/>
+    </p-iconField>
+    <ul class="nav w-full flex bg-yellow_primary rounded-xl p-2 justify-around font-bold">
+      <li><a href="">Proceso</a></li>
+      <li><a href="">Entregados</a></li>
+    </ul>
+  </div>
+  <div class="container-products flex items-center justify-center w-full">
+    <div class="flex flex-wrap gap-5 items-center justify-center">
+      @for (product of products; track $index) {
+      <app-product-card [product]="product" />
+      }
+    </div>
+  </div>
+</section>

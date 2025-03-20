@@ -1,0 +1,83 @@
+/* @import "@styles/_variables.scss";
+
+.car-page-container {
+  .total-container {
+    padding: 10px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h4 {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      font-size: 1.2em;
+      color: $red-main;
+      span {
+        font-weight: 600;
+        font-size: 1.3em;
+        color: $black;
+      }
+    }
+  }
+  .products-container {
+    margin: 40px 10px 0px;
+
+    .product {
+      height: 110px;
+      display: flex;
+      border: 0.5px;
+      box-shadow: $shadow-ligh-all;
+      border-radius: 10px;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      padding-right: 10px;
+      width: auto;
+
+      ::ng-deep .btn-number {
+
+        width: 40px !important;
+        input{
+          padding: 2px;
+          margin: 4px 0px 4px 0px;
+        }
+        button{
+          padding: 5px;
+
+        }
+      }
+      gap: 5px;
+      .txt-container {
+        width: auto;
+        h3 {
+          font-size: 1.2em;
+          font-weight: 600;
+          color: $red-main;
+        }
+        span {
+          color: $yellow-main;
+          font-size: 1.3em;
+          font-weight: 600;
+        }
+      }
+      .img-container {
+        width: 130px; // Asegura que el contenedor ocupe el ancho completo
+        min-height: 100%; // Establece una altura mínima para el contenedor
+        overflow: hidden; // Evita que la imagen se desborde del contenedor
+        position: relative;
+        box-shadow: $shadow-ligh-inset-all;
+
+        img {
+          position: absolute;
+          width: 100%; // Ajusta el ancho automáticamente
+          height: 100%; // Ajusta la altura automáticamente
+          object-fit: cover; // Asegura que la imagen cubra el contenedor sin distorsionarse
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+}
+ */

@@ -1,0 +1,19 @@
+@import "@styles/_variables.scss";
+
+.img-top{
+  display: flex;
+  
+  justify-content: center;
+  h2{
+    position: absolute;
+    font-weight: 600;
+    color: $yellow-main;
+    font-size: 2em;
+  /*   top: 85px; */
+  }
+  img{
+    display: block;
+    width: 95%;
+  }
+  
+}

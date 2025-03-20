@@ -1,0 +1,28 @@
+<section class="login-page-container">
+  <!-- <div class="img-top"></div> -->
+  <app-img-top></app-img-top>
+  <div class="container-btn-angle">
+    <a routerLink="/register-page" class="pi pi-angle-left"></a>
+  </div>
+  <div class="form-section-container">
+    <img src="../../../assets/images/Logo.svg" alt="" />
+    <div class="form-container">
+      <h3>Completa los campos para continuar</h3>
+      <form>
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-user"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Nombre de usuario" />
+        </p-inputgroup>
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-phone"></i>
+          </p-inputgroup-addon>
+          <input pInputText placeholder="Numero de teléfono" />
+        </p-inputgroup>
+        <app-button label="Siguiente" [click]="nextForm" />
+      </form>
+    </div>
+  </div>
+</section>

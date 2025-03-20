@@ -1,0 +1,12 @@
+<div class="input-continer">
+  <label for="" [id]="">{{ label }}</label>
+  <div class="input">
+    <li [class]="icon" ></li>
+    @if (active) {
+      <button (click)="changeVisual()"><li [class]="onVisual ? 'pi pi-lock-open' : 'pi pi-lock'"></li></button>
+      <input [type]="onVisual ? 'text':'password'" [id]="id" [placeholder]="placeholder"/>   
+    }@else {
+      <input type="text" [placeholder]="placeholder"/>   
+    }
+  </div>
+</div>

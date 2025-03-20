@@ -1,0 +1,126 @@
+@import "@styles/_variables.scss";
+
+.order-page-container {
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    .total-container {
+      align-self: flex-start;
+    }
+    .nav {
+      background-color: $yellow-main;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      list-style: none;
+      padding: 5px;
+      width: 80%;
+      border-radius: 5px;
+      a {
+        font-size: 1.2em;
+        font-weight: 600;
+        text-decoration: none;
+        color: $black;
+      }
+    }
+    .total-container {
+      padding: 10px 20px 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h4 {
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+        font-size: 1.2em;
+        color: $red-main;
+
+        span {
+          font-weight: 600;
+          font-size: 1.3em;
+          color: $black;
+        }
+      }
+    }
+  }
+
+  .products-container {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    .product {
+      padding: 5px; 
+      height: auto;
+      width: 180px;
+      min-width: 150px;
+      
+      display: flex;
+      border: 0.5px;
+      box-shadow: $shadow-ligh-all;
+      border-radius: 10px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      .btn-container{
+        display: flex;
+        width: 100%;
+        justify-content: end;
+      }
+      .state-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        
+        h3 {
+          font-weight: 600;
+          color: $red-main;
+        }
+
+        span {
+          border: 2px solid $green;
+          padding: 5px;
+          font-weight: 600;
+          color: $green;
+          border-radius: 5px;
+        }
+      }
+      gap: 15px;
+      .txt-container {
+        width: 100%;
+        h3 {
+          font-size: 1.2em;
+          font-weight: 600;
+          color: $red-main;
+        }
+        span {
+          color: $yellow-main;
+          font-size: 1.3em;
+          font-weight: 600;
+        }
+      }
+      .img-container {
+        width: 100%;
+        min-height: 150px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: $shadow-ligh-inset-all;
+
+        img {
+          position: absolute;
+          width: 100%; // Ajusta el ancho automáticamente
+          height: 100%; // Ajusta la altura automáticamente
+          object-fit: cover; // Asegura que la imagen cubra el contenedor sin distorsionarse
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+}
