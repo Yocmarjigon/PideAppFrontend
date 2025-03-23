@@ -31,25 +31,25 @@ value: any;
     this.products = [
       {
         id: 1,
-        nameProduct: 'Arepa de huevo',
+        title: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
         id: 2,
-        nameProduct: 'Arepa de huevo',
+        title: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
         id: 3,
-        nameProduct: 'Arepa de huevo',
+        title: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },
       {
         id: 4,
-        nameProduct: 'Arepa de huevo',
+        title: 'Arepa de huevo',
         img: '/assets/images/arepa-de-huevo.jpeg',
         price: 2000,
       },

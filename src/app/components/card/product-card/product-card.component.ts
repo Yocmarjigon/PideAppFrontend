@@ -11,17 +11,17 @@ import { DescriptionSendDataComponentService } from 'src/app/service/utils/descr
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  
+
   @Input() product:Product ={
-    nameProduct: '',
+    title: '',
     price: 0,
     img: ''
   }
 
   constructor(private route: Router, private sendServiceData: DescriptionSendDataComponentService) {}
-  
+
   ngOnInit(){
-    
+
   }
 
 
@@ -31,7 +31,7 @@ export class ProductCardComponent {
 
   }
 
-  
+
 
 
 }

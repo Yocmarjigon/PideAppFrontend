@@ -1,0 +1,73 @@
+<section class="p-2 flex flex-col gap-10 h-screen">
+  <h1 class="text-[1.5em] font-bold text-orange_primary">Productos</h1>
+  <app-form-product [displayModal]="openModal"></app-form-product>
+  <!-- Filtros -->
+  <div class="flex flex-col gap-5 w-full">
+    <div class="flex justify-between">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          type="text"
+          pInputText
+          placeholder="Buscar por nombre"
+          (input)="applyFilter()"
+        />
+      </p-iconfield>
+      <p-button icon="pi pi-plus" severity="success" label="Crear"(onClick)="handleOpenModal()" />
+    </div>
+
+    <div class="flex w-full justify-between">
+      <!-- Filtro por categoría -->
+      <p-dropdown
+        [options]="categories"
+        (onChange)="applyFilter()"
+        optionLabel="name"
+        optionValue="value"
+        placeholder="Seleccione una categoría"
+      ></p-dropdown>
+
+      <!-- Filtro por precio máximo -->
+      <p-inputnumber
+        [inputStyle]="{ backgroundColor: '', maxWidth: '140px' }"
+        min="1"
+        [showButtons]="true"
+        inputId="stacked"
+        mode="currency"
+        currency="COP"
+        [(ngModel)]="valuePriceFilter"
+      />
+    </div>
+  </div>
+
+  <!-- DataView de productos -->
+  <p-dataview [value]="filteredProducts()" [rows]="10" [paginator]="true">
+    <ng-template #list let-items>
+      <div class="flex flex-col gap-5">
+        @for (product of filteredProducts(); track $index) {
+        <div
+          class="flex border-s-gray-400 border-[1px] justify-between p-1 shadow-md"
+        >
+          <img
+            class="min-w-10 min-h-10 max-h-20"
+            [src]="product.img"
+            [alt]="product.title"
+          />
+          <div class="flex flex-col justify-between p-1">
+            <h2>{{ product.title }}</h2>
+            <p class="font-bold">{{ product.price | currency }}</p>
+          </div>
+          <div class="flex gap-2 items-end">
+            <p-button icon="pi pi-pencil" aria-label="Save" severity="info" />
+            <p-button
+              icon="pi pi-info-circle"
+              aria-label="Save"
+              severity="success"
+            />
+            <p-button icon="pi pi-trash" aria-label="Save" severity="danger" />
+          </div>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </p-dataview>
+</section>

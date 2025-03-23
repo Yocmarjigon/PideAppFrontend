@@ -1,3 +1,4 @@
+import { ErrorPageComponent } from './pages/public/error-page/error-page.component';
 import { Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/public/login-page/login-page.component';
 import { RegisterSelectPageComponent } from './pages/public/register/register-select-page/register-select-page.component';
@@ -12,7 +13,7 @@ import { PerfilPageComponent } from './pages/private/user/perfil-page/perfil-pag
 import { OrderPageComponent } from './pages/private/user/order-page/order-page.component';
 import { SearchPageComponent } from './pages/private/user/search-page/search-page.component';
 import { LayoutAdminComponent } from './pages/private/admin/layout-admin/layout-admin.component';
-import { ProductsPageComponent } from './pages/private/admin/products-page/products-page.component';
+import { ProductsPageComponent } from './pages/private/admin/products/products-page/products-page.component';
 import { DescriptionProductPageComponent } from './pages/private/user/description-product-page/description-product-page.component';
 
 export const routes: Routes = [
@@ -71,6 +72,12 @@ export const routes: Routes = [
       }
     ]
   },
+
+  {
+    path: 'description-product-page',
+    component: DescriptionProductPageComponent
+  },
+  /* Rutas de las paginas administrativas */
   {
     path: 'layout-admin',
     component: LayoutAdminComponent,
@@ -78,17 +85,22 @@ export const routes: Routes = [
       {
         path: 'product-page',
         component: ProductsPageComponent
+      },
+      {
+        path: "",
+        pathMatch: 'full',
+        redirectTo: "/layout-admin/product-page"
       }
+
     ]
   },
-  {
-    path: 'description-product-page',
-    component: DescriptionProductPageComponent
-  },
-
   {
     path: '',
     redirectTo: '/login-page',
     pathMatch: "full"
   },
+  {
+    path: "**",
+    component: ErrorPageComponent
+  }
 ];
