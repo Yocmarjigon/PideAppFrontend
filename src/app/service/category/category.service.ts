@@ -10,8 +10,11 @@ export class CategoryService {
   constructor() {}
 
   getCategories() {
+    this._supabaseClient.auth.getSession()
+    this._supabaseClient.auth.getUser()
     return this._supabaseClient.from('categoria').select('*');
   }
+
   saveCategory(category: Category) {
     return this._supabaseClient
       .from('categoria')

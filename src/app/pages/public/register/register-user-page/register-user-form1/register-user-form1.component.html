@@ -8,31 +8,32 @@
     <img src="../../../assets/images/Logo.svg" alt="" />
     <div class="form-container">
       <h3>Completa los campos para continuar</h3>
-      <form>
+      <div class="">
 
         <p-inputgroup>
           <p-inputgroup-addon>
             <i class="pi pi-user"></i>
           </p-inputgroup-addon>
-          <input pInputText placeholder="Nombre de usuario" />
+          <input pInputText placeholder="Nombre" [formControl]="controls.name" />
         </p-inputgroup>
 
         <p-inputgroup>
           <p-inputgroup-addon>
             <i class="pi pi-phone"></i>
           </p-inputgroup-addon>
-          <input pInputText placeholder="Numero de teléfono" />
+          <input pInputText placeholder="Numero de teléfono" [formControl]="controls.phone"  />
         </p-inputgroup>
 
         <p-inputgroup>
           <p-inputgroup-addon>
             <i class="pi pi-send"></i>
           </p-inputgroup-addon>
-          <input pInputText placeholder="Dirección" />
+          <input pInputText placeholder="Dirección" [formControl]="controls.address" />
         </p-inputgroup>
 
-        <app-button label="Siguiente" [click]="nextForm" />
-      </form>
+        <p-button label="Siguiente"(onClick)="nextForm()" />
+
+      </div>
     </div>
   </div>
 </section>

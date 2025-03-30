@@ -1,5 +1,5 @@
 import { InputPasswordComponent } from './../../../components/inputs/input-password/input-password.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { InputTextComponent } from '../../../components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '../../../components/buttons/button/button.component';
 import {
@@ -21,6 +21,9 @@ import { PasswordModule } from 'primeng/password';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { DataFormService } from 'src/app/service/utils/data-form.service';
 @Component({
   selector: 'app-login-page',
   standalone: true,
@@ -38,8 +41,9 @@ import { MessageModule } from 'primeng/message';
     InputTextModule,
     InputPasswordComponent,
     ReactiveFormsModule,
+    ToastModule,
   ],
-  providers: [Validators, AuthService],
+  providers: [Validators, AuthService, MessageService],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
@@ -53,31 +57,38 @@ export class LoginPageComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private _messageService: MessageService,
+    private _dataFormService: DataFormService,
+    private _router: Router
+  ) {
+
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-
   async ngOnInit() {
     await this.data();
-  }
 
+  }
 
   async login() {
     const user = this.formLogin.value;
-    const res = await this.authService.singIn(user);
-    console.log(res);
+    const {data, error}= await this.authService.singIn(user);
+    if(!error){
+
+    }else{
+
+    }
+
   }
 
 
-  data(): Promise<boolean> {
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(false);
-      }, 5000);
-    });
+  data(){
+
   }
 
   changeVisual() {

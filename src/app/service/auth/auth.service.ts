@@ -9,11 +9,11 @@ import { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
 export class AuthService {
   private readonly _supabaseClient = inject(SupabaseService).supabaseClient
   constructor(
-    private readonly router: Router
+
   ) {}
 
   singIn(credentials:any){
-    this.router.navigate(["/layout-admin"])
+    console.log(this._supabaseClient.auth.getUser())
     return this._supabaseClient.auth.signInWithPassword(credentials)
   }
 

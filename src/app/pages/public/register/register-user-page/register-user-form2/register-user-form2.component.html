@@ -11,25 +11,23 @@
     <img src="../../../assets/images/Logo.svg" alt="" />
     <div class="form-container">
       <h3>Completa los campos para continuar</h3>
-      <form>
+      <form [formGroup]="formClient">
+
         <p-inputgroup>
           <p-inputgroup-addon>
             <i class="pi pi-envelope"></i>
           </p-inputgroup-addon>
-          <input pInputText placeholder="Correo" />
+          <input pInputText placeholder="Correo" formControlName="email" />
         </p-inputgroup>
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-user"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Contraseña" />
-        </p-inputgroup>
-        <app-input-password [placeholder]="'Contraseña'"></app-input-password>
+
+        <app-input-password [placeholder]="'Contraseña'" formControlName="password"></app-input-password>
         <app-input-password
           [placeholder]="'Repetir Contraseña'"
         ></app-input-password>
-        <app-button label="Registrarse" [click]="registerUser" />
+
+        <p-button label="Registrarse" (onClick)="registerUser()" />
       </form>
     </div>
   </div>
+  <p-toast />
 </section>
