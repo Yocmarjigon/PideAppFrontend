@@ -43,54 +43,6 @@ export class HomePageComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.products = [
-      {
-        id: 1,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 2,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 3,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 4,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 5,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {id: 6,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 7,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 8,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-    ];
+    this.products = [];
   }
 }

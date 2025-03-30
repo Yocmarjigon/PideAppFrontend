@@ -1,4 +1,34 @@
-@import "primeicons/primeicons.css"
+@import "primeicons/primeicons.css";
+
+.btn-back
+  a
+    font-size: 2em
+    color: red
+
+    /* Asegura que el backdrop del modal esté por encima de todo */
+.p-dialog-mask
+  z-index: 9999 !important
+  position: fixed !important
+
+
+/* Estilos específicos para móvil */
+@media (max-width: 768px)
+  .p-dialog
+    width: 95vw !important
+    max-height: 85vh !important
+
+    .p-dialog-content
+      padding: 1rem !important
+      overflow-y: auto !important
+
+
+
+  /* Asegura que los inputs sean legibles en móvil */
+  .p-inputtext, .p-inputnumber, .p-dropdown
+    font-size: 16px !important /* Previene el zoom automático en iOS */
+
+
+
 
 @layer tailwind-base, primeng, tailwind-utilities
 
@@ -8,3 +38,5 @@
 @layer tailwind-utilities
   @tailwind components
   @tailwind utilities
+
+

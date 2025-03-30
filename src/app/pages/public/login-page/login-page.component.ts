@@ -2,7 +2,14 @@ import { InputPasswordComponent } from './../../../components/inputs/input-passw
 import { Component, OnInit } from '@angular/core';
 import { InputTextComponent } from '../../../components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '../../../components/buttons/button/button.component';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ImgTopComponent } from '../../../components/img-top/img-top.component';
 import { InputIconModule } from 'primeng/inputicon';
@@ -11,23 +18,28 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { PasswordModule } from 'primeng/password';
-
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
 @Component({
   selector: 'app-login-page',
   standalone: true,
   imports: [
+    MessageModule,
     PasswordModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ButtonComponent,
+    ButtonModule,
     FormsModule,
     ImgTopComponent,
     RouterLink,
     InputIconModule,
     IconFieldModule,
     InputTextModule,
-    InputPasswordComponent
+    InputPasswordComponent,
+    ReactiveFormsModule,
   ],
+  providers: [Validators, AuthService],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
@@ -36,18 +48,29 @@ export class LoginPageComponent implements OnInit {
   loader = true;
   showPassword = false;
 
+  formLogin: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
+
+  constructor(private readonly authService: AuthService) {}
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  constructor(private readonly router: Router) {}
+
   async ngOnInit() {
     await this.data();
   }
 
-  login() {
-    this.router.navigateByUrl('/layout/home-page');
+
+  async login() {
+    const user = this.formLogin.value;
+    const res = await this.authService.singIn(user);
+    console.log(res);
   }
+
 
   data(): Promise<boolean> {
     return new Promise((res) => {

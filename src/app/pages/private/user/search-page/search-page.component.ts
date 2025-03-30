@@ -18,41 +18,15 @@ import { FormsModule } from '@angular/forms';
     StyleClassModule,
     ImgTopComponent,
     ProductCardComponent,
-    FormsModule
-
+    FormsModule,
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
 })
 export class SearchPageComponent {
   products: Product[] = [];
-value: any;
+  value: any;
   ngOnInit() {
-    this.products = [
-      {
-        id: 1,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 2,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 3,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-      {
-        id: 4,
-        title: 'Arepa de huevo',
-        img: '/assets/images/arepa-de-huevo.jpeg',
-        price: 2000,
-      },
-    ];
+    this.products = [];
   }
 }

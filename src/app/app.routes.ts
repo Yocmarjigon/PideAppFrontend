@@ -19,63 +19,63 @@ import { DescriptionProductPageComponent } from './pages/private/user/descriptio
 export const routes: Routes = [
   {
     path: 'login-page',
-    component: LoginPageComponent
+    component: LoginPageComponent,
   },
   {
     path: 'register-page',
-    component: RegisterSelectPageComponent
+    component: RegisterSelectPageComponent,
   },
   {
     path: 'register-user-form1',
-    component: RegisterUserForm1Component
+    component: RegisterUserForm1Component,
   },
   {
-    path: "register-user-form2",
-    component: RegisterUserForm2Component
+    path: 'register-user-form2',
+    component: RegisterUserForm2Component,
   },
   {
     path: 'register-delivery-form1',
-    component: RegisterDeliveryForm1Component
+    component: RegisterDeliveryForm1Component,
   },
   {
     path: 'register-delivery-form2',
-    component: RegisterDeliveryForm2Component
+    component: RegisterDeliveryForm2Component,
   },
   {
     path: 'layout',
     component: LayoutComponent,
-    children:[
+    children: [
       {
         path: 'home-page',
-        component: HomePageComponent
+        component: HomePageComponent,
       },
       {
         path: 'car-page',
-        component: CarPageComponent
+        component: CarPageComponent,
       },
       {
-        path: "perfil-page",
-        component: PerfilPageComponent
+        path: 'perfil-page',
+        component: PerfilPageComponent,
       },
       {
         path: 'order-page',
-        component: OrderPageComponent
+        component: OrderPageComponent,
       },
       {
         path: 'search-page',
-        component: SearchPageComponent
+        component: SearchPageComponent,
       },
       {
-        path: 'layout',
-        redirectTo: '/home-page',
-        pathMatch: "full"
-      }
-    ]
+        path: '',
+        redirectTo: '/layout/home-page',
+        pathMatch: 'full',
+      },
+    ],
   },
 
   {
     path: 'description-product-page',
-    component: DescriptionProductPageComponent
+    component: DescriptionProductPageComponent,
   },
   /* Rutas de las paginas administrativas */
   {
@@ -84,23 +84,22 @@ export const routes: Routes = [
     children: [
       {
         path: 'product-page',
-        component: ProductsPageComponent
+        component: ProductsPageComponent,
       },
       {
-        path: "",
+        path: '',
         pathMatch: 'full',
-        redirectTo: "/layout-admin/product-page"
-      }
-
-    ]
+        redirectTo: '/layout-admin/product-page',
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/login-page',
-    pathMatch: "full"
+    pathMatch: 'full',
   },
   {
-    path: "**",
-    component: ErrorPageComponent
-  }
+    path: '**',
+    component: ErrorPageComponent,
+  },
 ];

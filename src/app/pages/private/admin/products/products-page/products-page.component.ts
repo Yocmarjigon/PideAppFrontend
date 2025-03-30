@@ -1,4 +1,4 @@
-import { Component, Signal, computed, signal } from '@angular/core';
+import { Component, OnInit, Signal, computed, signal } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -14,6 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { SliderModule } from 'primeng/slider';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormProductComponent } from '../form-product/form-product.component';
+import { ProductService } from 'src/app/service/products/product.service';
+import { Category } from 'src/app/models/Category';
+import { InputGroupAddon, InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputGroupModule } from 'primeng/inputgroup';
 
 @Component({
   selector: 'app-products-page',
@@ -33,70 +37,20 @@ import { FormProductComponent } from '../form-product/form-product.component';
     SliderModule,
     InputNumberModule,
     FormProductComponent,
+    InputGroupAddonModule,
+    InputGroupModule
   ],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
 })
-export class ProductsPageComponent {
+export class ProductsPageComponent implements OnInit{
+
   openModal = signal(false);
   valuePriceFilter = 0;
-  products: Signal<Product[]> = signal([
-    {
-      id: 1,
-      title: 'Manzanas',
-      description: 'Manzanas rojas frescas y jugosas.',
-      category: 'Frutas',
-      available: true,
-      price: 2.5,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-    {
-      id: 2,
-      title: 'Agua Mineral',
-      description: 'Agua mineral natural en botella de 1 litro.',
-      category: 'Bebidas',
-      available: true,
-      price: 1.0,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-    {
-      id: 3,
-      title: 'Pan Integral',
-      description:
-        'Pan integral recién horneado, ideal para dietas saludables.',
-      category: 'Panadería',
-      available: true,
-      price: 3.0,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-    {
-      id: 4,
-      title: 'Yogur Natural',
-      description: 'Yogur natural sin azúcar añadida, 500 ml.',
-      category: 'Lácteos',
-      available: true,
-      price: 1.8,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-    {
-      id: 5,
-      title: 'Café Molido',
-      description: 'Café molido 100% arábica, paquete de 250 gramos.',
-      category: 'Bebidas',
-      available: true,
-      price: 5.5,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-    {
-      id: 6,
-      title: 'Pasta de Trigo Integral',
-      description: 'Pasta de trigo integral, paquete de 500 gramos.',
-      category: 'Alimentos Secos',
-      available: true,
-      price: 2.0,
-      img: '/assets/images/arepa-de-huevo.jpeg',
-    },
-  ]);
+  products: Signal<Product[]> = signal([]);
+
+   //Lista de categoría
+  categories: Signal<Category[]> = signal([])
 
   // Filtros
   filters = signal({
@@ -105,14 +59,16 @@ export class ProductsPageComponent {
     price: 100, // Precio máximo inicial
   });
 
-  // Categorías para el dropdown
-  categories = [
-    { name: 'Frutas', value: 'Frutas' },
-    { name: 'Bebidas', value: 'Bebidas' },
-    { name: 'Panadería', value: 'Panadería' },
-    { name: 'Lácteos', value: 'Lácteos' },
-    { name: 'Alimentos Secos', value: 'Alimentos Secos' },
-  ];
+
+  constructor(
+    private readonly productService: ProductService
+  ){
+
+  }
+
+  ngOnInit(): void {
+    console.log(this.productService.getProducts)
+  }
 
   // Productos filtrados
   filteredProducts = computed(() => {

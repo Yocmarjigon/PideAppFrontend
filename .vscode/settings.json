@@ -1,5 +1,7 @@
 {
   "cSpell.words": [
-    "inputgroup"
-  ]
+    "inputgroup",
+    "tailwind"
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

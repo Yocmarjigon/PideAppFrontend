@@ -13,16 +13,41 @@
       class="flex flex-col m-5 bg-white rounded-md items-center shadow-lg border-gray-200 border-solid border-[0.2px] p-5"
     >
       <h3>Inicia sesión para continuar</h3>
-      <form class="flex flex-col items-center gap-5 mb-4">
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-user"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Nombre de usuario" />
-        </p-inputgroup>
+      <form
+        class="flex flex-col items-center gap-5 mb-4"
+        [formGroup]="formLogin"
+      >
+        <div class="flex flex-col gap-1 w-full">
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-user"></i>
+            </p-inputgroup-addon>
+            <input pInputText placeholder="Correo" formControlName="email" />
+          </p-inputgroup>
 
-        <app-input-password [placeholder]="'Contraseña'"></app-input-password>
-        <app-button label="Ingresar" [click]="login" />
+          @if (formLogin.get("email")?.invalid &&
+          formLogin.get("email")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El campo correo no puede estar vació</p-message
+          >
+          }<!-- @if (formLogin.get("email")?.errors?.['pattern']&&
+          formLogin.get("email")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El correo es invalido</p-message
+          >
+          } -->
+        </div>
+        <app-input-password
+          formControlName="password"
+          [placeholder]="'Contraseña'"
+          [control]="formLogin.get('password')"
+        ></app-input-password>
+        <p-button
+          [disabled]="formLogin.invalid"
+          label="Ingresar"
+          type="submit"
+          (onClick)="login()"
+        />
       </form>
       <a routerLink="*">¿Olvidaste tu contraseña?</a>
       <a routerLink="*">¿Olvidaste tu usuario?</a>

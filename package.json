@@ -19,13 +19,17 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@capacitor/android": "7.1.0",
     "@capacitor/angular": "^2.0.3",
     "@capacitor/app": "7.0.0",
+    "@capacitor/camera": "^7.0.0",
     "@capacitor/core": "7.1.0",
+    "@capacitor/filesystem": "^7.0.0",
     "@capacitor/haptics": "7.0.0",
     "@capacitor/keyboard": "7.0.0",
     "@capacitor/status-bar": "7.0.0",
     "@primeng/themes": "^19.0.9",
+    "@supabase/supabase-js": "^2.49.3",
     "pide-ya-app": "file:",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.9",
@@ -50,5 +54,14 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.7.2"
-  }
+  },
+  "browserslist": [
+    "Chrome >=61",
+    "ChromeAndroid >=61",
+    "Firefox >=63",
+    "Firefox ESR",
+    "Edge >=79",
+    "Safari >=13",
+    "iOS >=13"
+  ]
 }
