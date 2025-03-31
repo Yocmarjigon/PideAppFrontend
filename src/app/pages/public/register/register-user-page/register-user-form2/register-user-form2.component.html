@@ -1,6 +1,6 @@
 <section class="login-page-container">
   <!-- <div class="img-top"></div> -->
-   <!-- Imagen superior -->
+  <!-- Imagen superior -->
   <app-img-top></app-img-top>
 
   <div class="btn-back">
@@ -12,20 +12,54 @@
     <div class="form-container">
       <h3>Completa los campos para continuar</h3>
       <form [formGroup]="formClient">
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-700">Correo:</span>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-envelope"></i>
+            </p-inputgroup-addon>
+            <input
+              pInputText
+              placeholder="Ingresa tu correo"
+              formControlName="email"
+            />
+          </p-inputgroup>
+          @if (formClient.get("email")?.hasError("required") &&
+          formClient.get("email")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El numero de telefono es requerido</p-message
+          >
+          }
+        </div>
 
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-envelope"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Correo" formControlName="email" />
-        </p-inputgroup>
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-700">Contraseña</span>
+          <app-input-password
+            [placeholder]="'Ingresa una contraseña'"
+            formControlName="password"
+          ></app-input-password>
+          @if (formClient.get("password")?.hasError("required") &&
+          formClient.get("password")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El numero de telefono es requerido</p-message
+          >
+          }
+        </div>
 
-        <app-input-password [placeholder]="'Contraseña'" formControlName="password"></app-input-password>
-        <app-input-password
-          [placeholder]="'Repetir Contraseña'"
-        ></app-input-password>
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-700">Repetir contraseña</span>
+          <app-input-password
+            formControlName="repitPassword"
+            [placeholder]="'Repite la contraseña'"
+          ></app-input-password>
+          @if (formClient.hasError('mismatch')) {
+          <p-message severity="error" variant="simple" size="small"
+            >Las contraseñas deben ser iguales</p-message
+          >
+          }
+        </div>
 
-        <p-button label="Registrarse" (onClick)="registerUser()" />
+        <p-button label="Registrarse" (onClick)="registerUser()" [disabled]="formClient.invalid"/>
       </form>
     </div>
   </div>

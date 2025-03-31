@@ -3,5 +3,6 @@
     "inputgroup",
     "tailwind"
   ],
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "css.lint.unknownAtRules": "ignore"
 }

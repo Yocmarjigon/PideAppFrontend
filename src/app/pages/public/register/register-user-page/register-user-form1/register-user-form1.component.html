@@ -8,32 +8,83 @@
     <img src="../../../assets/images/Logo.svg" alt="" />
     <div class="form-container">
       <h3>Completa los campos para continuar</h3>
-      <div class="">
+      <form class="form-register" [formGroup]="formClient1">
+        <!-- Input nombre -->
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-800">Nombre:</span>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-user"></i>
+            </p-inputgroup-addon>
+            <input
+              pInputText
+              placeholder="Ingresa nombre completo"
+              formControlName="name"
+            />
+          </p-inputgroup>
+          @if (formClient1.get("name")?.invalid &&
+          formClient1.get("name")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El nombre es requerido</p-message
+          >
+          }
+        </div>
 
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-user"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Nombre" [formControl]="controls.name" />
-        </p-inputgroup>
+        <!-- Input numero de teléfono -->
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-700">Numero de teléfono:</span>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-phone"></i>
+            </p-inputgroup-addon>
+            <p-inputNumber
+              mode="decimal"
+              [useGrouping]="false"
+              placeholder="Ingresa numero de teléfono"
+              formControlName="phone"
+            ></p-inputNumber>
+          </p-inputgroup>
+          @if (formClient1.get("phone")?.hasError("required") &&
+          formClient1.get("phone")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >El numero de telefono es requerido</p-message
+          >
+          }
+          @if (this.formClient1.get('phone')?.hasError('pattern') && formClient1.get("phone")?.touched) {
+            <p-message severity="error" variant="simple" size="small"
+            >El teléfono debe tener como mínimo 10 dígitos</p-message
+          >
+          }
 
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-phone"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Numero de teléfono" [formControl]="controls.phone"  />
-        </p-inputgroup>
 
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-send"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Dirección" [formControl]="controls.address" />
-        </p-inputgroup>
+        </div>
+        <!-- Input Dirección -->
+        <div class="flex flex-col gap-1 container-input">
+          <span class="text-gray-700">Dirección:</span>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-send"></i>
+            </p-inputgroup-addon>
+            <input
+              pInputText
+              placeholder="Ingresa tu dirección"
+              formControlName="address"
+            />
+          </p-inputgroup>
+          @if (formClient1.get("address")?.invalid &&
+          formClient1.get("address")?.touched) {
+          <p-message severity="error" variant="simple" size="small"
+            >La dirección es requerido</p-message
+          >
+          }
+        </div>
 
-        <p-button label="Siguiente"(onClick)="nextForm()" />
-
-      </div>
+        <p-button
+          label="Siguiente"
+          (onClick)="nextForm()"
+          [disabled]="formClient1.invalid"
+        />
+      </form>
     </div>
   </div>
 </section>

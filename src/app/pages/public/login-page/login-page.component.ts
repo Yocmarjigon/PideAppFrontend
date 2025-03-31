@@ -24,6 +24,7 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DataFormService } from 'src/app/service/utils/data-form.service';
+
 @Component({
   selector: 'app-login-page',
   standalone: true,
@@ -47,6 +48,7 @@ import { DataFormService } from 'src/app/service/utils/data-form.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
+
 export class LoginPageComponent implements OnInit {
   onVisual = false;
   loader = true;

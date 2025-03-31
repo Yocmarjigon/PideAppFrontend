@@ -1,19 +1,17 @@
 @import "@styles/_variables.scss";
 
-.login-page-container{
+.login-page-container {
+  @apply flex flex-col;
 
-@apply flex flex-col;
-
-  .form-section-container{
-
+  .form-section-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 30px;
     grid-row: 2;
-    .form-container::before{
-      content: '';
+    .form-container::before {
+      content: "";
       position: absolute;
       height: 7px;
       width: 100%;
@@ -21,7 +19,7 @@
       bottom: 0;
     }
 
-    .form-container{
+    .form-container {
       display: flex;
       position: relative;
       flex-direction: column;
@@ -29,33 +27,36 @@
       justify-content: center;
       gap: 20px;
       min-width: 300px;
+      max-width: 300px;
       padding: 15px;
       box-shadow: $shadow-ligh-all;
       border-radius: 13px;
       overflow: hidden;
 
-
-      form, div{
+      form,
+      .form-register {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 30px;
+        gap: 15px;
         width: 100%;
-        .w-full{
+        .w-full {
+          width: 100%;
+        }
+        .container-input{
           width: 100%;
         }
       }
 
-      h3{
+      h3 {
         color: $black-gray-ligh;
       }
     }
 
-    a{
+    a {
       text-align: center;
       color: #000000;
       width: 200px;
     }
   }
-
 }

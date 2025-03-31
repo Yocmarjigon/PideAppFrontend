@@ -17,12 +17,18 @@
         class="flex flex-col items-center gap-5 mb-4"
         [formGroup]="formLogin"
       >
+        <!-- Input correo -->
         <div class="flex flex-col gap-1 w-full">
+          <span class="text-gray-700">Correo:</span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-user"></i>
             </p-inputgroup-addon>
-            <input pInputText placeholder="Correo" formControlName="email" />
+            <input
+              pInputText
+              placeholder="Ingrese su correo"
+              formControlName="email"
+            />
           </p-inputgroup>
 
           @if (formLogin.get("email")?.invalid &&
@@ -37,11 +43,14 @@
           >
           } -->
         </div>
-        <app-input-password
-          formControlName="password"
-          [placeholder]="'Contraseña'"
-          [control]="formLogin.get('password')"
-        ></app-input-password>
+        <div class="flex flex-col gap-1 w-full">
+          <span class="text-gray-700">Contraseña:</span>
+          <app-input-password
+            formControlName="password"
+            [placeholder]="'Ingresa tu contraseña'"
+            [control]="formLogin.get('password')"
+          ></app-input-password>
+        </div>
         <p-button
           [disabled]="formLogin.invalid"
           label="Ingresar"
@@ -56,7 +65,6 @@
       >¿Aun no tienes una cuenta? Regístrate</a
     >
   </div>
-
 </section>
 <div class="card flex justify-center">
   <p-toast />
