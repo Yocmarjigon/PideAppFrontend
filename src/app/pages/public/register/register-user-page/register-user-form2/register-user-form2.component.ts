@@ -65,7 +65,7 @@ export class RegisterUserForm2Component {
         [
           Validators.required,
           Validators.pattern(
-            '/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/'
+            '^(?=.*[A-Za-z]).{8,}$'
           ),
         ],
       ],
@@ -78,6 +78,8 @@ export class RegisterUserForm2Component {
       validators: matchPasswordValidator('password', 'repitPassword')
     }
   );
+
+  this.formClient.valueChanges.subscribe(()=>console.log(this.formClient.invalid))
 
   }
 

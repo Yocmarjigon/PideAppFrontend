@@ -54,9 +54,7 @@ export class RegisterUserForm1Component {
       ]),
       address: new FormControl('', [Validators.required]),
     });
-    this.formClient1.get('phone')?.statusChanges.subscribe(() =>
-      console.log(this.formClient1.get('phone')?.hasError('pattern'))
-    );
+
   }
 
   nextForm() {
