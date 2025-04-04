@@ -5,4 +5,5 @@ export interface Client{
   phone?: string;
   address?: string;
   password?: string;
+  id_user?:string;
 }

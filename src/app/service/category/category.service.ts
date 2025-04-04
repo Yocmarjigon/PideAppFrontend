@@ -1,18 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { Category } from 'src/app/models/Category';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  constructor() {}
+  private url = 'http://localhost:8080/category';
+  constructor(private http: HttpClient) {}
 
-  getCategories() {
-    this._supabaseClient.auth.getSession()
-    this._supabaseClient.auth.getUser()
-    return this._supabaseClient.from('categoria').select('*');
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}/get`);
   }
 
   saveCategory(category: Category) {

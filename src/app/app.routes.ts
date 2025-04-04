@@ -15,6 +15,8 @@ import { SearchPageComponent } from './pages/private/user/search-page/search-pag
 import { LayoutAdminComponent } from './pages/private/admin/layout-admin/layout-admin.component';
 import { ProductsPageComponent } from './pages/private/admin/products/products-page/products-page.component';
 import { DescriptionProductPageComponent } from './pages/private/user/description-product-page/description-product-page.component';
+import { authGuard } from './guards/auth.guard';
+import { FormProductComponent } from './pages/private/admin/products/form-product/form-product.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,7 @@ export const routes: Routes = [
   {
     path: 'layout',
     component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'home-page',
@@ -81,11 +84,13 @@ export const routes: Routes = [
   {
     path: 'layout-admin',
     component: LayoutAdminComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'product-page',
         component: ProductsPageComponent,
       },
+
       {
         path: '',
         pathMatch: 'full',
@@ -94,10 +99,15 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'product-form',
+    component: FormProductComponent,
+  },
+  {
     path: '',
     redirectTo: '/login-page',
     pathMatch: 'full',
   },
+
   {
     path: '**',
     component: ErrorPageComponent,

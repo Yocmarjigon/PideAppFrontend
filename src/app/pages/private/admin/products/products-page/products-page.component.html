@@ -22,14 +22,14 @@
           icon="pi pi-plus"
           severity="success"
           label="Crear"
-          (onClick)="handleOpenModal()"
+          (onClick)="openForm()"
           styleClass="p-button-sm md:p-button"
         />
       </div>
 
       <div class="flex flex-wrap gap-2">
         <p-dropdown
-          [options]="categories()"
+          [options]="categories"
           (onChange)="applyFilter()"
           optionLabel="name"
           placeholder="Categoría"
@@ -50,38 +50,34 @@
 
   <!-- Contenido desplazable -->
   <div class="flex-1 overflow-y-auto">
-    <p-dataView [value]="filteredProducts()" [paginator]="true" [rows]="8">
-      <ng-template let-product pTemplate="listItem">
+    <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
+      <ng-template #list let-products>
+        @for (product of products; track $index) {
         <div class="flex items-center p-2 border-b gap-3">
           <img
-            [src]="product.img"
+            [src]="'/assets/images/img-default.jpg'"
             [alt]="product.title"
             class="w-16 h-16 object-cover rounded"
-          >
+          />
           <div class="flex-1 min-w-0">
             <h3 class="font-medium truncate">{{ product.title }}</h3>
-            <p class="text-sm text-gray-600">{{ product.price | currency:'COP':'symbol':'1.0-0' }}</p>
+            <p class="text-sm text-gray-600">
+              {{ product.price | currency : "COP" : "symbol" : "1.0-0" }}
+            </p>
           </div>
           <div class="flex gap-1">
             <p-button
               icon="pi pi-pencil"
               styleClass="p-button-sm p-button-text"
-
             ></p-button>
             <p-button
               icon="pi pi-trash"
               styleClass="p-button-sm p-button-text p-button-danger"
-
             ></p-button>
           </div>
         </div>
+        }
       </ng-template>
     </p-dataView>
   </div>
-
-  <!-- Modal -->
-  <app-form-product
-    [displayModal]="openModal"
-    (modalClosed)="openModal()"
-  ></app-form-product>
 </section>

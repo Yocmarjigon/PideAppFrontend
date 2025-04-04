@@ -16,8 +16,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FormProductComponent } from '../form-product/form-product.component';
 import { ProductService } from 'src/app/service/products/product.service';
 import { Category } from 'src/app/models/Category';
-import { InputGroupAddon, InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import {
+  InputGroupAddon,
+  InputGroupAddonModule,
+} from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
+import { CategoryService } from 'src/app/service/category/category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-page',
@@ -38,19 +43,17 @@ import { InputGroupModule } from 'primeng/inputgroup';
     InputNumberModule,
     FormProductComponent,
     InputGroupAddonModule,
-    InputGroupModule
+    InputGroupModule,
   ],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
 })
-export class ProductsPageComponent implements OnInit{
-
-  openModal = signal(false);
+export class ProductsPageComponent implements OnInit {
   valuePriceFilter = 0;
-  products: Signal<Product[]> = signal([]);
+  products: Product[] = [];
 
-   //Lista de categoría
-  categories: Signal<Category[]> = signal([])
+  //Lista de categoría
+  categories: Category[] = [];
 
   // Filtros
   filters = signal({
@@ -59,19 +62,38 @@ export class ProductsPageComponent implements OnInit{
     price: 100, // Precio máximo inicial
   });
 
-
   constructor(
-    private readonly productService: ProductService
-  ){
-
-  }
+    private readonly productService: ProductService,
+    private _categoryService: CategoryService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.productService.getProducts)
+    this.getProducts();
+    this.getCategory()
+  }
+
+  getProducts() {
+    this.productService.getProducts().subscribe({
+      next: (p) => {
+        this.products = p;
+        console.log(p);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
+  }
+  getCategory() {
+    this._categoryService.getCategories().subscribe({
+      next: (c) => {
+        this.categories = c;
+      },
+    });
   }
 
   // Productos filtrados
-  filteredProducts = computed(() => {
+  /* filteredProducts = computed(() => {
     return this.products().filter((product) => {
       if (product.title != undefined) {
         const matchesName = product.title
@@ -85,10 +107,10 @@ export class ProductsPageComponent implements OnInit{
       }
       return '';
     });
-  });
+  }); */
 
-  handleOpenModal() {
-   this.openModal.set(true)
+  openForm() {
+    this.router.navigateByUrl("/product-form")
   }
 
   // Función para aplicar filtros (se llama automáticamente al cambiar los filtros)

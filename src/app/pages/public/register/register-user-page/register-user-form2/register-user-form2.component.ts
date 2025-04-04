@@ -37,7 +37,7 @@ import { MessageModule } from 'primeng/message';
     InputTextModule,
     ButtonModule,
     ToastModule,
-    MessageModule
+    MessageModule,
   ],
   providers: [Validators, MessageService],
   templateUrl: './register-user-form2.component.html',
@@ -47,72 +47,83 @@ export class RegisterUserForm2Component {
   formClient: FormGroup;
   formsControl: any = {};
 
-
   constructor(
     private fb: FormBuilder,
     private _dataFormService: DataFormService,
     private _registerUserService: RegisterusersService,
     private _router: Router,
     private _messageService: MessageService,
-    private _authService: AuthService,
+    private _authService: AuthService
   ) {
     this.formsControl = this._dataFormService.getSharedData();
-    this.formClient = fb.group({
-      name: this.formsControl.name,
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^(?=.*[A-Za-z]).{8,}$'
-          ),
+    this.formClient = fb.group(
+      {
+        name: this.formsControl.name,
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [Validators.required, Validators.pattern('^(?=.*[A-Za-z]).{8,}$')],
         ],
-      ],
-      repitPassword: ['', Validators.required],
-      address: this.formsControl.address,
-      phone: this.formsControl.phone,
+        repitPassword: ['', Validators.required],
+        address: this.formsControl.address,
+        phone: this.formsControl.phone,
+      },
+      {
+        validators: matchPasswordValidator('password', 'repitPassword'),
+      }
+    );
 
-    },
-    {
-      validators: matchPasswordValidator('password', 'repitPassword')
-    }
-  );
-
-  this.formClient.valueChanges.subscribe(()=>console.log(this.formClient.invalid))
-
+    this.formClient.valueChanges.subscribe(() =>
+      console.log(this.formClient.invalid)
+    );
   }
 
   async registerUser() {
-
-
     console.log(this.formClient.value);
     const client = this.formClient.value as Client;
 
-    const { data, error } = await this._authService.sinUp({
+    const { data, error } = await this._authService.signUp({
       email: client.email,
       password: client.password,
     });
+
     if (error) {
-      return console.log(error);
+      if (error.code === 'user_already_exists') {
+        this._messageService.add({
+          severity: 'error',
+          detail:
+            'El cliente con este correo ya esta registrado en base de datos',
+          summary: 'Error',
+          life: 5000,
+        });
+        return;
+      }
+      return console.log(error.code);
     } else {
       console.log(data);
-    }
-    const { error: errorC } = await this._registerUserService.registerClient({
-      id: data.user?.id,
-      ...client,
-    });
+      const { data: dataC, error: errorC } =
+        await this._registerUserService.registerClient({
+          address: client.address,
+          email: client.email,
+          name: client.name,
+          password: client.password,
+          phone: client.phone,
+          id: data.user?.id,
+          id_user: data.user?.id,
+        });
+      console.log(dataC);
 
-    if (!errorC) {
-      this._messageService.add({
-        summary: 'Info',
-        detail: 'Usuario registrado correctamente',
-        life: 10000,
-        severity: 'success',
-      });
-      setTimeout(() => this._router.navigate(['/login-page']), 1500);
-    } else {
-      console.log(errorC);
+      if (!errorC) {
+        this._messageService.add({
+          summary: 'Info',
+          detail: 'Usuario registrado correctamente',
+          life: 10000,
+          severity: 'success',
+        });
+        setTimeout(() => this._router.navigate(['/login-page']), 1500);
+      } else {
+        console.log(errorC);
+      }
     }
   }
 }

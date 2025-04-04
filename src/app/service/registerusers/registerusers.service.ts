@@ -16,6 +16,9 @@ export class RegisterusersService {
       correo: client.email,
       direccion: client.address,
       telefono: client.phone,
+      id_user: client.id_user,
+      id_cliente: client.id
+
     });
   }
 }

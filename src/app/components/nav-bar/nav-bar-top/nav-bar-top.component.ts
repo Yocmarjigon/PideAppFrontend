@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ButtonCarComponent } from "../../buttons/button-car/button-car.component";
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-nav-bar-top',
@@ -12,13 +13,15 @@ import { Router } from '@angular/router';
 export class NavBarTopComponent {
 
   constructor(
+    private _authService: AuthService,
     private readonly router:Router
   ){
 
   }
-  logout(){
+  async logout(){
+    await this._authService.signOut()
     this.router.navigateByUrl("/login-page")
-    console.log("kjksdjf")
+
   }
 
 }

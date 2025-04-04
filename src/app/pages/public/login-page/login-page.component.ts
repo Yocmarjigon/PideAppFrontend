@@ -48,7 +48,6 @@ import { DataFormService } from 'src/app/service/utils/data-form.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-
 export class LoginPageComponent implements OnInit {
   onVisual = false;
   loader = true;
@@ -60,13 +59,11 @@ export class LoginPageComponent implements OnInit {
   });
 
   constructor(
-    private readonly authService: AuthService,
+    private readonly _authService: AuthService,
     private _messageService: MessageService,
     private _dataFormService: DataFormService,
     private _router: Router
-  ) {
-
-  }
+  ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -74,24 +71,32 @@ export class LoginPageComponent implements OnInit {
 
   async ngOnInit() {
     await this.data();
-
   }
 
   async login() {
     const user = this.formLogin.value;
-    const {data, error}= await this.authService.singIn(user);
-    if(!error){
+    const { data, error } = await this._authService.signIn(user);
+    const rol = await this._authService.obtenerRolUsuario(data.user?.id!);
 
-    }else{
-
+    if (!error) {
+      console.log(data);
+      this.redirect(rol);
+    } else {
     }
-
   }
 
-
-  data(){
-
+  redirect(rol: string) {
+    switch (rol) {
+      case 'CLIENTEUSER':
+        this._router.navigateByUrl('/layout/home-page');
+        break;
+      case 'ADMINUSER':
+        this._router.navigateByUrl('/layout-admin');
+        break;
+    }
   }
+
+  data() {}
 
   changeVisual() {
     this.onVisual = !this.onVisual;

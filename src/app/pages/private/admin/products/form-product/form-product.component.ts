@@ -34,6 +34,8 @@ import { SelectModule } from 'primeng/select';
 import { FilestorageService } from 'src/app/service/filestorage/filestorage.service';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from 'src/app/service/supabase.service';
+import { MenubarModule } from 'primeng/menubar';
+import { NavBarBackComponent } from '../../../../../components/nav-bar/nav-bar-back/nav-bar-back.component';
 @Component({
   selector: 'app-form-product',
   imports: [
@@ -48,6 +50,8 @@ import { SupabaseService } from 'src/app/service/supabase.service';
     ToastModule,
     SelectModule,
     FormsModule,
+    MenubarModule,
+    NavBarBackComponent,
   ],
   providers: [MessageService],
   templateUrl: './form-product.component.html',
@@ -75,7 +79,6 @@ export class FormProductComponent implements OnInit {
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
       category: new FormControl('', Validators.required),
-      available: new FormControl('', Validators.required),
       price: new FormControl(0, [Validators.required, Validators.min(0)]),
       img: new FormControl('', Validators.required),
     });
@@ -102,7 +105,6 @@ export class FormProductComponent implements OnInit {
     } catch {}
   }
 
-  hideDialogCreateProduct() {}
   hideMessageCreateCategory() {
     this.messageService.add({
       severity: 'success',
@@ -113,57 +115,37 @@ export class FormProductComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    const file = event.target.files?.[0];
-    if (file) {
-      // Guardar el archivo real en una propiedad separada
-      this.selectedFile = file;
-      console.log(this.selectedFile);
-    }
+    console.log(event.files[0]);
+
+    console.log(event);
   }
 
   async saveProduct() {
-    let imageUrl = null;
-
-    if (this.selectedFile) {
-      const file = this.selectedFile;
-      const fileExt = file.name.split('.').pop();
-
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `uploads/${fileName}`;
-
-      // Subir a Supabase
-      const { error } = await this._supabaseClient.storage
-        .from('imagenes')
-        .upload(filePath, this.selectedFile, {
-          contentType: file.type,
-          cacheControl: '3600',
-          upsert: false,
-        });
-
-      if (error) throw error;
-
-      const expiresIn = 60 * 60 * 24 * 365 * 10;
+    const product = this.productForm.value;
+    product.category = product.category.idCategory
+    console.log(product);
 
 
-      // 3. Obtener URL pública con parámetros de cache
-      const { data } = await this._supabaseClient.storage
-        .from('imagenes')
-        .createSignedUrl(filePath, expiresIn);
-
-      imageUrl = data?.signedUrl;
-
-      console.log(imageUrl);
-      console.log(filePath);
-    }
+    this.productService.saveProducts(product).subscribe({
+      next: (v) => {
+        console.log(v);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
   }
 
   async getCategories() {
-    const resCategories = await this.categoryService.getCategories();
-
-    this.categories = resCategories.data as Category[];
-    console.log(this.categories);
+    this.categoryService.getCategories().subscribe({
+      next: (c) => {
+        this.categories = c;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
   }
-
 
   async pickFromGallery() {
     try {

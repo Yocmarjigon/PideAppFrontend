@@ -25,6 +25,7 @@
               formControlName="email"
             />
           </p-inputgroup>
+
           @if(formClient.get("email")?.hasError("email")&&
           formClient.get("email")?.touched){
           <p-message severity="error" variant="simple" size="small"
@@ -53,7 +54,8 @@
           } @if(formClient.get("password")?.hasError("pattern")&&
           formClient.get("password")?.touched){
           <p-message severity="error" variant="simple" size="small"
-            >La contraseña debe tener minimo 8 cartacteres y una letra</p-message
+            >La contraseña debe tener minimo 8 cartacteres y una
+            letra</p-message
           >
           }
         </div>
