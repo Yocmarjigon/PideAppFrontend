@@ -12,6 +12,6 @@ import { RouterLink } from '@angular/router';
 export class NavBarBackComponent {
 
 @Input() router = "/login-page";
-@Input() icon = "pi pi-home";
+@Input() icon = "pi pi-chevron-left";
 
 }

@@ -1,0 +1,26 @@
+<div class="flex items-center p-2 border-b gap-3">
+  @if (showImg){
+  <img
+    [src]="srcImg ? srcImg : '/assets/images/img-default.jpg'"
+    [alt]="alt"
+    class="w-16 h-16 object-cover rounded"
+  />
+  }
+
+  <div class="flex-1 min-w-0">
+    <h3 class="font-medium truncate">{{ title }}</h3>
+    @if (showPrice) {
+    <p class="text-sm text-gray-600">
+      {{ price | currency : "COP" : "symbol" : "1.0-0" }}
+    </p>
+    }
+    @if(showQuantity){
+      <p>Disponibles: <span class="font-bold">{{quantity}}</span></p>
+    }
+
+  </div>
+  <div class="flex gap-1">
+    <p-button icon="pi pi-pencil" severity="info" (onClick)="onClickDetail()" />
+    <p-button icon="pi pi-trash" severity="danger" (onClick)="onClickDelete()" />
+  </div>
+</div>

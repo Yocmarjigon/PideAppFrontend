@@ -15,7 +15,9 @@ export class ProductCardComponent {
   @Input() product:Product ={
     title: '',
     price: 0,
-    img: ''
+    img: '',
+    available: false,
+    stock: 0
   }
 
   constructor(private route: Router, private sendServiceData: DescriptionSendDataComponentService) {}

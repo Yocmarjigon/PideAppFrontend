@@ -1,0 +1,29 @@
+<section class="mt-20 p-5">
+  <app-nav-bar-back
+    [icon]="'pi pi-chevron-left'"
+    [router]="'/layout-admin/product-page'"
+  ></app-nav-bar-back>
+  <div>
+    <p-button
+      icon="pi pi-plus"
+      severity="success"
+      label="Crear Categoria"
+      (onClick)="openCategoryForm()"
+      styleClass="p-button-sm md:p-button"
+    />
+  </div>
+  <div class="flex-1 overflow-y-auto">
+    <p-dataView #dv [paginator]="true" [rows]="8" [value]="categories">
+      <ng-template #list let-products>
+        @for (category of categories; track $index) {
+        <app-card-custom
+          [alt]="category.name"
+          [title]="category.name"
+          [showImg]="false"
+          [showPrice]="false"
+        ></app-card-custom>
+        }
+      </ng-template>
+    </p-dataView>
+  </div>
+</section>

@@ -36,6 +36,10 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from 'src/app/service/supabase.service';
 import { MenubarModule } from 'primeng/menubar';
 import { NavBarBackComponent } from '../../../../../components/nav-bar/nav-bar-back/nav-bar-back.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
+import { Router } from '@angular/router';
+import { MessageModule } from 'primeng/message';
 @Component({
   selector: 'app-form-product',
   imports: [
@@ -44,7 +48,7 @@ import { NavBarBackComponent } from '../../../../../components/nav-bar/nav-bar-b
     DialogModule,
     ReactiveFormsModule,
     ButtonModule,
-    ToggleSwitchModule,
+    ToggleButtonModule,
     InputNumberModule,
     PopoverModule,
     ToastModule,
@@ -52,6 +56,7 @@ import { NavBarBackComponent } from '../../../../../components/nav-bar/nav-bar-b
     FormsModule,
     MenubarModule,
     NavBarBackComponent,
+    MessageModule,
   ],
   providers: [MessageService],
   templateUrl: './form-product.component.html',
@@ -63,28 +68,28 @@ export class FormProductComponent implements OnInit {
   @Input() displayModal = signal(false);
 
   productForm: FormGroup;
-  categoryForm: FormGroup;
+
   previewImageUrl: string | undefined = '';
   categories: Category[] = [];
   selectedFile!: File;
   private _supabaseClient = inject(SupabaseService).supabaseClient;
+  checked: any;
 
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {
     this.productForm = fb.group({
       title: new FormControl('', Validators.required),
-      description: new FormControl(''),
+      description: ['', [Validators.required]],
       category: new FormControl('', Validators.required),
-      price: new FormControl(0, [Validators.required, Validators.min(0)]),
-      img: new FormControl('', Validators.required),
-    });
-
-    this.categoryForm = fb.group({
-      name: new FormControl('', Validators.required),
+      price: new FormControl(0, [Validators.required, Validators.min(100)]),
+      available: [false],
+      stock: ['', [Validators.required, Validators.min(1)]],
+      img: new FormControl(''),
     });
   }
 
@@ -92,51 +97,51 @@ export class FormProductComponent implements OnInit {
     this.getCategories();
   }
 
-  toggle(event: Event) {
-    this.op.toggle(event);
-  }
-
-  async saveCategory() {
-    try {
-      const category = this.categoryForm.value as Category;
-      const res = await this.categoryService.saveCategory(category);
-      this.hideMessageCreateCategory();
-      console.log(res);
-    } catch {}
-  }
-
-  hideMessageCreateCategory() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Info',
-      detail: 'La categoría se creo correctamente',
-      life: 3000,
-    });
-  }
-
   onFileChange(event: any) {
     console.log(event.files[0]);
 
     console.log(event);
   }
-
+  openCategoryForm() {
+    this.router.navigateByUrl('/category-form');
+  }
   async saveProduct() {
     const product = this.productForm.value;
-    product.category = product.category.idCategory
-    console.log(product);
 
+    const productP = {
+      description: product.description,
+      img: product.img,
+      price: product.price,
+      title: product.title,
+      stock: product.stock,
+      available: product.available,
+      category: product.category.idCategory,
+    };
+    console.log(productP);
 
-    this.productService.saveProducts(product).subscribe({
+    this.productService.saveProducts(productP).subscribe({
       next: (v) => {
         console.log(v);
+        this.showMessageCreateProduct();
+      },
+      complete: () => {
+        this.router.navigateByUrl('/layout-admin/product-page');
       },
       error: (e) => {
         console.log(e);
       },
     });
   }
+  showMessageCreateProduct() {
+    this.messageService.add({
+      detail: 'El producto se creo correctamente',
+      summary: 'Info',
+      severity: 'success',
+      life: 3000,
+    });
+  }
 
-  async getCategories() {
+  getCategories() {
     this.categoryService.getCategories().subscribe({
       next: (c) => {
         this.categories = c;
@@ -145,29 +150,5 @@ export class FormProductComponent implements OnInit {
         console.log(e);
       },
     });
-  }
-
-  async pickFromGallery() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Photos,
-      });
-
-      this.previewImageUrl = image.dataUrl;
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Imagen seleccionada',
-        detail: 'La imagen se ha cargado correctamente',
-      });
-    } catch (error) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'No se pudo cargar la imagen',
-      });
-    }
   }
 }

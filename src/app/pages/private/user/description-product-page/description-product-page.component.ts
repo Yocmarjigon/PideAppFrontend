@@ -20,14 +20,6 @@ export class DescriptionProductPageComponent implements OnInit {
   constructor(private sendServiceData: DescriptionSendDataComponentService) {}
 
   ngOnInit(): void {
-    this.product = {
-      id: 1,
-     title: 'Arepa de huevo',
-      img: '/assets/images/arepa-de-huevo.jpeg',
-      description:
-        'Lorem ipsum odor amet, consectetuer adipiscing elit. Id nunc id dignissim velit ultrices. Hendrerit vitae elit proin suspendisse vel integer. Ornare varius magna nostra hac class congue diam torquent luctus. Viverra dignissim fames tellus tempor congue. Convallis praesent proin maximus facilisi eleifend convallis scelerisque semper. Leo nunc luctus nascetur lacinia phasellus fusce class quis. Fusce et auctor eleifend ut rhoncus vitae. Sapien hendrerit in maecenas class eu ante aliquet dis?',
-      price: 2000,
-    };
 
     /* this.sendServiceData.data.subscribe((d) => {
       this.product = d;

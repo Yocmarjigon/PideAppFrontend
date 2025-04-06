@@ -18,6 +18,7 @@
             </p-inputgroup-addon>
             <input
               pInputText
+              [required]="true"
               placeholder="Ingresa nombre completo"
               formControlName="name"
             />
@@ -38,6 +39,7 @@
               <i class="pi pi-phone"></i>
             </p-inputgroup-addon>
             <p-inputNumber
+              required="true"
               mode="decimal"
               [useGrouping]="false"
               placeholder="Ingresa numero de teléfono"
@@ -67,6 +69,7 @@
             </p-inputgroup-addon>
             <input
               pInputText
+              required="true"
               placeholder="Ingresa tu dirección"
               formControlName="address"
             />

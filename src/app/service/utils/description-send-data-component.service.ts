@@ -3,16 +3,19 @@ import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/Product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DescriptionSendDataComponentService {
-dataSource = new BehaviorSubject<any>({})
-data = this.dataSource.asObservable()
+  dataSource = new BehaviorSubject<any>({});
+  data = this.dataSource.asObservable();
+  idDataSource = new BehaviorSubject('');
+  idData = this.idDataSource.asObservable();
+  constructor() {}
 
-  constructor() { }
-
-  changeData(newData: any){
-    this.dataSource.next(newData)
+  changeData(newData: any) {
+    this.dataSource.next(newData);
   }
-
+  sendId(id: string) {
+    this.idDataSource.next(id);
+  }
 }

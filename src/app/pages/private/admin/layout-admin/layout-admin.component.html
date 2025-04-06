@@ -1,5 +1,5 @@
-<section class="layout-container">
-  <p-menubar [model]="items">
+<section class="layout-container relative ">
+  <p-menubar [model]="items" styleClass="fixet w-full ">
     <ng-template #start>
       <div class="w-20">
         <img src="/assets/images/Logo.png" alt="" />
@@ -32,7 +32,7 @@
       </div>
     </ng-template>
   </p-menubar>
-  <main>
+  <main class="mt-3">
     <router-outlet></router-outlet>
   </main>
 </section>

@@ -16,6 +16,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FormProductComponent } from '../form-product/form-product.component';
 import { ProductService } from 'src/app/service/products/product.service';
 import { Category } from 'src/app/models/Category';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {
   InputGroupAddon,
   InputGroupAddonModule,
@@ -23,6 +24,8 @@ import {
 import { InputGroupModule } from 'primeng/inputgroup';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { Router } from '@angular/router';
+import { CardCustomComponent } from '../../../../../components/card/card-custom/card-custom.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-products-page',
@@ -44,7 +47,10 @@ import { Router } from '@angular/router';
     FormProductComponent,
     InputGroupAddonModule,
     InputGroupModule,
+    CardCustomComponent,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
 })
@@ -65,13 +71,39 @@ export class ProductsPageComponent implements OnInit {
   constructor(
     private readonly productService: ProductService,
     private _categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
     this.getProducts();
-    this.getCategory()
+    this.getCategory();
   }
+
+  confirmDelete(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Estas seguro que quieres eliminar el producto',
+        header: 'Confirmacion',
+        closable: true,
+        closeOnEscape: true,
+        icon: 'pi pi-exclamation-triangle',
+        rejectButtonProps: {
+            label: 'Cancelar',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptButtonProps: {
+            label: 'Confirmar',
+        },
+        accept: () => {
+
+        },
+        reject: () => {
+
+        },
+    });
+}
 
   getProducts() {
     this.productService.getProducts().subscribe({
@@ -84,6 +116,7 @@ export class ProductsPageComponent implements OnInit {
       },
     });
   }
+
   getCategory() {
     this._categoryService.getCategories().subscribe({
       next: (c) => {
@@ -109,10 +142,13 @@ export class ProductsPageComponent implements OnInit {
     });
   }); */
 
-  openForm() {
-    this.router.navigateByUrl("/product-form")
+  openProductsForm() {
+    this.router.navigateByUrl('/product-form');
   }
 
+  openCategoryPage() {
+    this.router.navigateByUrl('/category-page');
+  }
   // Función para aplicar filtros (se llama automáticamente al cambiar los filtros)
   applyFilter() {
     // No es necesario hacer nada aquí, ya que `filteredProducts` es una señal computada

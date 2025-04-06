@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         return router.navigateByUrl('/login-page'); // Redirige si no autenticado
       }
 
-      console.log('Usuario:', data.user);
+
 
       try {
         const rol = await authService.obtenerRolUsuario(data.user.id);

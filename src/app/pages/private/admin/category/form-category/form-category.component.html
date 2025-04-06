@@ -1,0 +1,42 @@
+<section class="flex flex-col p-5">
+  <app-nav-bar-back
+    [icon]="'pi pi-chevron-left'"
+    [router]="'/layout-admin/product-page'"
+  ></app-nav-bar-back>
+  <form
+    [formGroup]="categoryForm"
+    class="space-y-4 mt-20"
+    (submit)="saveCategory()"
+  >
+    <!-- Campo: Título -->
+    <div class="flex flex-col gap-1">
+      <label for="title" class="font-medium">Nombre:</label>
+      <input
+        id="title"
+        type="text"
+        pInputText
+        formControlName="name"
+        placeholder="Ingrese el título"
+        class="w-full p-2 border rounded-lg"
+      />
+    </div>
+
+    <!-- Botones del formulario -->
+    <div class="flex justify-end gap-2">
+      <p-button
+        type="button"
+        label="Cancelar"
+        severity="secondary"
+        class="w-full md:w-auto"
+      ></p-button>
+      <p-button
+        type="submit"
+        label="Guardar"
+        severity="primary"
+        class="w-full md:w-auto"
+      ></p-button>
+    </div>
+  </form>
+  <p-toast />
+</section>
+

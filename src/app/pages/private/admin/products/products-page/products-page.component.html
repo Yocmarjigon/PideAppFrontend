@@ -4,7 +4,23 @@
     <h1 class="text-[1.5em] font-bold text-orange_primary">Productos</h1>
 
     <div class="flex flex-col gap-3 w-full mt-3">
-      <div class="flex justify-between items-center gap-2">
+      <div class="flex justify-between flex-col gap-2">
+        <div class="flex gap-5">
+          <p-button
+            icon="pi pi-plus"
+            severity="success"
+            label="Crear Producto"
+            (onClick)="openProductsForm()"
+            styleClass="p-button-sm md:p-button"
+          />
+          <p-button
+            variant="outlined"
+            icon="pi pi-plus"
+            label="Categorias"
+            (onClick)="openCategoryPage()"
+            styleClass="p-button-sm md:p-button"
+          />
+        </div>
         <p-inputGroup class="flex-1">
           <p-inputGroupAddon>
             <i class="pi pi-search"></i>
@@ -17,14 +33,6 @@
             (input)="applyFilter()"
           />
         </p-inputGroup>
-
-        <p-button
-          icon="pi pi-plus"
-          severity="success"
-          label="Crear"
-          (onClick)="openForm()"
-          styleClass="p-button-sm md:p-button"
-        />
       </div>
 
       <div class="flex flex-wrap gap-2">
@@ -53,31 +61,10 @@
     <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
       <ng-template #list let-products>
         @for (product of products; track $index) {
-        <div class="flex items-center p-2 border-b gap-3">
-          <img
-            [src]="'/assets/images/img-default.jpg'"
-            [alt]="product.title"
-            class="w-16 h-16 object-cover rounded"
-          />
-          <div class="flex-1 min-w-0">
-            <h3 class="font-medium truncate">{{ product.title }}</h3>
-            <p class="text-sm text-gray-600">
-              {{ product.price | currency : "COP" : "symbol" : "1.0-0" }}
-            </p>
-          </div>
-          <div class="flex gap-1">
-            <p-button
-              icon="pi pi-pencil"
-              styleClass="p-button-sm p-button-text"
-            ></p-button>
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-sm p-button-text p-button-danger"
-            ></p-button>
-          </div>
-        </div>
+          <app-card-custom [id]="product.idProduct"  [quantity]="product.stock" [alt]="product.name" [title]="product.title" [price]="product.price"></app-card-custom>
         }
       </ng-template>
     </p-dataView>
   </div>
+  <p-confirmdialog />
 </section>
