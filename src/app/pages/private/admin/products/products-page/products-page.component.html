@@ -61,10 +61,41 @@
     <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
       <ng-template #list let-products>
         @for (product of products; track $index) {
-          <app-card-custom [id]="product.idProduct"  [quantity]="product.stock" [alt]="product.name" [title]="product.title" [price]="product.price"></app-card-custom>
+        <div class="flex items-center p-2 border-b gap-3">
+          <img
+            [src]="product.img ? product.img : '/assets/images/img-default.jpg'"
+            [alt]="product.title"
+            class="w-16 h-16 object-cover rounded"
+          />
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium truncate">{{ product.title }}</h3>
+
+            <p class="text-sm text-gray-600">
+              {{ product.price | currency : "COP" : "symbol" : "1.0-0" }}
+            </p>
+
+            <p>
+              Disponibles: <span class="font-bold">{{ product.quantity }}</span>
+            </p>
+          </div>
+          <div class="flex gap-1">
+            <p-button
+              icon="pi pi-pencil"
+              severity="info"
+              (onClick)="openDetailProuct(product)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              (onClick)="confirmDelete($event, product.idProduct)"
+            />
+          </div>
+        </div>
+
         }
       </ng-template>
     </p-dataView>
   </div>
+  <p-toast />
   <p-confirmdialog />
 </section>

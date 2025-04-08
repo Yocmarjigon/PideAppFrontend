@@ -1,4 +1,4 @@
-import { DescriptionSendDataComponentService } from 'src/app/service/utils/description-send-data-component.service';
+
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class CardCustomComponent {
   @Input() clickDetail = () => {};
   constructor(
     private router: Router,
-    private _descriptionSendDataService: DescriptionSendDataComponentService,
+
     private _productService: ProductService
   ) {}
   onClickDelete() {
@@ -39,8 +39,6 @@ export class CardCustomComponent {
     });
   }
   onClickDetail() {
-    this.router.navigateByUrl('/product-detail-page');
-    console.log(this.id);
-    this._descriptionSendDataService.sendId(this.id);
+
   }
 }

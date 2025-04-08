@@ -11,27 +11,29 @@ import enviroment_back from 'src/app/enviroment_back';
 })
 export class ProductService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private url =`${enviroment_back.url_local}/product`  ;
-  constructor(
-    private http: HttpClient
-  ) {}
+  private url = `${enviroment_back.url_local}/product`;
+  constructor(private http: HttpClient) {}
 
-  test():Observable<string>{
-    return this.http.get<string>(`${this.url}/test`)
+  test(): Observable<string> {
+    return this.http.get<string>(`${this.url}/test`);
   }
-  getProducts(): Observable<Product[]>{
+  getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.url}/get`);
   }
 
-  saveProducts(product: Product):Observable<any>{
+  saveProducts(product: Product): Observable<any> {
     return this.http.post(`${this.url}/save`, product);
   }
 
-getProductById(id: string): Observable<Product>{
-  return this.http.get<Product>(`${this.url}/get/${id}`)
-}
-deleteProduct(id: string): Observable<any>{
-  return this.http.delete(`${this.url}/delete/${id}`)
-}
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.url}/get/${id}`);
+  }
 
+  updateProduct(id: string, product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.url}/update/${id}`, product);
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.url}/delete/${id}`);
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Product } from 'src/app/models/Product';
-import { DescriptionSendDataComponentService } from 'src/app/service/utils/description-send-data-component.service';
+
 
 @Component({
   selector: 'app-product-card',
@@ -20,7 +20,7 @@ export class ProductCardComponent {
     stock: 0
   }
 
-  constructor(private route: Router, private sendServiceData: DescriptionSendDataComponentService) {}
+  constructor() {}
 
   ngOnInit(){
 
@@ -28,8 +28,7 @@ export class ProductCardComponent {
 
 
   routerSelectProduct() {
-    this.sendServiceData.changeData(this.product)
-    this.route.navigateByUrl("/description-product-page");
+
 
   }
 

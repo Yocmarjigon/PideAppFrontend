@@ -6,11 +6,13 @@
   <form
     [formGroup]="productForm"
     class="space-y-4 mt-20"
-    (submit)="updateProduct()"
+    (submit)="confirmUpdate($event)"
   >
     <!-- Campo: Título -->
     <div class="flex flex-col gap-1">
-      <label for="title" class="font-medium">Título:<span class="text-red-500">*</span></label>
+      <label for="title" class="font-medium"
+        >Título:<span class="text-red-500">*</span></label
+      >
       <input
         required
         id="title"
@@ -30,7 +32,9 @@
 
     <!-- Campo: Descripción -->
     <div class="flex flex-col gap-1">
-      <label for="description" class="font-medium">Descripción:<span class="text-red-500">*</span></label>
+      <label for="description" class="font-medium"
+        >Descripción:<span class="text-red-500">*</span></label
+      >
       <textarea
         required
         id="description"
@@ -49,7 +53,9 @@
 
     <!-- Campo: Categoría -->
     <div class="flex flex-col gap-1">
-      <label for="category" class="font-medium">Categoría:<span class="text-red-500">*</span></label>
+      <label for="category" class="font-medium"
+        >Categoría:<span class="text-red-500">*</span></label
+      >
       <div class="flex items-center gap-5">
         <p-select
           required
@@ -95,7 +101,9 @@
     </div>
     <!-- Campo: Stock -->
     <div class="flex flex-col gap-1">
-      <label for="stock" class="font-medium">Stock:<span class="text-red-500">*</span></label>
+      <label for="stock" class="font-medium"
+        >Stock:<span class="text-red-500">*</span></label
+      >
       <p-inputnumber
         formControlName="stock"
         [showButtons]="true"
@@ -126,7 +134,9 @@
 
     <!-- Campo: Precio -->
     <div class="flex flex-col gap-1">
-      <label for="price" class="font-medium">Precio:<span class="text-red-500">*</span></label>
+      <label for="price" class="font-medium"
+        >Precio:<span class="text-red-500">*</span></label
+      >
       <p-inputNumber
         required
         id="price"
@@ -174,12 +184,13 @@
       ></p-button>
       <p-button
         type="submit"
-        label="Guardar"
+        label="Actualizar"
         severity="primary"
         class="w-auto"
         [disabled]="productForm.invalid"
       ></p-button>
     </div>
   </form>
+  <p-confirmdialog />
   <p-toast />
 </section>

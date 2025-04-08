@@ -25,7 +25,9 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { Router } from '@angular/router';
 import { CardCustomComponent } from '../../../../../components/card/card-custom/card-custom.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
 
 @Component({
   selector: 'app-products-page',
@@ -47,10 +49,10 @@ import { ConfirmationService } from 'primeng/api';
     FormProductComponent,
     InputGroupAddonModule,
     InputGroupModule,
-    CardCustomComponent,
     ConfirmDialogModule,
+    ToastModule
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
 })
@@ -72,7 +74,9 @@ export class ProductsPageComponent implements OnInit {
     private readonly productService: ProductService,
     private _categoryService: CategoryService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private _messageService: MessageService,
+    private _sendDataComponentService: SendDataComponentsService
   ) {}
 
   ngOnInit(): void {
@@ -80,36 +84,64 @@ export class ProductsPageComponent implements OnInit {
     this.getCategory();
   }
 
-  confirmDelete(event: Event) {
-    this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Estas seguro que quieres eliminar el producto',
-        header: 'Confirmacion',
-        closable: true,
-        closeOnEscape: true,
-        icon: 'pi pi-exclamation-triangle',
-        rejectButtonProps: {
-            label: 'Cancelar',
-            severity: 'secondary',
-            outlined: true,
-        },
-        acceptButtonProps: {
-            label: 'Confirmar',
-        },
-        accept: () => {
-
-        },
-        reject: () => {
-
-        },
+  showMessageDeleteProduct() {
+    this._messageService.add({
+      detail: 'El producto se elimino correctamente',
+      summary: 'Info',
+      severity: 'success',
+      life: 3000,
     });
-}
+  }
+
+  productDelete(id: string) {
+    this.productService.deleteProduct(id).subscribe({
+      next: (r) => {
+        console.log(r);
+        this.showMessageDeleteProduct()
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.getProducts();
+
+      },
+    });
+  }
+
+  openDetailProuct(product: Product) {
+    this.router.navigateByUrl('/product-detail-page');
+    this._sendDataComponentService.setProduct(product)
+  }
+
+  confirmDelete(event: Event, id: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Estas seguro que quieres eliminar el producto',
+      header: 'Confirmación',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Cancelar',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Confirmar',
+      },
+      accept: () => {
+        this.productDelete(id);
+      },
+      reject: () => {},
+    });
+  }
 
   getProducts() {
     this.productService.getProducts().subscribe({
       next: (p) => {
         this.products = p;
-        console.log(p);
+
       },
       error: (e) => {
         console.log(e);

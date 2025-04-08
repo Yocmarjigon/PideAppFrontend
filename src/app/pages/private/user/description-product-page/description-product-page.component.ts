@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from 'src/app/models/Product';
-import { DescriptionSendDataComponentService } from 'src/app/service/utils/description-send-data-component.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { StyleClass, StyleClassModule } from 'primeng/styleclass';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -17,7 +16,7 @@ export class DescriptionProductPageComponent implements OnInit {
   product!: Product;
   value = 1;
 
-  constructor(private sendServiceData: DescriptionSendDataComponentService) {}
+  constructor() {}
 
   ngOnInit(): void {
 
