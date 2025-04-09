@@ -14,14 +14,26 @@
   </div>
   <div class="flex-1 overflow-y-auto">
     <p-dataView #dv [paginator]="true" [rows]="8" [value]="categories">
-      <ng-template #list let-products>
+      <ng-template #list let-category>
         @for (category of categories; track $index) {
-        <app-card-custom
-          [alt]="category.name"
-          [title]="category.name"
-          [showImg]="false"
-          [showPrice]="false"
-        ></app-card-custom>
+        <div class="flex items-center p-2 border-b gap-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium truncate">{{ category.name }}</h3>
+          </div>
+          <div class="flex gap-1">
+            <p-button
+              icon="pi pi-pencil"
+              severity="info"
+              (onClick)="openDetailCategory(category)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              (onClick)="confirmDelete($event, category.idCategory)"
+            />
+          </div>
+        </div>
+
         }
       </ng-template>
     </p-dataView>

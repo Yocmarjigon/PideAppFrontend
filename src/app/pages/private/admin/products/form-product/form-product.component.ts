@@ -40,6 +40,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 
 import { Router } from '@angular/router';
 import { MessageModule } from 'primeng/message';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { MediaService } from 'src/app/service/utils/media.service';
 @Component({
   selector: 'app-form-product',
   imports: [
@@ -66,7 +68,7 @@ export class FormProductComponent implements OnInit {
   @ViewChild('op') op!: Popover;
 
   @Input() displayModal = signal(false);
-
+  imgSelect: any;
   productForm: FormGroup;
 
   previewImageUrl: string | undefined = '';
@@ -74,13 +76,14 @@ export class FormProductComponent implements OnInit {
   selectedFile!: File;
   private _supabaseClient = inject(SupabaseService).supabaseClient;
   checked: any;
-
+  imageUrl: any = '';
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private _mediaService: MediaService
   ) {
     this.productForm = fb.group({
       title: new FormControl('', Validators.required),
@@ -98,19 +101,38 @@ export class FormProductComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    console.log(event.files[0]);
-
-    console.log(event);
+    this.imgSelect = event.files[0];
   }
+
+  async uploadImg() {
+    if (!this.imgSelect) {
+      return;
+    }
+
+    this.imageUrl = await this._mediaService.uploadImage(
+      this.imgSelect,
+      'productos'
+    );
+
+
+  }
+
   openCategoryForm() {
     this.router.navigateByUrl('/category-form');
   }
   async saveProduct() {
+    this.uploadImg();
+
+    const { data } = this._supabaseClient.storage
+      .from('imagenes')
+      .getPublicUrl(this.imageUrl!);
+
+    console.log(data.publicUrl + ' ---------------------------------');
     const product = this.productForm.value;
 
     const productP = {
       description: product.description,
-      img: product.img,
+      img: this.imageUrl,
       price: product.price,
       title: product.title,
       stock: product.stock,

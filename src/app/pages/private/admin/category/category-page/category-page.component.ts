@@ -19,6 +19,12 @@ import { CategoryService } from 'src/app/service/category/category.service';
   styleUrl: './category-page.component.sass',
 })
 export class CategoryPageComponent implements AfterViewInit {
+confirmDelete($event: MouseEvent,arg1: any) {
+throw new Error('Method not implemented.');
+}
+openDetailCategory(_t14: any) {
+throw new Error('Method not implemented.');
+}
   categories: Category[] = [];
 
   constructor(private _categoryService: CategoryService, private router: Router) {}

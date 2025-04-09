@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { NgFor, NgIf } from '@angular/common';
+import { ProductService } from 'src/app/service/products/product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -23,26 +24,35 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class HomePageComponent implements OnInit {
   products: Product[] = [];
-
   responsiveOptions = [
     {
-      breakpoint: '800px',
+      breakpoint: '1400px',
       numVisible: 3,
-      numScroll: 3,
+      numScroll: 1,
     },
     {
-      breakpoint: '600px',
+      breakpoint: '1199px',
       numVisible: 2,
-      numScroll: 2,
+      numScroll: 1,
     },
     {
-      breakpoint: '300px',
+      breakpoint: '767px',
       numVisible: 1,
       numScroll: 1,
     },
   ];
 
+  constructor(private _productService: ProductService) {}
+
   ngOnInit(): void {
+    this._productService.getProducts().subscribe({
+      next: (p) => {
+        this.products = p;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
     this.products = [];
   }
 }

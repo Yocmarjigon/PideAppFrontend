@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Product } from 'src/app/models/Product';
-
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [],
+  imports: [CardModule,ButtonModule],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
