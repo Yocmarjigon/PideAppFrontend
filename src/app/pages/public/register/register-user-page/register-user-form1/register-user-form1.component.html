@@ -11,7 +11,7 @@
       <form class="form-register" [formGroup]="formClient1">
         <!-- Input nombre -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-800">Nombre:</span>
+          <span class="text-gray-800">Nombre:<span class="text-red-500">*</span>:</span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-user"></i>
@@ -33,7 +33,7 @@
 
         <!-- Input numero de teléfono -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Numero de teléfono:</span>
+          <span class="text-gray-700">Numero de teléfono:<span class="text-red-500">*</span></span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-phone"></i>
@@ -62,7 +62,7 @@
         </div>
         <!-- Input Dirección -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Dirección:</span>
+          <span class="text-gray-700">Dirección:<span class="text-red-500">*</span></span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-send"></i>

@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
-import { CardCustomComponent } from 'src/app/components/card/card-custom/card-custom.component';
+
 import { NavBarBackComponent } from 'src/app/components/nav-bar/nav-bar-back/nav-bar-back.component';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/service/category/category.service';
@@ -12,7 +12,7 @@ import { CategoryService } from 'src/app/service/category/category.service';
   imports: [
     NavBarBackComponent,
     DataViewModule,
-    CardCustomComponent,
+
     ButtonModule,
   ],
   templateUrl: './category-page.component.html',

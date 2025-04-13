@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-img-top-private',
@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ImgTopPrivateComponent {
   name = "Carlos Ramírez";
-   
-  
+
+
 
 }

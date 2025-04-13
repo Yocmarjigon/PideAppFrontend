@@ -15,6 +15,7 @@
         <!-- Input correo -->
         <div class="flex flex-col gap-1 container-input">
           <span class="text-gray-700">Correo:</span>
+
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-envelope"></i>
@@ -26,23 +27,21 @@
               formControlName="email"
             />
           </p-inputgroup>
-
+          <p-message severity="info" variant="simple" size="small"
+          >El correo es opcional</p-message
+        >
           @if(formClient.get("email")?.hasError("email")&&
           formClient.get("email")?.touched){
           <p-message severity="error" variant="simple" size="small"
             >El correo no es valido</p-message
           >
-          } @if (formClient.get("email")?.hasError("required") &&
-          formClient.get("email")?.touched) {
-          <p-message severity="error" variant="simple" size="small"
-            >El correo es requerido</p-message
-          >
           }
+
         </div>
 
         <!-- Input contraseña -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Contraseña</span>
+          <span class="text-gray-700">Contraseña:<span class="text-red-500">*</span></span>
           <app-input-password
             [placeholder]="'Ingresa una contraseña'"
             formControlName="password"
@@ -63,7 +62,7 @@
 
         <!-- Input confirmar contraseña -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Repetir contraseña</span>
+          <span class="text-gray-700">Repetir contraseña:<span class="text-red-500">*</span></span>
           <app-input-password
             formControlName="repitPassword"
             [placeholder]="'Repite la contraseña'"
@@ -82,7 +81,6 @@
 
         <p-button
           label="Registrarse"
-          (onClick)="registerUser()"
           [disabled]="formClient.invalid || formClient.hasError('mismatch')"
         />
       </form>

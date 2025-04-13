@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, computed, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -17,14 +17,10 @@ import { FormProductComponent } from '../form-product/form-product.component';
 import { ProductService } from 'src/app/service/products/product.service';
 import { Category } from 'src/app/models/Category';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {
-  InputGroupAddon,
-  InputGroupAddonModule,
-} from 'primeng/inputgroupaddon';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { Router } from '@angular/router';
-import { CardCustomComponent } from '../../../../../components/card/card-custom/card-custom.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
@@ -50,7 +46,7 @@ import { SendDataComponentsService } from 'src/app/service/utils/send-data-compo
     InputGroupAddonModule,
     InputGroupModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './products-page.component.html',
@@ -95,23 +91,22 @@ export class ProductsPageComponent implements OnInit {
 
   productDelete(id: string) {
     this.productService.deleteProduct(id).subscribe({
-      next: (r) => {
+      next: r => {
         console.log(r);
-        this.showMessageDeleteProduct()
+        this.showMessageDeleteProduct();
       },
-      error: (e) => {
+      error: e => {
         console.log(e);
       },
       complete: () => {
         this.getProducts();
-
       },
     });
   }
 
   openDetailProuct(product: Product) {
     this.router.navigateByUrl('/product-detail-page');
-    this._sendDataComponentService.setProduct(product)
+    this._sendDataComponentService.setProduct(product);
   }
 
   confirmDelete(event: Event, id: string) {
@@ -133,17 +128,19 @@ export class ProductsPageComponent implements OnInit {
       accept: () => {
         this.productDelete(id);
       },
-      reject: () => {},
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      reject: () => {
+
+      },
     });
   }
 
   getProducts() {
     this.productService.getProducts().subscribe({
-      next: (p) => {
+      next: p => {
         this.products = p;
-
       },
-      error: (e) => {
+      error: e => {
         console.log(e);
       },
     });
@@ -151,7 +148,7 @@ export class ProductsPageComponent implements OnInit {
 
   getCategory() {
     this._categoryService.getCategories().subscribe({
-      next: (c) => {
+      next: c => {
         this.categories = c;
       },
     });

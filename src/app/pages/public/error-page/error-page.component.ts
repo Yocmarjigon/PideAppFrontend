@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './error-page.component.sass'
 })
 export class ErrorPageComponent {
-  constructor(){
 
-  }
 }

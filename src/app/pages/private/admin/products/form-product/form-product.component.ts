@@ -4,7 +4,6 @@ import {
   inject,
   Input,
   OnInit,
-  Signal,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -19,20 +18,14 @@ import {
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FileUploadModule } from 'primeng/fileupload';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/products/product.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { ToastModule } from 'primeng/toast';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { SelectModule } from 'primeng/select';
-import { FilestorageService } from 'src/app/service/filestorage/filestorage.service';
-import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from 'src/app/service/supabase.service';
 import { MenubarModule } from 'primeng/menubar';
 import { NavBarBackComponent } from '../../../../../components/nav-bar/nav-bar-back/nav-bar-back.component';
@@ -40,7 +33,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 
 import { Router } from '@angular/router';
 import { MessageModule } from 'primeng/message';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 import { MediaService } from 'src/app/service/utils/media.service';
 @Component({
   selector: 'app-form-product',

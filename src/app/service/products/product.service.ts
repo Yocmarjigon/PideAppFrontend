@@ -1,6 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { enviroment } from '../../../enviroments/enviroment';
 import { SupabaseService } from '../supabase.service';
 import { Product } from 'src/app/models/Product';
 import { Observable } from 'rxjs';

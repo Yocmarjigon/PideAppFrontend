@@ -19,7 +19,7 @@
       >
         <!-- Input correo -->
         <div class="flex flex-col gap-1 w-full">
-          <span class="text-gray-700">Correo:</span>
+          <span class="text-gray-700">Correo:<span class="text-red-500">*</span></span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-user"></i>
@@ -44,7 +44,7 @@
           } -->
         </div>
         <div class="flex flex-col gap-1 w-full">
-          <span class="text-gray-700">Contraseña:</span>
+          <span class="text-gray-700">Contraseña:<span class="text-red-500">*</span></span>
           <app-input-password
             formControlName="password"
             [placeholder]="'Ingresa tu contraseña'"

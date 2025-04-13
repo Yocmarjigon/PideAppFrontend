@@ -1,7 +1,8 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import {
+  AbstractControl,
   ControlValueAccessor,
-  FormGroup,
+  FormControl,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -34,21 +35,24 @@ export class InputPasswordComponent implements ControlValueAccessor {
   showPassword = false;
   @Input() placeholder = '';
   @Input() showErrors = true;
-  @Input() control?: any;
+  @Input() control: AbstractControl | undefined | null;
 
-  value: string = '';
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  value = '';
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  onChange = (value: string) => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched = () => {};
 
   writeValue(value: string): void {
     this.value = value;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: never): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: never): void {
     this.onTouched = fn;
   }
 

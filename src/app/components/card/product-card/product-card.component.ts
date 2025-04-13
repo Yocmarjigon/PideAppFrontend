@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Route, Router } from '@angular/router';
 import { Product } from 'src/app/models/Product';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -20,20 +19,4 @@ export class ProductCardComponent {
     available: false,
     stock: 0
   }
-
-  constructor() {}
-
-  ngOnInit(){
-
-  }
-
-
-  routerSelectProduct() {
-
-
-  }
-
-
-
-
 }

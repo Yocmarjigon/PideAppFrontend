@@ -1,15 +1,12 @@
 import { InputPasswordComponent } from './../../../../../components/inputs/input-password/input-password.component';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ImgTopComponent } from '../../../../../components/img-top/img-top.component';
-import { InputTextComponent } from '../../../../../components/inputs/input-text/input-text.component';
-import { ButtonComponent } from '../../../../../components/buttons/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -17,7 +14,6 @@ import {
 import { DataFormService } from 'src/app/service/utils/data-form.service';
 import { ButtonModule } from 'primeng/button';
 import { RegisterusersService } from 'src/app/service/registerusers/registerusers.service';
-import { Client } from 'src/app/models/Client';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -45,7 +41,9 @@ import { MessageModule } from 'primeng/message';
 })
 export class RegisterUserForm2Component {
   formClient: FormGroup;
-  formsControl: any = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formsControl: any;
+  invalidForm = signal<boolean | undefined>(true);
 
   constructor(
     private fb: FormBuilder,
@@ -59,7 +57,7 @@ export class RegisterUserForm2Component {
     this.formClient = fb.group(
       {
         name: this.formsControl.name,
-        email: ['', [Validators.required, Validators.email]],
+        email: ['', [Validators.email]],
         password: [
           '',
           [Validators.required, Validators.pattern('^(?=.*[A-Za-z]).{8,}$')],
@@ -73,57 +71,12 @@ export class RegisterUserForm2Component {
       }
     );
 
-    this.formClient.valueChanges.subscribe(() =>
-      console.log(this.formClient.invalid)
-    );
-  }
+    this.formClient.valueChanges.subscribe({
+      next: ()=>{
+        this.invalidForm.set(this.formClient.get("password")?.invalid ||  this.formClient.hasError('mismatch'))
 
-  async registerUser() {
-    console.log(this.formClient.value);
-    const client = this.formClient.value as Client;
-
-    const { data, error } = await this._authService.signUp({
-      email: client.email,
-      password: client.password,
-    });
-
-    if (error) {
-      if (error.code === 'user_already_exists') {
-        this._messageService.add({
-          severity: 'error',
-          detail:
-            'El cliente con este correo ya esta registrado en base de datos',
-          summary: 'Error',
-          life: 5000,
-        });
-        return;
+        console.log(this.invalidForm())
       }
-      return console.log(error.code);
-    } else {
-      console.log(data);
-      const { data: dataC, error: errorC } =
-        await this._registerUserService.registerClient({
-          address: client.address,
-          email: client.email,
-          name: client.name,
-          password: client.password,
-          phone: client.phone,
-          id: data.user?.id,
-          id_user: data.user?.id,
-        });
-      console.log(dataC);
-
-      if (!errorC) {
-        this._messageService.add({
-          summary: 'Info',
-          detail: 'Usuario registrado correctamente',
-          life: 10000,
-          severity: 'success',
-        });
-        setTimeout(() => this._router.navigate(['/login-page']), 1500);
-      } else {
-        console.log(errorC);
-      }
-    }
+    })
   }
 }

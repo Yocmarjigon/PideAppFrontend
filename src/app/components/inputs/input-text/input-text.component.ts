@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -7,7 +6,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
   ],
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',
@@ -26,7 +24,7 @@ export class InputTextComponent {
   changeVisual() {
     this.onVisual = !this.onVisual;
   }
- 
 
- 
+
+
 }

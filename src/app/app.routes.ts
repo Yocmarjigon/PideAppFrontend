@@ -22,6 +22,7 @@ import { CategoryPageComponent } from './pages/private/admin/category/category-p
 import { ProductDetailPageComponent } from './pages/private/admin/product-detail-page/product-detail-page.component';
 
 export const routes: Routes = [
+  //rutas publicas
   {
     path: 'login-page',
     component: LoginPageComponent,
@@ -46,6 +47,7 @@ export const routes: Routes = [
     path: 'register-delivery-form2',
     component: RegisterDeliveryForm2Component,
   },
+  //rutas de clientes
   {
     path: 'layout',
     component: LayoutComponent,
@@ -71,11 +73,11 @@ export const routes: Routes = [
         path: 'search-page',
         component: SearchPageComponent,
       },
-      {
+      /* {
         path: '',
         redirectTo: '/layout/home-page',
         pathMatch: 'full',
-      },
+      }, */
     ],
   },
 
@@ -94,11 +96,11 @@ export const routes: Routes = [
         component: ProductsPageComponent,
       },
 
-      {
+      /* {
         path: '',
         pathMatch: 'full',
         redirectTo: '/layout-admin/product-page',
-      },
+      }, */
     ],
   },
   {
@@ -107,16 +109,17 @@ export const routes: Routes = [
   },
   {
     path: 'category-page',
-    component: CategoryPageComponent
+    component: CategoryPageComponent,
   },
   {
     path: 'category-form',
-    component: FormCategoryComponent
+    component: FormCategoryComponent,
   },
   {
     path: 'product-detail-page',
-    component: ProductDetailPageComponent
+    component: ProductDetailPageComponent,
   },
+
   {
     path: '',
     redirectTo: '/login-page',

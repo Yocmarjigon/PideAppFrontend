@@ -9,9 +9,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonCircleComponent {
   @Input() icon = '';
-  @Input() click: any;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  @Input() click = () => {};
 
-  ejClick(){
-    this.click()
+  ejClick() {
+    this.click();
   }
 }
