@@ -54,7 +54,7 @@ export class LoginPageComponent implements OnInit {
   showPassword = false;
 
   formLogin: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -73,16 +73,9 @@ export class LoginPageComponent implements OnInit {
     await this.data();
   }
 
-  async login() {
+  login() {
     const user = this.formLogin.value;
-    const { data, error } = await this._authService.signIn(user);
-    const rol = await this._authService.obtenerRolUsuario(data.user?.id!);
-
-    if (!error) {
-      console.log(data);
-      this.redirect(rol);
-    } else {
-    }
+    this._authService.signIn(user)
   }
 
   redirect(rol: string) {

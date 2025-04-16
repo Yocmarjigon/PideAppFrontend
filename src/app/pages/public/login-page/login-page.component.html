@@ -19,22 +19,22 @@
       >
         <!-- Input correo -->
         <div class="flex flex-col gap-1 w-full">
-          <span class="text-gray-700">Correo:<span class="text-red-500">*</span></span>
+          <span class="text-gray-700">Nombre de usuario:<span class="text-red-500">*</span></span>
           <p-inputgroup>
             <p-inputgroup-addon>
               <i class="pi pi-user"></i>
             </p-inputgroup-addon>
             <input
               pInputText
-              placeholder="Ingrese su correo"
-              formControlName="email"
+              placeholder="Ingrese nombre de usuario"
+              formControlName="username"
             />
           </p-inputgroup>
 
-          @if (formLogin.get("email")?.invalid &&
-          formLogin.get("email")?.touched) {
+          @if (formLogin.get("username")?.hasError("required") &&
+          formLogin.get("username")?.touched) {
           <p-message severity="error" variant="simple" size="small"
-            >El campo correo no puede estar vació</p-message
+            >El nombre de usuario  no puede estar vació</p-message
           >
           }<!-- @if (formLogin.get("email")?.errors?.['pattern']&&
           formLogin.get("email")?.touched) {

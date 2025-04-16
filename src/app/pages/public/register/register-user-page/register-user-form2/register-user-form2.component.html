@@ -11,7 +11,7 @@
     <img src="../../../assets/images/Logo.svg" alt="" />
     <div class="form-container">
       <h3>Completa los campos para continuar</h3>
-      <form [formGroup]="formClient">
+      <form [formGroup]="formClient" (ngSubmit)="saveCustomer()">
         <!-- Input correo -->
         <div class="flex flex-col gap-1 container-input">
           <span class="text-gray-700">Correo:</span>
@@ -22,67 +22,76 @@
             </p-inputgroup-addon>
             <input
               pInputText
-              required="true"
               placeholder="Ingresa tu correo"
-              formControlName="email"
-            />
+              formControlName="email" />
           </p-inputgroup>
           <p-message severity="info" variant="simple" size="small"
-          >El correo es opcional</p-message
-        >
-          @if(formClient.get("email")?.hasError("email")&&
-          formClient.get("email")?.touched){
-          <p-message severity="error" variant="simple" size="small"
-            >El correo no es valido</p-message
+            >El correo es opcional</p-message
           >
+          @if (
+            formClient.get('email')?.hasError('invalidEmail') &&
+            formClient.get('email')?.touched
+          ) {
+            <p-message severity="error" variant="simple" size="small"
+              >El correo no es valido</p-message
+            >
           }
-
         </div>
 
         <!-- Input contraseña -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Contraseña:<span class="text-red-500">*</span></span>
+          <span class="text-gray-700"
+            >Contraseña:<span class="text-red-500">*</span></span
+          >
           <app-input-password
             [placeholder]="'Ingresa una contraseña'"
-            formControlName="password"
-          ></app-input-password>
-          @if (formClient.get("password")?.hasError("required") &&
-          formClient.get("password")?.touched) {
-          <p-message severity="error" variant="simple" size="small"
-            >La contraseña es requerida</p-message
-          >
-          } @if(formClient.get("password")?.hasError("pattern")&&
-          formClient.get("password")?.touched){
-          <p-message severity="error" variant="simple" size="small"
-            >La contraseña debe tener minimo 8 cartacteres y una
-            letra</p-message
-          >
+            formControlName="password"></app-input-password>
+          @if (
+            formClient.get('password')?.hasError('required') &&
+            formClient.get('password')?.touched
+          ) {
+            <p-message severity="error" variant="simple" size="small"
+              >La contraseña es requerida</p-message
+            >
+          }
+          @if (
+            formClient.get('password')?.hasError('pattern') &&
+            formClient.get('password')?.touched
+          ) {
+            <p-message severity="error" variant="simple" size="small"
+              >La contraseña debe tener minimo 8 cartacteres y una
+              letra</p-message
+            >
           }
         </div>
 
         <!-- Input confirmar contraseña -->
         <div class="flex flex-col gap-1 container-input">
-          <span class="text-gray-700">Repetir contraseña:<span class="text-red-500">*</span></span>
+          <span class="text-gray-700"
+            >Repetir contraseña:<span class="text-red-500">*</span></span
+          >
           <app-input-password
             formControlName="repitPassword"
-            [placeholder]="'Repite la contraseña'"
-          ></app-input-password>
-          @if (formClient.get("repitPassword")?.hasError("required")&&
-          formClient.get("repitPassword")?.touched) {
-          <p-message severity="error" variant="simple" size="small"
-            >Se debe confirmar la contraseña</p-message
-          >
-          } @if (formClient.hasError('mismatch')) {
-          <p-message severity="error" variant="simple" size="small"
-            >Las contraseñas deben ser iguales</p-message
-          >
+            [placeholder]="'Repite la contraseña'"></app-input-password>
+          @if (
+            formClient.get('repitPassword')?.hasError('required') &&
+            formClient.get('repitPassword')?.touched
+          ) {
+            <p-message severity="error" variant="simple" size="small"
+              >Se debe confirmar la contraseña</p-message
+            >
+          }
+          @if (formClient.hasError('mismatch')) {
+            <p-message severity="error" variant="simple" size="small"
+              >Las contraseñas deben ser iguales</p-message
+            >
           }
         </div>
 
         <p-button
           label="Registrarse"
-          [disabled]="formClient.invalid || formClient.hasError('mismatch')"
-        />
+          type="submit"
+          [disabled]="formClient.invalid" />
       </form>
     </div>
   </div>

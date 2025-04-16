@@ -19,7 +19,7 @@ export class NavBarTopComponent {
 
   }
   async logout(){
-    await this._authService.signOut()
+
     this.router.navigateByUrl("/login-page")
 
   }

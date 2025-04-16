@@ -52,7 +52,6 @@ export class LayoutAdminComponent {
   ){}
 
   async signOut(){
-    await this._authService.signOut()
     this.router.navigateByUrl("/login-page")
   }
 }

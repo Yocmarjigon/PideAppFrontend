@@ -1,43 +1,29 @@
-import { Router, Routes } from '@angular/router';
-import { inject, Injectable } from '@angular/core';
-import { SupabaseService } from '../supabase.service';
-import { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import enviroment_back from 'src/app/enviroment_back';
+import { Login } from 'src/app/models/Login';
 
-
-interface credenciale{
-  email: string;
-  password: string;
+interface responseToken {
+  message?: string;
+  token?: string;
 }
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly _supabaseClient = inject(SupabaseService).supabaseClient
+  private url = `${enviroment_back.url_local}/auth`;
   constructor(
-
+    private http: HttpClient,
+    private router: Router
   ) {}
-
-  signIn(credentials:credenciale){
-    return  this._supabaseClient.auth.signInWithPassword(credentials)
-  }
-
-  async obtenerRolUsuario(userId:string) {
-    const { data, error } = await this._supabaseClient.rpc('obtener_rol_usuario', {
-      p_user_id: userId
+  signIn(credentials: Login) {
+    this.http.post(`${this.url}/login`, credentials).subscribe({
+      next: (r: responseToken) => {
+        localStorage.setItem('token', r.token!);
+        /* this.router.navigateByUrl("/layout/home-page") */
+        console.log(localStorage.getItem('token'));
+      },
     });
-
-    if (error) throw error;
-    console.log(data)
-    return data;
   }
-
-  signOut(){
-    return this._supabaseClient.auth.signOut()
-  }
-
-
-  signUp(credentials: any){
-    return this._supabaseClient.auth.signUp(credentials)
-  }
-
 }

@@ -13,12 +13,13 @@ import {
 } from '@angular/forms';
 import { DataFormService } from 'src/app/service/utils/data-form.service';
 import { ButtonModule } from 'primeng/button';
-import { RegisterusersService } from 'src/app/service/registerusers/registerusers.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { matchPasswordValidator } from 'src/app/utils/validators/match-password.validator';
 import { MessageModule } from 'primeng/message';
+import { optionalEmailValidator } from 'src/app/utils/validators/optional-validator-email.validator';
+import { CustomerService } from 'src/app/service/customer/customer.service';
 
 @Component({
   selector: 'app-register-user-form2',
@@ -48,16 +49,16 @@ export class RegisterUserForm2Component {
   constructor(
     private fb: FormBuilder,
     private _dataFormService: DataFormService,
-    private _registerUserService: RegisterusersService,
     private _router: Router,
     private _messageService: MessageService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _customerService: CustomerService
   ) {
     this.formsControl = this._dataFormService.getSharedData();
-    this.formClient = fb.group(
+    this.formClient = this.fb.group(
       {
         name: this.formsControl.name,
-        email: ['', [Validators.email]],
+        email: ['', [optionalEmailValidator()]],
         password: [
           '',
           [Validators.required, Validators.pattern('^(?=.*[A-Za-z]).{8,}$')],
@@ -72,11 +73,23 @@ export class RegisterUserForm2Component {
     );
 
     this.formClient.valueChanges.subscribe({
-      next: ()=>{
-        this.invalidForm.set(this.formClient.get("password")?.invalid ||  this.formClient.hasError('mismatch'))
+      next: () => {
+        console.log(this.formClient.invalid);
+      },
+    });
+  }
 
-        console.log(this.invalidForm())
-      }
-    })
+
+  saveCustomer() {
+    const customer = this.formClient.value;
+    console.log(customer);
+    /* this._customerService.saveCustomer(customer).subscribe({
+      next: res => {
+        console.log(res);
+      },
+      error: err => {
+        console.log(err);
+      },
+    }); */
   }
 }

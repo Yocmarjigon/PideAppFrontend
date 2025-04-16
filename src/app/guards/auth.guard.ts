@@ -21,8 +21,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 
 
       try {
-        const rol = await authService.obtenerRolUsuario(data.user.id);
-        console.log('Rol del usuario:', rol);
 
         /* switch (rol) {
           case 'CLIENTEUSER':
