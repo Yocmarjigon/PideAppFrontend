@@ -83,13 +83,21 @@ export class RegisterUserForm2Component {
   saveCustomer() {
     const customer = this.formClient.value;
     console.log(customer);
-    /* this._customerService.saveCustomer(customer).subscribe({
+    this._customerService.saveCustomer(customer).subscribe({
       next: res => {
+        this._messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'El cliente se creo correctamente',
+        })
         console.log(res);
+      },
+      complete: () => {
+        this._router.navigateByUrl('/login-page');
       },
       error: err => {
         console.log(err);
       },
-    }); */
+    });
   }
 }
