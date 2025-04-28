@@ -15,11 +15,12 @@ import { SearchPageComponent } from './pages/private/user/search-page/search-pag
 import { LayoutAdminComponent } from './pages/private/admin/layout-admin/layout-admin.component';
 import { ProductsPageComponent } from './pages/private/admin/products/products-page/products-page.component';
 import { DescriptionProductPageComponent } from './pages/private/user/description-product-page/description-product-page.component';
-import { authGuard } from './guards/auth.guard';
 import { FormProductComponent } from './pages/private/admin/products/form-product/form-product.component';
 import { FormCategoryComponent } from './pages/private/admin/category/form-category/form-category.component';
 import { CategoryPageComponent } from './pages/private/admin/category/category-page/category-page.component';
 import { ProductDetailPageComponent } from './pages/private/admin/product-detail-page/product-detail-page.component';
+import { authGuardCustomer } from './guards/customer-auth/authCustomer.guard';
+import { adminAuthGuard } from './guards/admin-auth/admin-auth.guard';
 
 export const routes: Routes = [
   //rutas publicas
@@ -51,7 +52,7 @@ export const routes: Routes = [
   {
     path: 'layout',
     component: LayoutComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuardCustomer],
     children: [
       {
         path: 'home-page',
@@ -89,7 +90,7 @@ export const routes: Routes = [
   {
     path: 'layout-admin',
     component: LayoutAdminComponent,
-    canActivate: [authGuard],
+    canActivate: [adminAuthGuard],
     children: [
       {
         path: 'product-page',

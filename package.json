@@ -32,6 +32,7 @@
     "@capacitor/status-bar": "7.0.0",
     "@primeng/themes": "^19.0.9",
     "@supabase/supabase-js": "^2.49.3",
+    "jwt-decode": "^4.0.0",
     "pide-ya-app": "file:",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.9",

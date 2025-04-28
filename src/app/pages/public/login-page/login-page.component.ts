@@ -1,9 +1,7 @@
 import { InputPasswordComponent } from './../../../components/inputs/input-password/input-password.component';
-import { Component, effect, OnInit } from '@angular/core';
-import { InputTextComponent } from '../../../components/inputs/input-text/input-text.component';
-import { ButtonComponent } from '../../../components/buttons/button/button.component';
+import { Component, effect } from '@angular/core';
+
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -48,7 +46,7 @@ import { DataFormService } from 'src/app/service/utils/data-form.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   onVisual = false;
   loader = true;
   showPassword = false;
@@ -62,35 +60,21 @@ export class LoginPageComponent implements OnInit {
     private readonly _authService: AuthService,
     private _messageService: MessageService,
     private _dataFormService: DataFormService,
-    private _router: Router
+    private router: Router
   ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  async ngOnInit() {
-    await this.data();
-  }
-
   login() {
     const user = this.formLogin.value;
-    this._authService.signIn(user)
+
+    this._authService.signIn(user);
+
+
+
   }
-
-  redirect(rol: string) {
-    switch (rol) {
-      case 'CLIENTEUSER':
-        this._router.navigateByUrl('/layout/home-page');
-        break;
-      case 'ADMINUSER':
-        this._router.navigateByUrl('/layout-admin');
-        break;
-    }
-  }
-
-  data() {}
-
   changeVisual() {
     this.onVisual = !this.onVisual;
     console.log(this.onVisual);
