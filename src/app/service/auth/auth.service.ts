@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, signal } from '@angular/core';
+import { HttpClient, HttpContext } from '@angular/common/http';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import enviroment_back from 'src/app/enviroment_back';
 import { Login } from 'src/app/models/Login';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { SKIP_INTERCEPTOR } from 'src/app/interceptors/context/ignore-token-interceptor';
 interface responseToken {
   message?: string;
   token?: string;
@@ -25,8 +26,11 @@ export class AuthService {
   ) {}
 
   signIn(credentials: Login) {
-    this.http.post(`${this.url}/login`, credentials).subscribe({
+    this.http.post(`${this.url}/login`, credentials, { context:new HttpContext().set(SKIP_INTERCEPTOR, true) }).subscribe({
       next: (r: responseToken) => {
+        console.log(r)
+        if (!r.token) return;
+
         localStorage.setItem('token', r.token!);
       },
       error: e => {

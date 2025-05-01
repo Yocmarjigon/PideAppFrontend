@@ -11,15 +11,13 @@
             severity="success"
             label="Crear Producto"
             (onClick)="openProductsForm()"
-            styleClass="p-button-sm md:p-button"
-          />
+            styleClass="p-button-sm md:p-button" />
           <p-button
             variant="outlined"
             icon="pi pi-plus"
             label="Categorias"
             (onClick)="openCategoryPage()"
-            styleClass="p-button-sm md:p-button"
-          />
+            styleClass="p-button-sm md:p-button" />
         </div>
         <p-inputGroup class="flex-1">
           <p-inputGroupAddon>
@@ -30,8 +28,7 @@
             pInputText
             placeholder="Buscar por nombre"
             class="w-full"
-            (input)="applyFilter()"
-          />
+            (input)="applyFilter()" />
         </p-inputGroup>
       </div>
 
@@ -41,8 +38,7 @@
           (onChange)="applyFilter()"
           optionLabel="name"
           placeholder="Categoría"
-          styleClass="flex-1 min-w-[150px]"
-        ></p-dropdown>
+          styleClass="flex-1 min-w-[150px]"></p-dropdown>
 
         <p-inputNumber
           [showButtons]="true"
@@ -50,8 +46,7 @@
           currency="COP"
           [(ngModel)]="valuePriceFilter"
           placeholder="Precio máximo"
-          styleClass="flex-1 min-w-[150px]"
-        ></p-inputNumber>
+          styleClass="flex-1 min-w-[150px]"></p-inputNumber>
       </div>
     </div>
   </div>
@@ -61,37 +56,39 @@
     <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
       <ng-template #list let-products>
         @for (product of products; track $index) {
-        <div class="flex items-center p-2 border-b gap-3">
-          <img
-            [src]="product.img ? product.img : '/assets/images/img-default.jpg'"
-            [alt]="product.title"
-            class="w-16 h-16 object-cover rounded"
-          />
-          <div class="flex-1 min-w-0">
-            <h3 class="font-medium truncate">{{ product.title }}</h3>
+          <div class="flex items-center p-2 border-b gap-3">
+            <img
+              [src]="
+                product.img ? product.img : '/assets/images/img-default.jpg'
+              "
+              [alt]="product.title"
+              class="w-16 h-16 object-cover rounded" />
+            <div class="flex-1 min-w-0">
+              <h3 class="font-medium truncate">{{ product.title }}</h3>
 
-            <p class="text-sm text-gray-600">
-              {{ product.price | currency : "COP" : "symbol" : "1.0-0" }}
-            </p>
+              <p class="text-sm text-gray-600 font-bold">
+                {{ product.price | currency: 'COP ' : 'symbol' : '1.0-0' }}
+              </p>
 
-            <p>
-              Disponibles: <span class="font-bold">{{ product.quantity }}</span>
-            </p>
+              <p>
+                Disponibles: <p-tag
+                  [severity]="product.available ? 'success' : 'danger'"
+                  [value]="
+                    product.available ? 'Disponible' : 'No Disponible'
+                  " />
+              </p>
+            </div>
+            <div class="flex gap-1">
+              <p-button
+                icon="pi pi-pencil"
+                severity="info"
+                (onClick)="openDetailProuct(product)" />
+              <p-button
+                icon="pi pi-trash"
+                severity="danger"
+                (onClick)="confirmDelete($event, product.idProduct)" />
+            </div>
           </div>
-          <div class="flex gap-1">
-            <p-button
-              icon="pi pi-pencil"
-              severity="info"
-              (onClick)="openDetailProuct(product)"
-            />
-            <p-button
-              icon="pi pi-trash"
-              severity="danger"
-              (onClick)="confirmDelete($event, product.idProduct)"
-            />
-          </div>
-        </div>
-
         }
       </ng-template>
     </p-dataView>

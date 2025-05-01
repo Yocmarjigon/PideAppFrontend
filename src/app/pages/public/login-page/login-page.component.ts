@@ -46,7 +46,7 @@ import { DataFormService } from 'src/app/service/utils/data-form.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent {
+export class LoginPageComponent{
   onVisual = false;
   loader = true;
   showPassword = false;
@@ -71,7 +71,6 @@ export class LoginPageComponent {
     const user = this.formLogin.value;
 
     this._authService.signIn(user);
-
 
 
   }
