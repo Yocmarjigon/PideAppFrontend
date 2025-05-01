@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import enviroment_back from 'src/app/enviroment_back';
+import enviroment_export from 'src/app/enviroment_back';
 import { Customer } from 'src/app/models/Customer';
 import { ResponseAPI } from 'src/app/utils/ResponseAPI';
 
@@ -9,7 +9,7 @@ import { ResponseAPI } from 'src/app/utils/ResponseAPI';
   providedIn: 'root'
 })
 export class CustomerService {
-  private url = `${enviroment_back.url_local}/customer`
+  private url = `${enviroment_export}/customer`
   constructor(
     private http: HttpClient
   ){

@@ -1,7 +1,7 @@
-const enviroment_back ={
-  url_local: "http://localhost:8080",
-  url_deployment: "https://pideyabackquend.onrender.com"
-}
+const enviroment_back = {
+  url_local: 'http://localhost:8080',
+  url_deployment: 'https://pideyabackquend.onrender.com',
+};
 
-export default enviroment_back;
-
+const enviroment_export = enviroment_back.url_deployment;
+export default enviroment_export;

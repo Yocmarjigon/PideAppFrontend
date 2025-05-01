@@ -3,13 +3,13 @@ import { SupabaseService } from '../supabase.service';
 import { Product } from 'src/app/models/Product';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import enviroment_back from 'src/app/enviroment_back';
+import enviroment_export from 'src/app/enviroment_back';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private url = `${enviroment_back.url_local}/product`;
+  private url = `${enviroment_export}/product`;
   constructor(private http: HttpClient) {}
 
   test(): Observable<string> {

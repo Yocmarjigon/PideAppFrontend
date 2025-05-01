@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import enviroment_back from 'src/app/enviroment_back';
+import enviroment_export from 'src/app/enviroment_back';
 import { Login } from 'src/app/models/Login';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { SKIP_INTERCEPTOR } from 'src/app/interceptors/context/ignore-token-interceptor';
@@ -16,7 +16,7 @@ interface payloadCustom extends JwtPayload {
   providedIn: 'root',
 })
 export class AuthService {
-  private url = `${enviroment_back.url_local}/auth`;
+  private url = `${enviroment_export}/auth`;
   public _isLogged = signal(false);
 
 

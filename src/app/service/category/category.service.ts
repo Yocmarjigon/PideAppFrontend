@@ -3,14 +3,14 @@ import { SupabaseService } from '../supabase.service';
 import { Category } from 'src/app/models/Category';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import enviroment_back from 'src/app/enviroment_back';
+import enviroment_export from 'src/app/enviroment_back';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private url = `${enviroment_back.url_local}/category`
+  private url = `${enviroment_export}/category`
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
