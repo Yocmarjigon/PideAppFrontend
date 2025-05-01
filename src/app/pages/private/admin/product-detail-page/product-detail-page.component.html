@@ -1,13 +1,11 @@
 <section class="flex flex-col p-5">
   <app-nav-bar-back
     [icon]="'pi pi-chevron-left'"
-    [router]="'/layout-admin/product-page'"
-  ></app-nav-bar-back>
+    [router]="'/layout-admin/product-page'"></app-nav-bar-back>
   <form
     [formGroup]="productForm"
-    class="space-y-4 mt-20"
-    (submit)="confirmUpdate($event)"
-  >
+    class="space-y-4 mt-20 h-screen overflow-auto p-4"
+    (submit)="confirmUpdate($event)">
     <!-- Campo: Título -->
     <div class="flex flex-col gap-1">
       <label for="title" class="font-medium"
@@ -20,13 +18,13 @@
         pInputText
         formControlName="title"
         placeholder="Ingrese el título"
-        class="w-full p-2 border rounded-lg"
-      />
-      @if (productForm.get("title")?.invalid &&
-      productForm.get("title")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El campo titlo no puede estar vació</p-message
-      >
+        class="w-full p-2 border rounded-lg" />
+      @if (
+        productForm.get('title')?.invalid && productForm.get('title')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El campo titlo no puede estar vació</p-message
+        >
       }
     </div>
 
@@ -41,13 +39,14 @@
         pInputTextarea
         formControlName="description"
         placeholder="Ingrese la descripción"
-        class="w-full p-2 border rounded-lg"
-      ></textarea>
-      @if (productForm.get("description")?.invalid &&
-      productForm.get("description")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El campo descripción no puede estar vació</p-message
-      >
+        class="w-full p-2 border rounded-lg"></textarea>
+      @if (
+        productForm.get('description')?.invalid &&
+        productForm.get('description')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El campo descripción no puede estar vació</p-message
+        >
       }
     </div>
 
@@ -63,21 +62,21 @@
           optionLabel="name"
           placeholder="Selecciona una categoría"
           class="w-full md:w-56"
-          formControlName="category"
-        />
+          formControlName="category" />
 
         <p-button
           icon="pi pi-plus"
           severity="success"
           aria-label="Save"
-          (onClick)="openCategoryForm()"
-        />
+          (onClick)="openCategoryForm()" />
       </div>
-      @if (productForm.get("category")?.invalid &&
-      productForm.get("category")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El campo categoria no puede estar vació</p-message
-      >
+      @if (
+        productForm.get('category')?.invalid &&
+        productForm.get('category')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El campo categoria no puede estar vació</p-message
+        >
       }
     </div>
 
@@ -93,8 +92,7 @@
         onIcon="pi pi-lock"
         offIcon="pi pi-lock-open"
         styleClass="w-auto"
-        ariaLabel="Do you confirm"
-      />
+        ariaLabel="Do you confirm" />
       <p-message severity="info" variant="simple" size="small"
         >Por defecto el producto no estará disponible</p-message
       >
@@ -110,8 +108,7 @@
         buttonLayout="horizontal"
         inputId="horizontal"
         spinnerMode="horizontal"
-        required
-      >
+        required>
         <ng-template #incrementbuttonicon>
           <span class="pi pi-plus"></span>
         </ng-template>
@@ -119,16 +116,21 @@
           <span class="pi pi-minus"></span>
         </ng-template>
       </p-inputnumber>
-      @if (productForm.get("stock")?.hasError("required") &&
-      productForm.get("stock")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El campo stock no puede estar vació</p-message
-      >
-      } @if (productForm.get("stock")?.hasError("min") &&
-      productForm.get("stock")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El stock debe tener mínimo 1 producto</p-message
-      >
+      @if (
+        productForm.get('stock')?.hasError('required') &&
+        productForm.get('stock')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El campo stock no puede estar vació</p-message
+        >
+      }
+      @if (
+        productForm.get('stock')?.hasError('min') &&
+        productForm.get('stock')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El stock debe tener mínimo 1 producto</p-message
+        >
       }
     </div>
 
@@ -144,18 +146,22 @@
         mode="currency"
         currency="USD"
         locale="en-US"
-        class="w-full"
-      ></p-inputNumber>
-      @if (productForm.get("price")?.hasError("required") &&
-      productForm.get("price")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El campo precio no puede estar vació</p-message
-      >
-      }@if (productForm.get("price")?.hasError("min") &&
-      productForm.get("price")?.touched) {
-      <p-message severity="error" variant="simple" size="small"
-        >El precio debe tener como mínimo un monto de 100$</p-message
-      >
+        class="w-full"></p-inputNumber>
+      @if (
+        productForm.get('price')?.hasError('required') &&
+        productForm.get('price')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El campo precio no puede estar vació</p-message
+        >
+      }
+      @if (
+        productForm.get('price')?.hasError('min') &&
+        productForm.get('price')?.touched
+      ) {
+        <p-message severity="error" variant="simple" size="small"
+          >El precio debe tener como mínimo un monto de 100$</p-message
+        >
       }
     </div>
 
@@ -170,8 +176,7 @@
         maxFileSize="1000000"
         [showUploadButton]="false"
         [previewWidth]="200"
-        (onSelect)="onFileChange($event)"
-      />
+        (onSelect)="onFileChange($event)" />
     </div>
 
     <!-- Botones del formulario -->
@@ -180,17 +185,15 @@
         type="button"
         label="Cancelar"
         severity="secondary"
-        class="w-auto"
-      ></p-button>
+        class="w-auto"></p-button>
       <p-button
         type="submit"
         label="Actualizar"
         severity="primary"
         class="w-auto"
-        [disabled]="productForm.invalid"
-      ></p-button>
+        [disabled]="productForm.invalid"></p-button>
     </div>
   </form>
-  <p-confirmdialog />
+  <p-confirmpopup />
   <p-toast />
 </section>

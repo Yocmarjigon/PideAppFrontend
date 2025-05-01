@@ -13,7 +13,6 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { SliderModule } from 'primeng/slider';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { FormProductComponent } from '../form-product/form-product.component';
 import { ProductService } from 'src/app/service/products/product.service';
 import { Category } from 'src/app/models/Category';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -24,7 +23,7 @@ import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
-
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 @Component({
   selector: 'app-products-page',
   standalone: true,
@@ -42,11 +41,11 @@ import { SendDataComponentsService } from 'src/app/service/utils/send-data-compo
     FormsModule,
     SliderModule,
     InputNumberModule,
-    FormProductComponent,
     InputGroupAddonModule,
     InputGroupModule,
     ConfirmDialogModule,
     ToastModule,
+    ConfirmPopupModule,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './products-page.component.html',
@@ -93,13 +92,14 @@ export class ProductsPageComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe({
       next: r => {
         console.log(r);
-        this.showMessageDeleteProduct();
+
       },
       error: e => {
         console.log(e);
       },
       complete: () => {
         this.getProducts();
+        this.showMessageDeleteProduct();
       },
     });
   }
@@ -153,23 +153,6 @@ export class ProductsPageComponent implements OnInit {
       },
     });
   }
-
-  // Productos filtrados
-  /* filteredProducts = computed(() => {
-    return this.products().filter((product) => {
-      if (product.title != undefined) {
-        const matchesName = product.title
-          .toLowerCase()
-          .includes(this.filters().name.toLowerCase());
-        const matchesCategory = this.filters().category
-          ? product.category === this.filters().category
-          : true;
-        const matchesPrice = product.price <= this.filters().price;
-        return matchesName && matchesCategory && matchesPrice;
-      }
-      return '';
-    });
-  }); */
 
   openProductsForm() {
     this.router.navigateByUrl('/product-form');

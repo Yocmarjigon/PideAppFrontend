@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, signal, ViewChild } from '@angular/core';
 import { NavBarBackComponent } from 'src/app/components/nav-bar/nav-bar-back/nav-bar-back.component';
 import { ProductService } from 'src/app/service/products/product.service';
-import { Product } from 'src/app/models/Product';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
@@ -26,8 +25,8 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/models/Category';
 import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
 import { ToastModule } from 'primeng/toast';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 @Component({
   selector: 'app-product-detail-page',
   imports: [
@@ -46,13 +45,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MenubarModule,
     MessageModule,
     ToastModule,
-    ConfirmDialogModule,
+    ConfirmPopupModule,
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './product-detail-page.component.html',
   styleUrl: './product-detail-page.component.sass',
 })
-export class ProductDetailPageComponent {
+export class ProductDetailPageComponent implements OnInit {
   @ViewChild('op') op!: Popover;
 
   @Input() displayModal = signal(false);
