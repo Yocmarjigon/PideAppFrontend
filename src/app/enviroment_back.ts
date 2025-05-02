@@ -3,5 +3,5 @@ const enviroment_back = {
   url_deployment: 'https://pideyabackquend.onrender.com',
 };
 
-const enviroment_export = enviroment_back.url_deployment;
+const enviroment_export = enviroment_back.url_local;
 export default enviroment_export;

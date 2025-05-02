@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ImgTopComponent } from '../../../../components/img-top/img-top.component';
-import { ProductCardComponent } from '../../../../components/card/product-card/product-card.component';
 import { Product } from 'src/app/models/Product';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
-import { NgFor, NgIf } from '@angular/common';
 import { ProductService } from 'src/app/service/products/product.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     ImgTopComponent,
-    ProductCardComponent,
-    NgFor,
+    RouterLink,
     CarouselModule,
     ButtonModule,
     TagModule,
@@ -48,6 +46,7 @@ export class HomePageComponent implements OnInit {
     this._productService.getProducts().subscribe({
       next: (p) => {
         this.products = p;
+        console.log(this.products);
       },
       error: (e) => {
         console.log(e);

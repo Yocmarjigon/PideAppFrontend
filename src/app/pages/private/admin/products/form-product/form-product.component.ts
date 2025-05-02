@@ -81,7 +81,7 @@ export class FormProductComponent implements OnInit {
       title: new FormControl('', Validators.required),
       description: ['', [Validators.required]],
       category: new FormControl('', Validators.required),
-      price: new FormControl(0, [Validators.required, Validators.min(100)]),
+      price: new FormControl(null, [Validators.required, Validators.min(100)]),
       available: [false],
       stock: ['', [Validators.required, Validators.min(1)]],
       img: new FormControl(''),

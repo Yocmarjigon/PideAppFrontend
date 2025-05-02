@@ -19,4 +19,5 @@ export class ProductCardComponent {
     available: false,
     stock: 0
   }
+
 }

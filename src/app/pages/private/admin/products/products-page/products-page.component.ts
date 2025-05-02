@@ -46,6 +46,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     ConfirmDialogModule,
     ToastModule,
     ConfirmPopupModule,
+    ConfirmDialogModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './products-page.component.html',
@@ -128,11 +129,23 @@ export class ProductsPageComponent implements OnInit {
       accept: () => {
         this.productDelete(id);
       },
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       reject: () => {
+        const overlays = document.querySelectorAll('.p-confirm-dialog-mask, .p-dialog-mask, .p-overlay');
+        overlays.forEach(el => el.remove());
 
+        // Quitar bloqueo de scroll (por si quedó)
+        document.body.classList.remove('p-overflow-hidden');
       },
     });
+  }
+
+  onDialogHide() {
+    // Quitar cualquier overlay que haya quedado pegado
+    const overlays = document.querySelectorAll('.p-confirm-dialog-mask, .p-dialog-mask, .p-overlay');
+    overlays.forEach(el => el.remove());
+
+    // Quitar bloqueo de scroll (por si quedó)
+    document.body.classList.remove('p-overflow-hidden');
   }
 
   getProducts() {

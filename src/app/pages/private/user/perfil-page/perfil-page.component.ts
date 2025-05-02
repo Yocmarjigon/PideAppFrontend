@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
-import { ImgTopPrivateComponent } from '../../../../components/img-top-private/img-top-private.component';
-import { ImgTopComponent } from '../../../../components/img-top/img-top.component';
 import { InputTextComponent } from '../../../../components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '../../../../components/buttons/button/button.component';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-page',
   standalone: true,
   imports: [
     InputTextModule,
-    ImgTopComponent,
     InputTextComponent,
     ButtonComponent,
     InputGroupAddonModule,
@@ -22,6 +20,11 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: '/src/app/pages/public/register/styles/form-page-syles.scss',
 })
 export class PerfilPageComponent {
-  perfil = 'Perfil';
-  nextForm() {}
+  constructor(
+    private router: Router
+  ) {}
+  signOut() {
+    localStorage.clear();
+    this.router.navigateByUrl("/login-page")
+  }
 }

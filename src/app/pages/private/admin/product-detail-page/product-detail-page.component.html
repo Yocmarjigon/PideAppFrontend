@@ -61,7 +61,8 @@
           [options]="categories"
           optionLabel="name"
           placeholder="Selecciona una categoría"
-          class="w-full md:w-56"
+          class="w-full md:w-56 z-[99999]"
+          appendTo="self"
           formControlName="category" />
 
         <p-button
@@ -194,6 +195,6 @@
         [disabled]="productForm.invalid"></p-button>
     </div>
   </form>
-  <p-confirmpopup />
+  <p-confirmpopup styleClass="z-[9999]" appendTo="body" />
   <p-toast />
 </section>

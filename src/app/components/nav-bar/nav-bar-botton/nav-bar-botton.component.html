@@ -1,33 +1,44 @@
-<nav>
-  <ul>
+<nav
+  class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-orange_primary border border-gray-200 rounded-md shadow-lg w-[90%] max-w-md z-50">
+  <ul class="flex justify-around items-center py-2">
     <li>
-      <a routerLink="order-page" routerLinkActive="active">
-        <span class="pi pi-reply"></span>
-        <p>Pedido</p>
+      <a
+        routerLink="home-page"
+        routerLinkActive="text-yellow_primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex flex-col items-center text-black hover:text-yellow_primary transition">
+        <span class="pi pi-home text-[1.5em] mb-[2px]"></span>
+        <p class="text-[0.8em]">Inicio</p>
       </a>
     </li>
     <li>
-      <a routerLink="perfil-page" routerLinkActive="active">
-        <span class="pi pi-user"></span>
-        <p>Perfil</p>
+      <a
+        routerLink="order-page"
+        routerLinkActive="text-yellow_primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex flex-col items-center text-black hover:text-yellow_primary transition">
+        <span class="pi pi-reply text-[1.5em] mb-[2px]"></span>
+        <p class="text-[0.8em]">Pedido</p>
       </a>
     </li>
     <li>
-      <a routerLink="home-page" routerLinkActive="active">
-        <span class="pi pi-home"></span>
-        <p>Home</p>
+      <a
+        routerLink="car-page"
+        routerLinkActive="text-yellow_primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex flex-col items-center text-black hover:text-yellow_primary transition">
+        <span class="pi pi-shopping-cart text-[1.5em] mb-[2px]"></span>
+        <p class="text-[0.8em]">Carrito</p>
       </a>
     </li>
     <li>
-      <a routerLink="search-page" routerLinkActive="active">
-        <span class="pi pi-search"></span>
-        <p>Buscar</p>
-      </a>
-    </li>
-    <li>
-      <a routerLink="car-page" routerLinkActive="active">
-        <span class="pi pi-shopping-cart"></span>
-        <p>Carrito</p>
+      <a
+        routerLink="perfil-page"
+        routerLinkActive="text-yellow_primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex flex-col items-center text-black hover:text-yellow_primary transition">
+        <span class="pi pi-user text-[1.5em] mb-[2px]"></span>
+        <p class="text-[0.8em]">Perfil</p>
       </a>
     </li>
   </ul>

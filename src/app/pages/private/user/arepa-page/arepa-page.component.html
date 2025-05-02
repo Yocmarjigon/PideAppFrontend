@@ -1,0 +1,11 @@
+
+<section >
+  <app-nav-bar-back
+  [icon]="'pi pi-chevron-left'"
+  [router]="'/layout/home-page'"></app-nav-bar-back>
+  <div class="pt-14">
+    @for (product of products; track $index) {
+      <app-product-card [product]="product"></app-product-card>
+    }
+  </div>
+</section>

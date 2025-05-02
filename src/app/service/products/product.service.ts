@@ -22,7 +22,9 @@ export class ProductService {
   saveProducts(product: Product): Observable<any> {
     return this.http.post(`${this.url}/save`, product);
   }
-
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.url}/get/category/${category}`);
+  }
   getProductById(id: string): Observable<Product> {
     return this.http.get<Product>(`${this.url}/get/${id}`);
   }

@@ -21,4 +21,6 @@ import { FormsModule } from '@angular/forms';
 export class CarPageComponent {
   total = 5000;
   value = 1;
+  subtotal: any;
+  envio: any;
 }

@@ -17,7 +17,7 @@
             icon="pi pi-plus"
             label="Categorias"
             (onClick)="openCategoryPage()"
-            styleClass="p-button-sm md:p-button" />
+            styleClass="p-button-sm md:p-button z-[99999]" />
         </div>
         <p-inputGroup class="flex-1">
           <p-inputGroupAddon>
@@ -38,7 +38,8 @@
           (onChange)="applyFilter()"
           optionLabel="name"
           placeholder="Categoría"
-          styleClass="flex-1 min-w-[150px]"></p-dropdown>
+          appendTo="self"
+          styleClass="flex-1 min-w-[150px] z-[99999]"></p-dropdown>
 
         <p-inputNumber
           [showButtons]="true"
@@ -71,7 +72,8 @@
               </p>
 
               <p>
-                Disponibles: <p-tag
+                Disponibles:
+                <p-tag
                   [severity]="product.available ? 'success' : 'danger'"
                   [value]="
                     product.available ? 'Disponible' : 'No Disponible'
@@ -93,6 +95,6 @@
       </ng-template>
     </p-dataView>
   </div>
-  <p-toast />
-<p-confirmpopup />
+  <p-toast styleClass="z-[9999]" />
+  <p-confirmDialog (onHide)="onDialogHide()"></p-confirmDialog>
 </section>

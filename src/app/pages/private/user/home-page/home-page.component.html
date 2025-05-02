@@ -2,105 +2,30 @@
   <app-img-top></app-img-top>
   <div class="w-full px-2 text-start ">
     <h2 class="text-2xl font-bold  text-start  mb-6 text-[#FF4E2E]">
-      Arepas
+      MENÚ
     </h2>
-    <div class="card">
-      <p-carousel
-        [value]="products"
-        [numVisible]="3"
-        [numScroll]="3"
-        [circular]="false"
-        [responsiveOptions]="responsiveOptions"
-      >
-        <ng-template let-product #item>
-          <div class="border border-surface rounded-border m-2 p-4">
-            <div class="mb-4">
-              <div class="relative mx-auto">
-                <img
-                  [src]="
-                    product.img ? product.img : '/assets/images/img-default.jpg'
-                  "
-                  [alt]="product.name"
-                   class="w-full h-48 object-cover rounded-xl border border-[#FFD700]"
-                />
-              </div>
-            </div>
-            <div class="mb-4 font-medium">{{ product.name }}</div>
-            <div class="flex justify-between items-center">
-              <div class="mt-0 font-semibold text-xl">
-                {{ "$" + product.price }}
-              </div>
-              <span>
-                <p-button
-                  icon="pi pi-shopping-cart"
-                  styleClass="ml-2"
-                  [style]="{
-                    backgroundColor: '#FFD700',
-                    border: 'none',
-                    color: 'black'
-                  }"
-                />
-              </span>
-            </div>
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
   </div>
+  <div class="grid grid-cols-2 gap-4 p-4">
+    <!-- Tarjeta AREPAS -->
+    <a routerLink="/layout/arepa-page" class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col items-center p-4 hover:shadow-md transition justify-between">
+      <img src="/assets/images/arepas.webp" alt="Arepas" class="w-18 h-18 object-contain mb-2" />
+      <p class="text-sm  text-gray-800 font-bold">AREPAS</p>
+    </a>
 
-  <div class="w-full px-2 mb-32">
-    <h2 class="text-2xl font-bold  mb-6 text-[#FF4E2E] text-start">
-      Bebidas
-    </h2>
-    <div class="card">
-      <p-carousel
-        [value]="products"
-        [numVisible]="3"
-        [numScroll]="3"
-        [circular]="false"
-        [responsiveOptions]="responsiveOptions"
-      >
-        <ng-template let-product #item>
-          <div class="border border-surface rounded-border m-2 p-4">
-            <div class="mb-4">
-              <div class="relative mx-auto">
-                <img
-                  [src]="
-                    product.img ? product.img : '/assets/images/img-default.jpg'
-                  "
-                  [alt]="product.name"
-                   class="w-full h-48 object-cover rounded-xl border border-[#FFD700]"
-                />
-              </div>
-            </div>
-            <div class="mb-4 font-medium">{{ product.name }}</div>
-            <div class="flex justify-between items-center">
-              <div class="mt-0 font-semibold text-xl">
-                {{ "$" + product.price }}
-              </div>
-              <span>
-                <p-button
-                  icon="pi pi-shopping-cart"
-                  styleClass="ml-2"
-                  [style]="{
-                    backgroundColor: '#FFD700',
-                    border: 'none',
-                    color: 'black'
-                  }"
-                />
-              </span>
-            </div>
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
+    <!-- Tarjeta JUGOS -->
+    <a routerLink="/layout/juice-page" class="bg-white rounded-lg shadow-sm border border-gray-200 flex justify-between flex-col items-center p-4 hover:shadow-md transition">
+      <img src="/assets/images/jugos.webp" alt="Jugos" class="w-18 h-18 object-contain mb-2" />
+      <p class="text-sm text-gray-800 font-bold">JUGOS</p>
+    </a>
+
+    <!-- Tarjeta GASEOSAS -->
+    <a routerLink="/layout/soda-page" class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col items-center p-4 hover:shadow-md transition justify-between">
+      <img src="/assets/images/gaseosas.webp" alt="Gaseosas" class="w-18 h-18 object-contain mb-2" />
+      <p class="text-sm text-gray-800 font-bold">GASEOSAS</p>
+    </a>
+    <a routerLink="/layout/empanada-page" class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col items-center p-4 hover:shadow-md transition justify-between">
+      <img src="/assets/images/empanadas.webp" alt="Empanadas" class="w-18 h-18 object-contain mb-2" />
+      <p class="text-sm text-gray-800 font-bold">EMPANADAS</p>
+    </a>
   </div>
-  <!-- <div class="container-products">
-    <h2>Menú general</h2>
-    <div class="flex flex-col flex-wrap">
-      @for (product of products; track $index) {
-      <app-product-card [product]="product" />
-      }
-    </div>
-  </div> -->
 </section>

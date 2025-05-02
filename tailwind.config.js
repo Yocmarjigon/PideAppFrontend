@@ -9,6 +9,9 @@ module.exports = {
         orange_primary:"#FF4E2E",
         yellow_primary: "#FFD700"
 
+      },
+      padding:{
+          'safe-top': 'env(safe-area-inset-top)',  // padding top seguro
       }
     }
 

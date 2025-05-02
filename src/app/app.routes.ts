@@ -21,6 +21,10 @@ import { CategoryPageComponent } from './pages/private/admin/category/category-p
 import { ProductDetailPageComponent } from './pages/private/admin/product-detail-page/product-detail-page.component';
 import { authGuardCustomer } from './guards/customer-auth/authCustomer.guard';
 import { adminAuthGuard } from './guards/admin-auth/admin-auth.guard';
+import { ArepaPageComponent } from './pages/private/user/arepa-page/arepa-page.component';
+import { EmpanadaPageComponent } from './pages/private/user/empanada-page/empanada-page.component';
+import { JuicePageComponent } from './pages/private/user/juice-page/juice-page.component';
+import { SodaPageComponent } from './pages/private/user/soda-page/soda-page.component';
 
 export const routes: Routes = [
   //rutas publicas
@@ -74,6 +78,22 @@ export const routes: Routes = [
         path: 'search-page',
         component: SearchPageComponent,
       },
+      {
+        path: "arepa-page",
+        component: ArepaPageComponent
+      },
+      {
+        path: "empanada-page",
+        component: EmpanadaPageComponent
+      },
+      {
+        path: "juice-page",
+        component: JuicePageComponent
+      },
+      {
+        path: 'soda-page',
+        component: SodaPageComponent
+      }
       /* {
         path: '',
         redirectTo: '/layout/home-page',

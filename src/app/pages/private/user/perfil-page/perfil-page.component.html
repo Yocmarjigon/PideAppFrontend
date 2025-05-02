@@ -1,35 +1,30 @@
-<div class="login-page-container">
-  <app-img-top [title]="perfil"> </app-img-top>
-  <div class="form-section-container p-5" >
-    <div class="form-container ">
-      <form action="" class="flex flex-col items-center gap-5">
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-user"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Nombre de usuario" />
-        </p-inputgroup>
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-phone"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Teléfono" />
-        </p-inputgroup>
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-envelope"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Correo" />
-        </p-inputgroup>
-
-        <p-inputgroup>
-          <p-inputgroup-addon>
-            <i class="pi pi-send"></i>
-          </p-inputgroup-addon>
-          <input pInputText placeholder="Dirección" />
-        </p-inputgroup>
-        <app-button label="Actualizar" [click]="nextForm"> </app-button>
-      </form>
+<div class="space-y-3 p-4">
+  <a
+    routerLink="/perfil/editar"
+    class="flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-3 hover:bg-gray-50 transition">
+    <div class="flex items-center space-x-3">
+      <span class="pi pi-user-edit text-xl text-blue-500"></span>
+      <span class="text-gray-700 font-medium">Editar perfil</span>
     </div>
-  </div>
+    <span class="pi pi-angle-right text-gray-400"></span>
+  </a>
+
+  <a
+    routerLink="/ayuda"
+    class="flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-3 hover:bg-gray-50 transition">
+    <div class="flex items-center space-x-3">
+      <span class="pi pi-question-circle text-xl text-green-500"></span>
+      <span class="text-gray-700 font-medium">Ayuda</span>
+    </div>
+    <span class="pi pi-angle-right text-gray-400"></span>
+  </a>
+
+  <button
+    class="w-full flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-3 hover:bg-gray-50 transition">
+    <div class="flex items-center space-x-3">
+      <span class="pi pi-sign-out text-xl text-red-500"></span>
+      <span class="text-gray-700 font-medium">Cerrar sesión</span>
+    </div>
+    <span class="pi pi-angle-right text-gray-400"></span>
+  </button>
 </div>
