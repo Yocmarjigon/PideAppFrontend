@@ -24,6 +24,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DataViewLoadingComponent } from "../../../../../components/loading/data-view-loading/data-view-loading.component";
+
 @Component({
   selector: 'app-products-page',
   standalone: true,
@@ -46,8 +48,9 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     ConfirmDialogModule,
     ToastModule,
     ConfirmPopupModule,
-    ConfirmDialogModule
-  ],
+    ConfirmDialogModule,
+    DataViewLoadingComponent
+],
   providers: [ConfirmationService, MessageService],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
@@ -55,7 +58,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 export class ProductsPageComponent implements OnInit {
   valuePriceFilter = 0;
   products: Product[] = [];
-
+  loading = signal(true);
   //Lista de categoría
   categories: Category[] = [];
 
@@ -65,6 +68,7 @@ export class ProductsPageComponent implements OnInit {
     category: null,
     price: 100, // Precio máximo inicial
   });
+  showModal = signal(true);
 
   constructor(
     private readonly productService: ProductService,
@@ -101,6 +105,7 @@ export class ProductsPageComponent implements OnInit {
       complete: () => {
         this.getProducts();
         this.showMessageDeleteProduct();
+
       },
     });
   }
@@ -111,6 +116,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   confirmDelete(event: Event, id: string) {
+
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Estas seguro que quieres eliminar el producto',
@@ -130,22 +136,22 @@ export class ProductsPageComponent implements OnInit {
         this.productDelete(id);
       },
       reject: () => {
-        const overlays = document.querySelectorAll('.p-confirm-dialog-mask, .p-dialog-mask, .p-overlay');
-        overlays.forEach(el => el.remove());
-
-        // Quitar bloqueo de scroll (por si quedó)
-        document.body.classList.remove('p-overflow-hidden');
+          this.onDialogHide()
       },
     });
   }
 
   onDialogHide() {
+
+    this.showModal.set(false);
     // Quitar cualquier overlay que haya quedado pegado
     const overlays = document.querySelectorAll('.p-confirm-dialog-mask, .p-dialog-mask, .p-overlay');
-    overlays.forEach(el => el.remove());
+    overlays.forEach(el => el.classList.add('hidden'));
 
     // Quitar bloqueo de scroll (por si quedó)
     document.body.classList.remove('p-overflow-hidden');
+    setTimeout(() => this.showModal.set(true), 0);
+
   }
 
   getProducts() {
@@ -155,6 +161,9 @@ export class ProductsPageComponent implements OnInit {
       },
       error: e => {
         console.log(e);
+      },
+      complete: () => {
+        this.loading.set(false);
       },
     });
   }

@@ -1,8 +1,7 @@
 <section class="p-2 flex flex-col gap-4 h-screen relative overflow-hidden">
   <!-- Encabezado y controles -->
   <div class="sticky top-0 bg-white z-10 pb-2">
-    <h1 class="text-[1.5em] font-bold text-orange_primary">Productos</h1>
-
+    <h1 class="text-2xl font-bold text-start mt-3 mb-6">PRODUCTOS</h1>
     <div class="flex flex-col gap-3 w-full mt-3">
       <div class="flex justify-between flex-col gap-2">
         <div class="flex gap-5">
@@ -54,47 +53,53 @@
 
   <!-- Contenido desplazable -->
   <div class="flex-1 overflow-y-auto">
-    <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
-      <ng-template #list let-products>
-        @for (product of products; track $index) {
-          <div class="flex items-center p-2 border-b gap-3">
-            <img
-              [src]="
-                product.img ? product.img : '/assets/images/img-default.jpg'
-              "
-              [alt]="product.title"
-              class="w-16 h-16 object-cover rounded" />
-            <div class="flex-1 min-w-0">
-              <h3 class="font-medium truncate">{{ product.title }}</h3>
+    @if (loading()) {
+      <app-data-view-loading></app-data-view-loading>
+    } @else {
+      <p-dataView #dv [paginator]="true" [rows]="8" [value]="products">
+        <ng-template #list let-products>
+          @for (product of products; track $index) {
+            <div class="flex items-center p-2 border-b gap-3">
+              <img
+                [src]="
+                  product.img ? product.img : '/assets/images/img-default.jpg'
+                "
+                [alt]="product.title"
+                class="w-16 h-16 object-cover rounded" />
+              <div class="flex-1 min-w-0">
+                <h3 class="font-medium truncate">{{ product.title }}</h3>
 
-              <p class="text-sm text-gray-600 font-bold">
-                {{ product.price | currency: 'COP ' : 'symbol' : '1.0-0' }}
-              </p>
+                <p class="text-sm text-gray-600 font-bold">
+                  {{ product.price | currency: 'COP ' : 'symbol' : '1.0-0' }}
+                </p>
 
-              <p>
-                Disponibles:
-                <p-tag
-                  [severity]="product.available ? 'success' : 'danger'"
-                  [value]="
-                    product.available ? 'Disponible' : 'No Disponible'
-                  " />
-              </p>
+                <p>
+                  Disponibles:
+                  <p-tag
+                    [severity]="product.available ? 'success' : 'danger'"
+                    [value]="
+                      product.available ? 'Disponible' : 'No Disponible'
+                    " />
+                </p>
+              </div>
+              <div class="flex gap-1">
+                <p-button
+                  icon="pi pi-pencil"
+                  severity="info"
+                  (onClick)="openDetailProuct(product)" />
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  (onClick)="confirmDelete($event, product.idProduct)" />
+              </div>
             </div>
-            <div class="flex gap-1">
-              <p-button
-                icon="pi pi-pencil"
-                severity="info"
-                (onClick)="openDetailProuct(product)" />
-              <p-button
-                icon="pi pi-trash"
-                severity="danger"
-                (onClick)="confirmDelete($event, product.idProduct)" />
-            </div>
-          </div>
-        }
-      </ng-template>
-    </p-dataView>
+          }
+        </ng-template>
+      </p-dataView>
+    }
   </div>
   <p-toast styleClass="z-[9999]" />
-  <p-confirmDialog (onHide)="onDialogHide()"></p-confirmDialog>
+  @if (showModal()) {
+    <p-confirmDialog (onHide)="onDialogHide()"></p-confirmDialog>
+  }
 </section>

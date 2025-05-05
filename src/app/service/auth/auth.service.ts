@@ -5,10 +5,9 @@ import enviroment_export from 'src/app/enviroment_back';
 import { Login } from 'src/app/models/Login';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { SKIP_INTERCEPTOR } from 'src/app/interceptors/context/ignore-token-interceptor';
-interface responseToken {
-  message?: string;
-  token?: string;
-}
+import { Observable } from 'rxjs';
+import { ResponseCredential } from 'src/app/models/ResponseCredential';
+
 interface payloadCustom extends JwtPayload {
   roles?: string;
 }
@@ -25,32 +24,13 @@ export class AuthService {
     private router: Router
   ) {}
 
-  signIn(credentials: Login) {
-    this.http.post(`${this.url}/login`, credentials, { context:new HttpContext().set(SKIP_INTERCEPTOR, true) }).subscribe({
-      next: (r: responseToken) => {
-        console.log(r)
-        if (!r.token) return;
-
-        localStorage.setItem('token', r.token!);
-      },
-      error: e => {
-        console.log(e);
-
-      },
-      complete: () => {
-        const rol = this.extractRole()
-        this._isLogged.set(true);
-        console.log(this._isLogged());
-
-        this.redirect(rol!)
-
-      },
-    });
+  signIn(credentials: Login):Observable<ResponseCredential>{
+    return this.http.post<ResponseCredential>(`${this.url}/login`, credentials, { context:new HttpContext().set(SKIP_INTERCEPTOR, true) });
   }
   redirect(rol: string) {
     switch (rol) {
       case 'ADMIN_USER':
-        this.router.navigateByUrl('/layout-admin/product-page');
+        this.router.navigate(['/layout-admin/product-admin-page']);
         break;
       case 'CUSTOMER_USER':
         this.router.navigateByUrl('/layout/home-page');

@@ -16,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors(
       [authInterceptor]
     )),
+
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

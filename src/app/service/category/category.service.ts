@@ -20,4 +20,9 @@ export class CategoryService {
   saveCategory(category: Category): Observable<any>{
     return this.http.post(`${this.url}/save`, category)
   }
+
+  deleteCategory(id: string): Observable<any>{
+    return this.http.delete(`${this.url}/delete/${id}`)
+  }
+
 }

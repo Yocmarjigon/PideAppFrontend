@@ -1,71 +1,77 @@
-<section class="flex flex-col h-screen">
-  <!-- <div class="img-top"></div> -->
+@if (loading()) {
+  <app-spinner></app-spinner>
+} @else {
+  <section class="flex flex-col h-screen">
+    <!-- <div class="img-top"></div> -->
 
-  <!-- Imagen superior de la pagina -->
-  <app-img-top></app-img-top>
+    <!-- Imagen superior de la pagina -->
+    <app-img-top></app-img-top>
 
-  <!-- Logo y formulario de login -->
-  <div class="flex flex-col items-center h-full justify-center">
-    <img src="../../../assets/images/Logo.svg" alt="logo" />
+    <!-- Logo y formulario de login -->
+    <div class="flex flex-col items-center h-full justify-center">
+      <img src="../../../assets/images/Logo.svg" alt="logo" />
 
-    <!-- Formulario -->
-    <div
-      class="flex flex-col m-5 bg-white rounded-md items-center shadow-lg border-gray-200 border-solid border-[0.2px] p-5"
-    >
-      <h3>Inicia sesión para continuar</h3>
-      <form
-        class="flex flex-col items-center gap-5 mb-4"
-        [formGroup]="formLogin"
+      <!-- Formulario -->
+      <div
+        class="flex flex-col m-5 bg-white rounded-md items-center shadow-lg border-gray-200 border-solid border-[0.2px] p-5">
+        <h3>Inicia sesión para continuar</h3>
+        <form
+          class="flex flex-col items-center gap-5 mb-4"
+          [formGroup]="formLogin">
+          <!-- Input correo -->
+          <div class="flex flex-col gap-1 w-full">
+            <span class="text-gray-700"
+              >Nombre de usuario:<span class="text-red-500">*</span></span
+            >
+            <p-inputgroup>
+              <p-inputgroup-addon>
+                <i class="pi pi-user"></i>
+              </p-inputgroup-addon>
+              <input
+                pInputText
+                placeholder="Ingrese nombre de usuario"
+                formControlName="username" />
+            </p-inputgroup>
+
+            @if (
+              formLogin.get('username')?.hasError('required') &&
+              formLogin.get('username')?.touched
+            ) {
+              <p-message severity="error" variant="simple" size="small"
+                >El nombre de usuario no puede estar vació</p-message
+              >
+            }
+            <!-- @if (formLogin.get("email")?.errors?.['pattern']&&
+            formLogin.get("email")?.touched) {
+            <p-message severity="error" variant="simple" size="small"
+              >El correo es invalido</p-message
+            >
+            } -->
+          </div>
+          <div class="flex flex-col gap-1 w-full">
+            <span class="text-gray-700"
+              >Contraseña:<span class="text-red-500">*</span></span
+            >
+            <app-input-password
+              formControlName="password"
+              [placeholder]="'Ingresa tu contraseña'"
+              [control]="formLogin.get('password')"></app-input-password>
+          </div>
+          <p-button
+            [disabled]="formLogin.invalid"
+            label="Ingresar"
+            type="submit"
+            (onClick)="login()" />
+        </form>
+        <a routerLink="*">¿Olvidaste tu contraseña?</a>
+        <a routerLink="*">¿Olvidaste tu usuario?</a>
+      </div>
+      <a routerLink="/register-page" class="w-60 text-center"
+        >¿Aun no tienes una cuenta? Regístrate</a
       >
-        <!-- Input correo -->
-        <div class="flex flex-col gap-1 w-full">
-          <span class="text-gray-700">Nombre de usuario:<span class="text-red-500">*</span></span>
-          <p-inputgroup>
-            <p-inputgroup-addon>
-              <i class="pi pi-user"></i>
-            </p-inputgroup-addon>
-            <input
-              pInputText
-              placeholder="Ingrese nombre de usuario"
-              formControlName="username"
-            />
-          </p-inputgroup>
-
-          @if (formLogin.get("username")?.hasError("required") &&
-          formLogin.get("username")?.touched) {
-          <p-message severity="error" variant="simple" size="small"
-            >El nombre de usuario  no puede estar vació</p-message
-          >
-          }<!-- @if (formLogin.get("email")?.errors?.['pattern']&&
-          formLogin.get("email")?.touched) {
-          <p-message severity="error" variant="simple" size="small"
-            >El correo es invalido</p-message
-          >
-          } -->
-        </div>
-        <div class="flex flex-col gap-1 w-full">
-          <span class="text-gray-700">Contraseña:<span class="text-red-500">*</span></span>
-          <app-input-password
-            formControlName="password"
-            [placeholder]="'Ingresa tu contraseña'"
-            [control]="formLogin.get('password')"
-          ></app-input-password>
-        </div>
-        <p-button
-          [disabled]="formLogin.invalid"
-          label="Ingresar"
-          type="submit"
-          (onClick)="login()"
-        />
-      </form>
-      <a routerLink="*">¿Olvidaste tu contraseña?</a>
-      <a routerLink="*">¿Olvidaste tu usuario?</a>
     </div>
-    <a routerLink="/register-page" class="w-60 text-center"
-      >¿Aun no tienes una cuenta? Regístrate</a
-    >
+  </section>
+  <div class="card flex justify-center">
+    <p-toast />
   </div>
-</section>
-<div class="card flex justify-center">
-  <p-toast />
-</div>
+}

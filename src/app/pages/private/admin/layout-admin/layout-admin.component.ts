@@ -9,6 +9,7 @@ import { RippleModule } from 'primeng/ripple';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { NavBarBottonAdminComponent } from "../../../../components/nav-bar/nav-bar-botton-admin/nav-bar-botton-admin.component";
 @Component({
   selector: 'app-layout-admin',
   standalone: true,
@@ -20,8 +21,9 @@ import { AuthService } from 'src/app/service/auth/auth.service';
     InputTextModule,
     RippleModule,
     CommonModule,
-    ButtonModule
-  ],
+    ButtonModule,
+    NavBarBottonAdminComponent
+],
   templateUrl: './layout-admin.component.html',
   styleUrl: './layout-admin.component.scss',
 })

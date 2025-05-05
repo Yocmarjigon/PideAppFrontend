@@ -22,7 +22,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+  defaultConfig {
+    minSdkVersion 24 // o superior (24 es Android 7)
+    targetSdkVersion 34 // lo recomendado para Android 14 (2023-2024)
+  }
 }
+
+
 
 repositories {
     flatDir{

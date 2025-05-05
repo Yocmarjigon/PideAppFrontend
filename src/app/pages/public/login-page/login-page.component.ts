@@ -1,5 +1,5 @@
 import { InputPasswordComponent } from './../../../components/inputs/input-password/input-password.component';
-import { Component, effect } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import {
   FormControl,
@@ -22,6 +22,8 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DataFormService } from 'src/app/service/utils/data-form.service';
+import { SpinnerComponent } from 'src/app/components/loading/spinner/spinner.component';
+import { ResponseCredential } from 'src/app/models/ResponseCredential';
 
 @Component({
   selector: 'app-login-page',
@@ -41,15 +43,16 @@ import { DataFormService } from 'src/app/service/utils/data-form.service';
     InputPasswordComponent,
     ReactiveFormsModule,
     ToastModule,
+    SpinnerComponent
   ],
   providers: [Validators, AuthService, MessageService],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent{
-  onVisual = false;
-  loader = true;
-  showPassword = false;
+  public onVisual = false;
+  public loading = signal(false);
+  public showPassword = false;
 
   formLogin: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -69,9 +72,24 @@ export class LoginPageComponent{
 
   login() {
     const user = this.formLogin.value;
+    this.loading.set(true);
+    this._authService.signIn(user).subscribe({
+      next: (r: ResponseCredential) => {
+        if (!r.token) return;
+        localStorage.setItem('token', r.token!);
+      },
+      error: e => {
+        console.log(e);
 
-    this._authService.signIn(user);
+      },
+      complete: () => {
+        const rol = this._authService.extractRole();
+        this._authService._isLogged.set(true);
+        this._authService.redirect(rol!);
+        this.loading.set(false);
 
+      },
+    });
 
   }
   changeVisual() {

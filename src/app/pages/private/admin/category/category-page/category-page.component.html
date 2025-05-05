@@ -1,41 +1,49 @@
 <section class="mt-20 p-5">
   <app-nav-bar-back
     [icon]="'pi pi-chevron-left'"
-    [router]="'/layout-admin/product-page'"
-  ></app-nav-bar-back>
+    [router]="'/layout-admin/product-admin-page'"></app-nav-bar-back>
+  <h1 class="text-2xl font-bold text-start mt-3 mb-6">CATEGORÍAS</h1>
+  <div class="flex justify-between flex-col gap-2">
+    <p-inputGroup class="flex-1">
+      <p-inputGroupAddon>
+        <i class="pi pi-search"></i>
+      </p-inputGroupAddon>
+      <input
+        type="text"
+        pInputText
+        placeholder="Buscar por nombre"
+        class="w-full" />
+    </p-inputGroup>
+  </div>
   <div>
     <p-button
       icon="pi pi-plus"
       severity="success"
       label="Crear Categoria"
       (onClick)="openCategoryForm()"
-      styleClass="p-button-sm md:p-button"
-    />
+      styleClass="p-button-sm md:p-button" />
   </div>
   <div class="flex-1 overflow-y-auto">
-    <p-dataView #dv [paginator]="true" [rows]="8" [value]="categories">
-      <ng-template #list let-category>
-        @for (category of categories; track $index) {
-        <div class="flex items-center p-2 border-b gap-3">
-          <div class="flex-1 min-w-0">
-            <h3 class="font-medium truncate">{{ category.name }}</h3>
-          </div>
-          <div class="flex gap-1">
-            <p-button
-              icon="pi pi-pencil"
-              severity="info"
-              (onClick)="openDetailCategory(category)"
-            />
-            <p-button
-              icon="pi pi-trash"
-              severity="danger"
-              (onClick)="confirmDelete($event, category.idCategory)"
-            />
-          </div>
-        </div>
-
-        }
-      </ng-template>
-    </p-dataView>
+    @if (loading()) {
+      <app-data-view-loading></app-data-view-loading>
+    } @else {
+      <p-dataView #dv [paginator]="true" [rows]="8" [value]="categories">
+        <ng-template #list let-category>
+          @for (category of categories; track $index) {
+            <div class="flex items-center p-2 border-b gap-3">
+              <div class="flex-1 min-w-0">
+                <h3 class="font-medium truncate">{{ category.name }}</h3>
+              </div>
+              <div class="flex gap-1">
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  (onClick)="confirmDelete($event, category.idCategory)" />
+              </div>
+            </div>
+          }
+        </ng-template>
+      </p-dataView>
+    }
   </div>
 </section>

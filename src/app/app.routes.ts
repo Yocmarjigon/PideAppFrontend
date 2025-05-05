@@ -22,9 +22,12 @@ import { ProductDetailPageComponent } from './pages/private/admin/product-detail
 import { authGuardCustomer } from './guards/customer-auth/authCustomer.guard';
 import { adminAuthGuard } from './guards/admin-auth/admin-auth.guard';
 import { ArepaPageComponent } from './pages/private/user/arepa-page/arepa-page.component';
-import { EmpanadaPageComponent } from './pages/private/user/empanada-page/empanada-page.component';
 import { JuicePageComponent } from './pages/private/user/juice-page/juice-page.component';
 import { SodaPageComponent } from './pages/private/user/soda-page/soda-page.component';
+import { PataconPageComponent } from './pages/private/user/patacon-page/patacon-page.component';
+import { OrderAdminPageComponent } from './pages/private/admin/order-admin-page/order-admin-page.component';
+import { PerfilAdminPageComponent } from './pages/private/admin/perfil-admin-page/perfil-admin-page.component';
+import { SaleAdminPageComponent } from './pages/private/admin/sale-admin-page/sale-admin-page.component';
 
 export const routes: Routes = [
   //rutas publicas
@@ -79,21 +82,21 @@ export const routes: Routes = [
         component: SearchPageComponent,
       },
       {
-        path: "arepa-page",
-        component: ArepaPageComponent
+        path: 'arepa-page',
+        component: ArepaPageComponent,
       },
       {
-        path: "empanada-page",
-        component: EmpanadaPageComponent
+        path: 'patacon-page',
+        component: PataconPageComponent,
       },
       {
-        path: "juice-page",
-        component: JuicePageComponent
+        path: 'juice-page',
+        component: JuicePageComponent,
       },
       {
         path: 'soda-page',
-        component: SodaPageComponent
-      }
+        component: SodaPageComponent,
+      },
       /* {
         path: '',
         redirectTo: '/layout/home-page',
@@ -103,8 +106,10 @@ export const routes: Routes = [
   },
 
   {
-    path: 'description-product-page',
+    path: 'description-page/:id',
+    canActivate: [authGuardCustomer],
     component: DescriptionProductPageComponent,
+
   },
   /* Rutas de las paginas administrativas */
   {
@@ -113,8 +118,20 @@ export const routes: Routes = [
     canActivate: [adminAuthGuard],
     children: [
       {
-        path: 'product-page',
+        path: 'product-admin-page',
         component: ProductsPageComponent,
+      },
+      {
+        path: 'order-admin-page',
+        component: OrderAdminPageComponent,
+      },
+      {
+        path: 'sale-admin-page',
+        component: SaleAdminPageComponent,
+      },
+      {
+        path: 'perfil-admin-page',
+        component: PerfilAdminPageComponent,
       },
 
       /* {
@@ -126,18 +143,22 @@ export const routes: Routes = [
   },
   {
     path: 'product-form',
+    canActivate: [adminAuthGuard],
     component: FormProductComponent,
   },
   {
     path: 'category-page',
+    canActivate: [adminAuthGuard],
     component: CategoryPageComponent,
   },
   {
     path: 'category-form',
+    canActivate: [adminAuthGuard],
     component: FormCategoryComponent,
   },
   {
     path: 'product-detail-page',
+    canActivate: [adminAuthGuard],
     component: ProductDetailPageComponent,
   },
 
@@ -149,6 +170,7 @@ export const routes: Routes = [
 
   {
     path: '**',
+    pathMatch: 'full',
     component: ErrorPageComponent,
   },
 ];

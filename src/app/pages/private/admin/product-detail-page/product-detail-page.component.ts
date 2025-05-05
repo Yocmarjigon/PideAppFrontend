@@ -27,6 +27,7 @@ import { SendDataComponentsService } from 'src/app/service/utils/send-data-compo
 import { ToastModule } from 'primeng/toast';
 
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @Component({
   selector: 'app-product-detail-page',
   imports: [
@@ -46,6 +47,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     MessageModule,
     ToastModule,
     ConfirmPopupModule,
+    ConfirmDialogModule
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './product-detail-page.component.html',
@@ -57,7 +59,7 @@ export class ProductDetailPageComponent implements OnInit {
   @Input() displayModal = signal(false);
 
   productForm: FormGroup;
-
+  showModal = signal(true);
   previewImageUrl: string | undefined = '';
   categories: Category[] = [];
   selectedFile!: File;
@@ -88,7 +90,6 @@ export class ProductDetailPageComponent implements OnInit {
 
   ngOnInit() {
     this.product.set(this._sendDataComponentService.getProduct()());
-    console.log(this.product());
     this.setForm();
     this.getCategory();
   }
@@ -119,9 +120,24 @@ export class ProductDetailPageComponent implements OnInit {
       accept: () => {
         this.updateProduct();
       },
-      reject: () => {},
+      reject: () => {
+        this.onDialogHide();
+      },
     });
   }
+  onDialogHide() {
+
+    this.showModal.set(false);
+    // Quitar cualquier overlay que haya quedado pegado
+    const overlays = document.querySelectorAll('.p-confirm-dialog-mask, .p-dialog-mask, .p-overlay');
+    overlays.forEach(el => el.classList.add('hidden'));
+
+    // Quitar bloqueo de scroll (por si quedó)
+    document.body.classList.remove('p-overflow-hidden');
+    setTimeout(() => this.showModal.set(true), 0);
+
+  }
+
 
   showMessageUpdateProduct() {
     this._messageService.add({

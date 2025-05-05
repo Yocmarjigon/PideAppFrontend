@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpanadaPageComponent } from './empanada-page.component';
+import { PerfilAdminPageComponent } from './perfil-admin-page.component';
 
-describe('EmpanadaPageComponent', () => {
-  let component: EmpanadaPageComponent;
-  let fixture: ComponentFixture<EmpanadaPageComponent>;
+describe('PerfilAdminPageComponent', () => {
+  let component: PerfilAdminPageComponent;
+  let fixture: ComponentFixture<PerfilAdminPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmpanadaPageComponent]
+      imports: [PerfilAdminPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EmpanadaPageComponent);
+    fixture = TestBed.createComponent(PerfilAdminPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
