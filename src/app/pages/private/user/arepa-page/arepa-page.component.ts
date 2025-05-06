@@ -17,6 +17,7 @@ export class ArepaPageComponent implements OnInit {
 
   products: Product[] = [];
   loading= signal(true);
+  notFoudData = signal(false);
   constructor(
     private _productService: ProductService,
     private router: Router,
@@ -34,6 +35,11 @@ export class ArepaPageComponent implements OnInit {
       },
       error: (e) => {
         console.log(e);
+        if(e.status == 404){
+          this.notFoudData.set(true);
+        }
+
+        this.loading.set(false);
       },
       complete: () => {
         this.loading.set(false);

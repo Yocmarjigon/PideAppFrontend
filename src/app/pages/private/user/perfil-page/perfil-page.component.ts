@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-perfil-page',
@@ -27,11 +28,12 @@ export class PerfilPageComponent {
   showModal = signal(true);
   constructor(
     private router: Router,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _authService: AuthService
   ) {}
 
   signOut() {
-    localStorage.clear();
+    this._authService.clearTokens();
     this.router.navigateByUrl('/login-page');
   }
 

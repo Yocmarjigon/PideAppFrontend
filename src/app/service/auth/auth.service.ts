@@ -5,8 +5,8 @@ import enviroment_export from 'src/app/enviroment_back';
 import { Login } from 'src/app/models/Login';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { SKIP_INTERCEPTOR } from 'src/app/interceptors/context/ignore-token-interceptor';
-import { Observable } from 'rxjs';
-import { ResponseCredential } from 'src/app/models/ResponseCredential';
+import { Observable, tap } from 'rxjs';
+import { ResponseCredential } from 'src/app/models/Responses/ResponseCredential';
 
 interface payloadCustom extends JwtPayload {
   roles?: string;
@@ -41,10 +41,41 @@ export class AuthService {
     }
   }
 
+  get accessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
+  get refreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
+  setTokens(tokens: { accessToken: string; refreshToken: string }) {
+    localStorage.setItem('accessToken', tokens.accessToken);
+    localStorage.setItem('refreshToken', tokens.refreshToken);
+  }
+
+  clearTokens() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  }
+
+  refreshTokens(): Observable<any> {
+    return this.http.post<any>(`${this.url}/refresh`, {
+      refreshToken: this.refreshToken
+    }).pipe(
+      tap(response => {
+        this.setTokens({
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken
+        });
+      })
+    );
+  }
+
 
 
   extractRole() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (!token) return undefined;
     const payload: payloadCustom = jwtDecode(token);
 

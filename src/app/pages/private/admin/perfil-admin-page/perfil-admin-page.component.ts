@@ -7,6 +7,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonComponent } from 'src/app/components/buttons/button/button.component';
 import { InputTextComponent } from 'src/app/components/inputs/input-text/input-text.component';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-perfil-admin-page',
@@ -27,11 +28,12 @@ export class PerfilAdminPageComponent {
   showModal = signal(true);
   constructor(
     private router: Router,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _authService: AuthService
   ) {}
 
   signOut() {
-    localStorage.clear();
+    this._authService.clearTokens();
     this.router.navigateByUrl('/login-page');
   }
 

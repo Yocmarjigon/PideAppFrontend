@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImgTopComponent } from '../../../../components/img-top/img-top.component';
 import { ButtonComponent } from '../../../../components/buttons/button/button.component';
 import { ButtonCircleComponent } from '../../../../components/buttons/button-circle/button-circle.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
+import { CarService } from 'src/app/service/car/car.service';
 
 @Component({
   selector: 'app-car-page',
@@ -18,9 +19,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './car-page.component.html',
   styleUrl: './car-page.component.scss',
 })
-export class CarPageComponent {
-  total = 5000;
-  value = 1;
-  subtotal: any;
-  envio: any;
+export class CarPageComponent implements OnInit {
+  cars: any[] = [];
+  constructor(private _carService: CarService) {}
+
+  ngOnInit(): void {
+    this._carService.getCar().subscribe((res) => {
+      this.cars = res;
+    });
+  }
+
+
 }

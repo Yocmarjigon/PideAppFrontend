@@ -23,7 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DataFormService } from 'src/app/service/utils/data-form.service';
 import { SpinnerComponent } from 'src/app/components/loading/spinner/spinner.component';
-import { ResponseCredential } from 'src/app/models/ResponseCredential';
+import { ResponseCredential } from 'src/app/models/Responses/ResponseCredential';
 
 @Component({
   selector: 'app-login-page',
@@ -75,11 +75,15 @@ export class LoginPageComponent{
     this.loading.set(true);
     this._authService.signIn(user).subscribe({
       next: (r: ResponseCredential) => {
-        if (!r.token) return;
-        localStorage.setItem('token', r.token!);
+        console.log(r);
+        if (!r.accessToken || !r.refreshToken) return;
+        const tokens = { accessToken: r.accessToken, refreshToken: r.refreshToken };
+        this._authService.setTokens(tokens);
+
       },
       error: e => {
         console.log(e);
+        this.loading.set(false);
 
       },
       complete: () => {

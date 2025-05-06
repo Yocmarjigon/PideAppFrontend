@@ -2,45 +2,50 @@
   <app-img-top [title]="'Carrito'"></app-img-top>
 
   <!-- Lista de productos -->
-  <div class="products-container mt-[20px] mx-[15px] flex flex-col gap-4">
-    <div class="product flex rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
-      <img
-        src="/assets/images/arepa-de-huevo.jpeg"
-        alt="Arepa de huevo"
-        class="w-[100px] h-[100px] object-cover rounded-l-xl"
-      />
-      <div class="flex flex-1 flex-col justify-between p-3">
-        <div>
-          <h3 class="text-[1em] font-semibold text-gray-800 mb-1">Arepa de huevo</h3>
-          <p class="text-orange_primary text-[1em] font-bold">$ 5,000</p>
-        </div>
-        <div class="flex items-center justify-between mt-3">
-          <p-inputnumber
-            [min]="1"
-            [max]="100"
-            [showButtons]="true"
-            buttonLayout="horizontal"
-            spinnerMode="horizontal"
-            inputId="horizontal"
-            [inputStyle]="{ width: '3rem' }"
-          >
-            <ng-template #incrementbuttonicon>
-              <span class="pi pi-plus"></span>
-            </ng-template>
-            <ng-template #decrementbuttonicon>
-              <span class="pi pi-minus"></span>
-            </ng-template>
-          </p-inputnumber>
+  @for (car of cars; track $index) {
+    <div class="products-container mt-[20px] mx-[15px] flex flex-col gap-4">
+      <div
+        class="product flex rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
+        <img
+          src="/assets/images/arepa-de-huevo.jpeg"
+          alt="Arepa de huevo"
+          class="w-[100px] h-[100px] object-cover rounded-l-xl" />
+        <div class="flex flex-1 flex-col justify-between p-3">
+          <div>
+            <h3 class="text-[1em] font-semibold text-gray-800 mb-1">
+              Arepa de huevo
+            </h3>
+            <p class="text-orange_primary text-[1em] font-bold">$ 5,000</p>
+          </div>
+          <div class="flex items-center justify-between mt-3">
+            <p-inputnumber
+              [min]="1"
+              [max]="100"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              spinnerMode="horizontal"
+              inputId="horizontal"
+              [inputStyle]="{ width: '3rem' }">
+              <ng-template #incrementbuttonicon>
+                <span class="pi pi-plus"></span>
+              </ng-template>
+              <ng-template #decrementbuttonicon>
+                <span class="pi pi-minus"></span>
+              </ng-template>
+            </p-inputnumber>
 
-          <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
+            <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
+  }
   <!-- Resumen -->
-  <div class="summary-container mx-[15px] mt-6 bg-white rounded-xl shadow p-4 border border-gray-200">
-    <h3 class="text-[1.1em] font-semibold text-gray-700 mb-3">Resumen de compra</h3>
+  <div
+    class="summary-container mx-[15px] mt-6 bg-white rounded-xl shadow p-4 border border-gray-200">
+    <h3 class="text-[1.1em] font-semibold text-gray-700 mb-3">
+      Resumen de compra
+    </h3>
     <div class="flex justify-between mb-2 text-sm text-gray-600">
       <span>Subtotal</span>
       <span>$ {{ subtotal }}</span>
@@ -49,15 +54,15 @@
       <span>Envío</span>
       <span>$ {{ envio }}</span>
     </div>
-    <div class="flex justify-between text-md font-semibold text-gray-800 border-t border-gray-200 pt-2">
+    <div
+      class="flex justify-between text-md font-semibold text-gray-800 border-t border-gray-200 pt-2">
       <span>Total a pagar</span>
       <span>$ {{ total }}</span>
     </div>
 
     <!-- Nuevo botón de compra mejorado -->
     <button
-      class="w-full mt-4 bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-2 text-[1em] shadow-md"
-    >
+      class="w-full mt-4 bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-2 text-[1em] shadow-md">
       <span class="pi pi-shopping-bag text-[1.2em]"></span> Comprar ahora
     </button>
   </div>

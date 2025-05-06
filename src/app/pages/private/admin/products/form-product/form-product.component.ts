@@ -139,7 +139,7 @@ export class FormProductComponent implements OnInit {
         this.showMessageCreateProduct();
       },
       complete: () => {
-        this.router.navigateByUrl('/layout-admin/product-page');
+        this.router.navigateByUrl('/layout-admin/product-admin-page');
       },
       error: (e) => {
         console.log(e);
