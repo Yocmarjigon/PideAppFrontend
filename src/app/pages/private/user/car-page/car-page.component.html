@@ -2,20 +2,28 @@
   <app-img-top [title]="'Carrito'"></app-img-top>
 
   <!-- Lista de productos -->
-  @for (car of cars; track $index) {
+  @for (product of products; track $index) {
     <div class="products-container mt-[20px] mx-[15px] flex flex-col gap-4">
       <div
         class="product flex rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
-        <img
-          src="/assets/images/arepa-de-huevo.jpeg"
-          alt="Arepa de huevo"
-          class="w-[100px] h-[100px] object-cover rounded-l-xl" />
+        <div class="flex flex-col items-center justify-center">
+          <img
+            src="{{
+              product.img ? product.img : '/assets/images/img-default.jpg'
+            }}"
+            alt="Arepa de huevo"
+            class="w-[100px] h-[100px] object-cover rounded-l-xl" />
+        </div>
         <div class="flex flex-1 flex-col justify-between p-3">
-          <div>
-            <h3 class="text-[1em] font-semibold text-gray-800 mb-1">
-              Arepa de huevo
+          <div class="flex justify-between">
+            <h3 class="text-[1.1em] text-gray-800 mb-1">
+              {{ product.title }}
             </h3>
-            <p class="text-orange_primary text-[1em] font-bold">$ 5,000</p>
+            <p class="text-[1.3em] font-bold text-orange_primary mb-1">
+              {{
+                product.price | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+              }}
+            </p>
           </div>
           <div class="flex items-center justify-between mt-3">
             <p-inputnumber
@@ -24,6 +32,7 @@
               [showButtons]="true"
               buttonLayout="horizontal"
               spinnerMode="horizontal"
+              [(ngModel)]="product.amount"
               inputId="horizontal"
               [inputStyle]="{ width: '3rem' }">
               <ng-template #incrementbuttonicon>
@@ -34,7 +43,7 @@
               </ng-template>
             </p-inputnumber>
 
-            <app-button-circle [icon]="'pi pi-trash'"></app-button-circle>
+            <p-button icon="pi pi-trash" severity="danger" />
           </div>
         </div>
       </div>

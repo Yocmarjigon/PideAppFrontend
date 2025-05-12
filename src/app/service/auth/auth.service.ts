@@ -3,14 +3,12 @@ import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import enviroment_export from 'src/app/enviroment_back';
 import { Login } from 'src/app/models/Login';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { jwtDecode} from 'jwt-decode';
 import { SKIP_INTERCEPTOR } from 'src/app/interceptors/context/ignore-token-interceptor';
 import { Observable, tap } from 'rxjs';
 import { ResponseCredential } from 'src/app/models/Responses/ResponseCredential';
+import { PayloadCustom } from 'src/app/models/PayloadCustom';
 
-interface payloadCustom extends JwtPayload {
-  roles?: string;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -27,6 +25,9 @@ export class AuthService {
   signIn(credentials: Login):Observable<ResponseCredential>{
     return this.http.post<ResponseCredential>(`${this.url}/login`, credentials, { context:new HttpContext().set(SKIP_INTERCEPTOR, true) });
   }
+
+
+
   redirect(rol: string) {
     switch (rol) {
       case 'ADMIN_USER':
@@ -49,10 +50,19 @@ export class AuthService {
     return localStorage.getItem('refreshToken');
   }
 
+  extractUserId() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) return undefined;
+    const payload: PayloadCustom = jwtDecode(token);
+
+    return payload.userId;
+  }
+
   setTokens(tokens: { accessToken: string; refreshToken: string }) {
     localStorage.setItem('accessToken', tokens.accessToken);
     localStorage.setItem('refreshToken', tokens.refreshToken);
   }
+
 
   clearTokens() {
     localStorage.removeItem('accessToken');
@@ -77,8 +87,15 @@ export class AuthService {
   extractRole() {
     const token = localStorage.getItem('accessToken');
     if (!token) return undefined;
-    const payload: payloadCustom = jwtDecode(token);
+    const payload: PayloadCustom = jwtDecode(token);
 
     return payload.roles;
+  }
+
+  extractIdUser() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) return undefined;
+    const payload: PayloadCustom = jwtDecode(token);
+    return payload.userId;
   }
 }

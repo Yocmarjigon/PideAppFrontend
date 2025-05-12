@@ -82,12 +82,13 @@ export class LoginPageComponent{
 
       },
       error: e => {
-        console.log(e);
+        this.exceptionHandler(e);
         this.loading.set(false);
 
       },
       complete: () => {
         const rol = this._authService.extractRole();
+        console.log(rol);
         this._authService._isLogged.set(true);
         this._authService.redirect(rol!);
         this.loading.set(false);
@@ -95,6 +96,28 @@ export class LoginPageComponent{
       },
     });
 
+  }
+
+  exceptionHandler(e: any) {
+    console.log(e.status);
+    switch (e.status) {
+      case 401:
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: e.error.message,
+          life: 3000,
+      })
+        break;
+      case 404:
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: e.error.message,
+          life: 3000,
+        })
+        break;
+    }
   }
   changeVisual() {
     this.onVisual = !this.onVisual;

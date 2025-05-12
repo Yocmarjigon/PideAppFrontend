@@ -9,6 +9,7 @@ import { NavBarBackComponent } from "../../../../components/nav-bar/nav-bar-back
 import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
 import { ProductService } from 'src/app/service/products/product.service';
 import { CurrencyPipe } from '@angular/common';
+import { CarService } from 'src/app/service/car/car.service';
 
 @Component({
   selector: 'app-description-product-page',
@@ -24,7 +25,8 @@ export class DescriptionProductPageComponent implements OnInit {
   quantity = 1;
   constructor(
     private route: ActivatedRoute,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _carService: CarService
   ){
     this.product= {
       idProduct: '',
@@ -53,7 +55,6 @@ export class DescriptionProductPageComponent implements OnInit {
 
   }
   addToCart() {
-    // Lógica para añadir al carrito
-    console.log(`Añadido ${this.quantity} x ${this.product.title} al carrito`);
+    this._carService.saveProductCar({ idProduct: this.product.idProduct, amount: this.quantity });
   }
 }
