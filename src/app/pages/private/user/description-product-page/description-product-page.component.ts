@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from 'src/app/models/Product';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -21,7 +21,7 @@ import { CarService } from 'src/app/service/car/car.service';
 })
 export class DescriptionProductPageComponent implements OnInit {
   public product: Product;
-
+  public loading = signal(false);
   quantity = 1;
   constructor(
     private route: ActivatedRoute,
@@ -55,6 +55,18 @@ export class DescriptionProductPageComponent implements OnInit {
 
   }
   addToCart() {
-    this._carService.saveProductCar({ idProduct: this.product.idProduct, amount: this.quantity });
+    this._carService.saveCar({ idProduct: this.product.idProduct, amount: this.quantity }).subscribe({
+      next: (r) => {
+        console.log(r);
+        this.loading.set(true);
+      },
+      error: (e) => {
+        console.log(e);
+        this.loading.set(false);
+      },
+      complete: () => {
+        this.loading.set(false);
+      },
+    });
   }
 }

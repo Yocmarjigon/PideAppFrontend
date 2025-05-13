@@ -14,25 +14,28 @@ import { CarGet } from 'src/app/models/Car/CarGet';
 export class CarService {
   private url = `${enviroment_export}/car`;
   private carProducts: CarProduct[] = [];
-  constructor(private http: HttpClient, private _authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private _authService: AuthService
+  ) {}
 
   getCar(): Observable<CarGet> {
     const userId = this._authService.extractUserId();
     return this.http.get<CarGet>(`${this.url}/getByCustomer/${userId}`);
   }
 
-  saveProductCar(carProduct:CarProduct) {
-    this.carProducts.push(carProduct);
-    this.saveCar()
-  }
+  saveCar(carProducts: CarProduct): Observable<Response> {
 
-  saveCar(): Observable<Response> {
     const userId = this._authService.extractUserId();
+    const products = [];
+    products.push(carProducts);
 
     const car: CarSave = {
       customer: userId,
-      products: this.carProducts,
+      products
     };
+
+    console.log(car);
 
     return this.http.post<Response>(`${this.url}/save`, car);
   }

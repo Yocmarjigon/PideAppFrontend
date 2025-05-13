@@ -57,16 +57,20 @@
     </h3>
     <div class="flex justify-between mb-2 text-sm text-gray-600">
       <span>Subtotal</span>
-      <span>$ {{ subtotal }}</span>
+      <span>{{
+        subtotal | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+      }}</span>
     </div>
     <div class="flex justify-between mb-2 text-sm text-gray-600">
       <span>Envío</span>
-      <span>$ {{ envio }}</span>
+      <span>{{
+        shipping | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+      }}</span>
     </div>
     <div
       class="flex justify-between text-md font-semibold text-gray-800 border-t border-gray-200 pt-2">
       <span>Total a pagar</span>
-      <span>$ {{ total }}</span>
+      <span>{{ total | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO' }}</span>
     </div>
 
     <!-- Nuevo botón de compra mejorado -->

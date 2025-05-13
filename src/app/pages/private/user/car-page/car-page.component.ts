@@ -21,7 +21,7 @@ import { CurrencyPipe } from '@angular/common';
     ImgTopComponent,
     ButtonModule,
     SpinnerComponent,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   templateUrl: './car-page.component.html',
   styleUrl: './car-page.component.scss',
@@ -31,7 +31,7 @@ export class CarPageComponent implements OnInit {
   products: CarGetProduct[] = [];
   subtotal = 0;
   total = 0;
-  envio = 0;
+  shipping = 0;
   loadding = signal(false);
   constructor(
     private _carService: CarService,
@@ -44,6 +44,10 @@ export class CarPageComponent implements OnInit {
         this.car = res;
         this.products = res.products!;
         this.loadding.set(true);
+        this.subtotal = res.subtotal!;
+        this.total = res.total!;
+        this.shipping = res.shipping!;
+        console.log(this.car);
       },
       error: err => {
         console.log(err);
