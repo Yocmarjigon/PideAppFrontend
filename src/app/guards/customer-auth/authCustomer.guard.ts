@@ -9,7 +9,6 @@ export const authGuardCustomer: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
 console.log(authService._isLogged.asReadonly());
-  console.log(authService.extractRole() === 'CUSTOMER_USER')
   if (authService._isLogged.asReadonly() && authService.extractRole() === 'CUSTOMER_USER') return true
   router.navigateByUrl('/login-page');
   return false

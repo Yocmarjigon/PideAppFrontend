@@ -55,18 +55,6 @@ export class DescriptionProductPageComponent implements OnInit {
 
   }
   addToCart() {
-    this._carService.saveCar({ idProduct: this.product.idProduct, amount: this.quantity }).subscribe({
-      next: (r) => {
-        console.log(r);
-        this.loading.set(true);
-      },
-      error: (e) => {
-        console.log(e);
-        this.loading.set(false);
-      },
-      complete: () => {
-        this.loading.set(false);
-      },
-    });
+    this._carService.saveCarProduct({ idProduct: this.product.idProduct, amount: this.quantity })
   }
 }
