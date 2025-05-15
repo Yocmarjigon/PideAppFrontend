@@ -27,7 +27,7 @@ export class CarService {
     return this.http.get<CarGet>(`${this.url}/getByCustomer/${userId}`);
   }
 
-  saveCarProduct(carProduct: CarProduct) {
+saveCarProduct(carProduct: CarProduct) {
   this.loadingSaveCar.set(false);
 
   this.getCar().subscribe({
@@ -37,8 +37,8 @@ export class CarService {
       // Evitar duplicados: buscar si ya existe
       const index = existingProducts.findIndex(p => p.idProduct === carProduct.idProduct);
       if (index !== -1) {
-        // Ya existe: actualizar la cantidad (sustituir o incrementar)
-        existingProducts[index].amount = carProduct.amount ?? 1; // o += si quieres acumular
+        // Ya existe: actualizar la cantidad
+        existingProducts[index].amount = carProduct.amount ?? 1;
       } else {
         // No existe: agregar nuevo
         existingProducts.push(carProduct as CarGetProduct);
@@ -49,6 +49,7 @@ export class CarService {
         customer: userId,
         products: existingProducts,
       };
+
       this.saveCar(car).subscribe({
         next: res => {
           console.log(res);
@@ -59,18 +60,40 @@ export class CarService {
           this.loadingSaveCar.set(false);
         }
       });
-
     },
+
     error: err => {
       console.log(err);
-    },
-    complete: () => {
-      this.loadingSaveCar.set(true);
+
+      if (err.status === 404) {
+        // Crear nuevo carrito desde cero
+        const userId = this._authService.extractUserId();
+        const car: CarSave = {
+          customer: userId,
+          products: [carProduct],
+        };
+
+        console.log(car);
+
+
+        this.saveCar(car).subscribe({
+          next: res => {
+            console.log(res);
+            this.loadingSaveCar.set(true);
+          },
+          error: err => {
+            console.log(err);
+            this.loadingSaveCar.set(false);
+          }
+        });
+      } else {
+        // Otro error distinto a 404
+        this.loadingSaveCar.set(false);
+      }
     }
   });
-
-
 }
+
   public saveCar(car: CarSave) {
     return this.http.post<Response>(`${this.url}/save`, car);
   }

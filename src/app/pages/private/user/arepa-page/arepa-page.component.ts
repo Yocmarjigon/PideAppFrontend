@@ -29,7 +29,7 @@ export class ArepaPageComponent implements OnInit {
     this._sendDataComponentService.setProduct(product);
   }
   ngOnInit() {
-    this._productService.getProductsByCategory('arepas').subscribe({
+    this._productService.getProductsByCategory('Arepas').subscribe({
       next: (p) => {
         this.products = p;
       },

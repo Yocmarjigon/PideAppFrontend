@@ -6,6 +6,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { ProductService } from 'src/app/service/products/product.service';
 import { RouterLink } from '@angular/router';
+import { ProductCardComponent } from 'src/app/components/card/product-card/product-card.component';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,7 @@ import { RouterLink } from '@angular/router';
     CarouselModule,
     ButtonModule,
     TagModule,
+    ProductCardComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
