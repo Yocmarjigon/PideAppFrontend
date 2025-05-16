@@ -18,6 +18,7 @@ export class CustomerService {
   }
 
   public saveCustomer(customer: Customer): Observable<ResponseAPI> {
+    console.log(customer);
     return this.http.post<ResponseAPI>(`${this.url}/save`, customer, {
       context: new HttpContext().set(SKIP_INTERCEPTOR, true),
     });

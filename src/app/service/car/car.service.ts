@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import enviroment_export from 'src/app/enviroment_back';
 import { CarProduct } from 'src/app/models/Car/CarProduct';
 import { CarSave } from 'src/app/models/Car/CarSave';
@@ -16,7 +16,7 @@ export class CarService {
   private url = `${enviroment_export}/car`;
   private carProducts: CarProduct[] = [];
   private idUser = '';
-  public loadingSaveCar = signal(false);
+  public loadingSaveCar = new BehaviorSubject<boolean>(false);
   constructor(
     private http: HttpClient,
     private _authService: AuthService
@@ -28,7 +28,7 @@ export class CarService {
   }
 
 saveCarProduct(carProduct: CarProduct) {
-  this.loadingSaveCar.set(false);
+  this.loadingSaveCar.next(true);
 
   this.getCar().subscribe({
     next: res => {
@@ -53,11 +53,11 @@ saveCarProduct(carProduct: CarProduct) {
       this.saveCar(car).subscribe({
         next: res => {
           console.log(res);
-          this.loadingSaveCar.set(true);
+          this.loadingSaveCar.next(false);
         },
         error: err => {
           console.log(err);
-          this.loadingSaveCar.set(false);
+          this.loadingSaveCar.next(true);
         }
       });
     },
@@ -65,31 +65,6 @@ saveCarProduct(carProduct: CarProduct) {
     error: err => {
       console.log(err);
 
-      if (err.status === 404) {
-        // Crear nuevo carrito desde cero
-        const userId = this._authService.extractUserId();
-        const car: CarSave = {
-          customer: userId,
-          products: [carProduct],
-        };
-
-        console.log(car);
-
-
-        this.saveCar(car).subscribe({
-          next: res => {
-            console.log(res);
-            this.loadingSaveCar.set(true);
-          },
-          error: err => {
-            console.log(err);
-            this.loadingSaveCar.set(false);
-          }
-        });
-      } else {
-        // Otro error distinto a 404
-        this.loadingSaveCar.set(false);
-      }
     }
   });
 }
@@ -99,7 +74,7 @@ saveCarProduct(carProduct: CarProduct) {
   }
 
   removeCarProduct(idProductToRemove: string) {
-    this.loadingSaveCar.set(false);
+
 
     this.getCar().subscribe({
       next: res => {
@@ -116,20 +91,18 @@ saveCarProduct(carProduct: CarProduct) {
         this.saveCar(car).subscribe({
           next: res => {
             console.log(res);
-            this.loadingSaveCar.set(true);
+
           },
           error: err => {
             console.log(err);
-            this.loadingSaveCar.set(false);
+
           }
         });
       },
       error: err => {
         console.log(err);
       },
-      complete: () => {
-        this.loadingSaveCar.set(true);
-      },
+
     });
   }
 }

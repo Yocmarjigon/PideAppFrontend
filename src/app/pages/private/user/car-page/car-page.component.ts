@@ -35,7 +35,7 @@ export class CarPageComponent implements OnInit {
   total = 0;
   shipping = 0;
   loadding = signal(false);
-  readonly isCarSaved = computed(() => this._carService.loadingSaveCar());
+
   constructor(
     private _carService: CarService,
     private _authService: AuthService
@@ -57,6 +57,7 @@ export class CarPageComponent implements OnInit {
       },
       error: err => {
         console.log(err);
+        this.loadding.set(false);
       },
       complete: () => {
         this.loadding.set(false);
@@ -69,7 +70,7 @@ export class CarPageComponent implements OnInit {
 
     this._carService.saveCarProduct(product);
     this.total = this.getTotal();
-    console.log(this._carService.loadingSaveCar());
+
   }
 
   getTotal() {
