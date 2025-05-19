@@ -25,11 +25,12 @@ export class MediaService {
 
     return this.readAsBase64(image);
   }
+
   async uploadImage(file: File, pathPrefix: string): Promise<string | null> {
     const fileName = `${Date.now()}_${file.name}`;
     const filePath = `${pathPrefix}/${fileName}`;
-
-    const { error } = await this._supabaseClient.storage
+    console.log(file)
+    const {data, error} = await this._supabaseClient.storage
       .from('imagenes')
       .upload(filePath, file, {
         cacheControl: '3600',
@@ -37,25 +38,15 @@ export class MediaService {
       });
 
     if (error) {
-      console.error('Error al subir la imagen:', error.message);
+      console.error('Error al subir la imagen: ', error);
       return null;
     }
+    console.log(data);
 
     // Obtener URL pública
 
 
     return filePath || null;
-  }
-
-  async pickFromGallery(): Promise<string> {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-    });
-
-    return this.readAsBase64(image);
   }
 
   private async readAsBase64(photo: Photo): Promise<string> {

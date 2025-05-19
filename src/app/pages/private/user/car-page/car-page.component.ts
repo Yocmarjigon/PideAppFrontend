@@ -1,7 +1,5 @@
-import { Component, computed, effect, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ImgTopComponent } from '../../../../components/img-top/img-top.component';
-import { ButtonComponent } from '../../../../components/buttons/button/button.component';
-import { ButtonCircleComponent } from '../../../../components/buttons/button-circle/button-circle.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 import { CarService } from 'src/app/service/car/car.service';
@@ -12,7 +10,6 @@ import { CarGetProduct } from 'src/app/models/Car/CarGetProduct';
 import { ButtonModule } from 'primeng/button';
 import { CurrencyPipe } from '@angular/common';
 import { CarProduct } from 'src/app/models/Car/CarProduct';
-import { CarSave } from 'src/app/models/Car/CarSave';
 
 @Component({
   selector: 'app-car-page',

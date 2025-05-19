@@ -105,46 +105,47 @@ export class FormProductComponent implements OnInit {
       this.imgSelect,
       'productos'
     );
-
-
   }
 
   openCategoryForm() {
     this.router.navigateByUrl('/category-form');
   }
   async saveProduct() {
-    this.uploadImg();
+    await this.uploadImg();
+    console.log(this.imageUrl);
 
     const { data } = this._supabaseClient.storage
       .from('imagenes')
       .getPublicUrl(this.imageUrl!);
 
-    console.log(data.publicUrl + ' ---------------------------------');
-    const product = this.productForm.value;
+    console.log(data.publicUrl);
+    if (data.publicUrl) {
 
-    const productP = {
-      description: product.description,
-      img: this.imageUrl,
-      price: product.price,
-      title: product.title,
-      stock: product.stock,
-      available: product.available,
-      category: product.category.idCategory,
-    };
-    console.log(productP);
+      const product = this.productForm.value;
+      const productP = {
+        description: product.description,
+        img: data.publicUrl,
+        price: product.price,
+        title: product.title,
+        stock: product.stock,
+        available: product.available,
+        category: product.category.idCategory,
+      };
+      console.log(productP);
 
-    this.productService.saveProducts(productP).subscribe({
-      next: (v) => {
-        console.log(v);
-        this.showMessageCreateProduct();
-      },
-      complete: () => {
-        this.router.navigateByUrl('/layout-admin/product-admin-page');
-      },
-      error: (e) => {
-        console.log(e);
-      },
-    });
+      this.productService.saveProducts(productP).subscribe({
+        next: v => {
+          console.log(v);
+          this.showMessageCreateProduct();
+        },
+        complete: () => {
+          this.router.navigateByUrl('/layout-admin/product-admin-page');
+        },
+        error: e => {
+          console.log(e);
+        },
+      });
+    }
   }
   showMessageCreateProduct() {
     this.messageService.add({
@@ -157,10 +158,10 @@ export class FormProductComponent implements OnInit {
 
   getCategories() {
     this.categoryService.getCategories().subscribe({
-      next: (c) => {
+      next: c => {
         this.categories = c;
       },
-      error: (e) => {
+      error: e => {
         console.log(e);
       },
     });

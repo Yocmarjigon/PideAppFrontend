@@ -27,54 +27,55 @@ export class CarService {
     return this.http.get<CarGet>(`${this.url}/getByCustomer/${userId}`);
   }
 
-saveCarProduct(carProduct: CarProduct) {
-  this.loadingSaveCar.next(true);
+  saveCarProduct(carProduct: CarProduct) {
+    this.loadingSaveCar.next(false);
 
-  this.getCar().subscribe({
-    next: res => {
-      const existingProducts = res.products ?? [];
+    this.getCar().subscribe({
+      next: res => {
+        const existingProducts = res.products ?? [];
 
-      // Evitar duplicados: buscar si ya existe
-      const index = existingProducts.findIndex(p => p.idProduct === carProduct.idProduct);
-      if (index !== -1) {
-        // Ya existe: actualizar la cantidad
-        existingProducts[index].amount = carProduct.amount ?? 1;
-      } else {
-        // No existe: agregar nuevo
-        existingProducts.push(carProduct as CarGetProduct);
-      }
-
-      const userId = this._authService.extractUserId();
-      const car: CarSave = {
-        customer: userId,
-        products: existingProducts,
-      };
-
-      this.saveCar(car).subscribe({
-        next: res => {
-          console.log(res);
-          this.loadingSaveCar.next(false);
-        },
-        error: err => {
-          console.log(err);
-          this.loadingSaveCar.next(true);
+        // Evitar duplicados: buscar si ya existe
+        const index = existingProducts.findIndex(
+          p => p.idProduct === carProduct.idProduct
+        );
+        if (index !== -1) {
+          // Ya existe: actualizar la cantidad
+          existingProducts[index].amount = carProduct.amount ?? 1;
+        } else {
+          // No existe: agregar nuevo
+          existingProducts.push(carProduct as CarGetProduct);
         }
-      });
-    },
 
-    error: err => {
-      console.log(err);
+        const userId = this._authService.extractUserId();
+        const car: CarSave = {
+          customer: userId,
+          products: existingProducts,
+        };
 
-    }
-  });
-}
+        this.saveCar(car).subscribe({
+          next: res => {
+            console.log(res);
+            this.loadingSaveCar.next(false);
+          },
+          error: err => {
+            console.log(err);
+            this.loadingSaveCar.next(false);
+          },
+        });
+      },
+
+      error: err => {
+        console.log(err);
+      },
+    });
+  }
 
   public saveCar(car: CarSave) {
     return this.http.post<Response>(`${this.url}/save`, car);
   }
 
   removeCarProduct(idProductToRemove: string) {
-
+    this.loadingSaveCar.next(true);
 
     this.getCar().subscribe({
       next: res => {
@@ -91,18 +92,21 @@ saveCarProduct(carProduct: CarProduct) {
         this.saveCar(car).subscribe({
           next: res => {
             console.log(res);
-
+            this.loadingSaveCar.next(true);
           },
           error: err => {
             console.log(err);
-
-          }
+            this.loadingSaveCar.next(false);
+          },
         });
       },
       error: err => {
         console.log(err);
+        this.loadingSaveCar.next(false);
       },
-
+      complete: () => {
+        this.loadingSaveCar.next(false);
+      },
     });
   }
 }
