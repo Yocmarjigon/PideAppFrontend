@@ -28,6 +28,7 @@ import { PataconPageComponent } from './pages/private/user/patacon-page/patacon-
 import { OrderAdminPageComponent } from './pages/private/admin/order-admin-page/order-admin-page.component';
 import { PerfilAdminPageComponent } from './pages/private/admin/perfil-admin-page/perfil-admin-page.component';
 import { SaleAdminPageComponent } from './pages/private/admin/sale-admin-page/sale-admin-page.component';
+import { SalePageComponent } from './pages/private/user/sale-page/sale-page.component';
 
 export const routes: Routes = [
   //rutas publicas
@@ -86,6 +87,10 @@ export const routes: Routes = [
         component: ArepaPageComponent,
       },
       {
+        path: 'sale-page',
+        component: SalePageComponent,
+      },
+      {
         path: 'patacon-page',
         component: PataconPageComponent,
       },
@@ -109,7 +114,6 @@ export const routes: Routes = [
     path: 'description-page/:id',
     canActivate: [authGuardCustomer],
     component: DescriptionProductPageComponent,
-
   },
   /* Rutas de las paginas administrativas */
   {

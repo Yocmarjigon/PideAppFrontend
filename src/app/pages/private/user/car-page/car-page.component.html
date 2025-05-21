@@ -83,7 +83,10 @@
 
       <!-- Nuevo botón de compra mejorado -->
       <button
-        class="w-full mt-4 bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-2 text-[1em] shadow-md">
+        class="w-full mt-4 bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-2 text-[1em] shadow-md"
+        (click)="confirmBuy()"
+        >
+
         <span class="pi pi-shopping-bag text-[1.2em]"></span> Comprar ahora
       </button>
     </div>

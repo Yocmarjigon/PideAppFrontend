@@ -23,4 +23,8 @@ export class CustomerService {
       context: new HttpContext().set(SKIP_INTERCEPTOR, true),
     });
   }
+
+  public getIdCustomer(id: string ): Observable<Customer> {
+    return this.http.get<Customer>(`${this.url}/get/${id}`);
+  }
 }

@@ -16,6 +16,7 @@ export class CarService {
   private url = `${enviroment_export}/car`;
   private carProducts: CarProduct[] = [];
   private idUser = '';
+  public existingProducts = signal<CarProduct[]>([]);
   public loadingSaveCar = new BehaviorSubject<boolean>(false);
   constructor(
     private http: HttpClient,
@@ -32,24 +33,24 @@ export class CarService {
 
     this.getCar().subscribe({
       next: res => {
-        const existingProducts = res.products ?? [];
+        this.existingProducts.set(res.products ?? []);
 
         // Evitar duplicados: buscar si ya existe
-        const index = existingProducts.findIndex(
+        const index = this.existingProducts().findIndex(
           p => p.idProduct === carProduct.idProduct
         );
         if (index !== -1) {
           // Ya existe: actualizar la cantidad
-          existingProducts[index].amount = carProduct.amount ?? 1;
+          this.existingProducts()[index].amount = carProduct.amount ?? 1;
         } else {
           // No existe: agregar nuevo
-          existingProducts.push(carProduct as CarGetProduct);
+          this.existingProducts().push(carProduct as CarGetProduct);
         }
 
         const userId = this._authService.extractUserId();
         const car: CarSave = {
           customer: userId,
-          products: existingProducts,
+          products: this.existingProducts(),
         };
 
         this.saveCar(car).subscribe({

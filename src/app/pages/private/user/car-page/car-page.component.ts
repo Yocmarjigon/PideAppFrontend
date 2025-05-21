@@ -10,6 +10,8 @@ import { CarGetProduct } from 'src/app/models/Car/CarGetProduct';
 import { ButtonModule } from 'primeng/button';
 import { CurrencyPipe } from '@angular/common';
 import { CarProduct } from 'src/app/models/Car/CarProduct';
+import { Router } from '@angular/router';
+import { SendDataComponentsService } from 'src/app/service/utils/send-data-components.service';
 
 @Component({
   selector: 'app-car-page',
@@ -35,7 +37,9 @@ export class CarPageComponent implements OnInit {
 
   constructor(
     private _carService: CarService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private router: Router,
+    private _sendDataService: SendDataComponentsService
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +66,21 @@ export class CarPageComponent implements OnInit {
     });
   }
 
+  confirmBuy() {
+    const car = {
+      products: this.products,
+      total: this.total,
+      shipping: this.shipping,
+      subtotal: this.subtotal,
+    };
+    this._sendDataService.setDataCar(car);
+    this.router.navigate(['/layout/sale-page']);
+  }
   updateCar(product: CarProduct, amount: number) {
     product.amount = amount;
 
     this._carService.saveCarProduct(product);
     this.total = this.getTotal();
-
   }
 
   getTotal() {
