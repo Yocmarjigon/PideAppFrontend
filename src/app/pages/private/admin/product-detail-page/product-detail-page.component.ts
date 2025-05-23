@@ -74,7 +74,6 @@ export class ProductDetailPageComponent implements OnInit {
     private _messageService: MessageService,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router,
     private _confirmationService: ConfirmationService
   ) {
     this.productForm = fb.group({

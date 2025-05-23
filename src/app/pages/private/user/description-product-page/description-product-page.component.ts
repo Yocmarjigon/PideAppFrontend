@@ -68,6 +68,7 @@ export class DescriptionProductPageComponent implements OnInit {
       idProduct: this.product.idProduct,
       amount: this.quantity,
     });
+
     this._carService.loadingSaveCar.subscribe({
       next: loading => {
         this.loading.set(loading);

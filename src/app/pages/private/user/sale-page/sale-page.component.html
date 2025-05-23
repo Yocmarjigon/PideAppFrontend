@@ -1,4 +1,4 @@
-<section>
+<section class="pb-24">
   <app-nav-bar-back
     [icon]="'pi pi-chevron-left'"
     [router]="'/layout/home-page'"></app-nav-bar-back>
@@ -71,12 +71,30 @@
       <!-- Nuevo botón de compra mejorado -->
       <button
         class="w-full mt-4 bg-green-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-2 text-[1em] shadow-md"
-        (click)="buy()">
+        (click)="buy()"
+        >
         <span class="pi pi-shopping-bag text-[1.2em]"></span> Comprar ahora
       </button>
     </div>
   </div>
   <div>
+    <div class="flex flex-col gap-1 justify-center items-center">
+      <span class="text-[1.1em] font-semibold text-gray-700">Comprobante de pago NEQUI</span>
+      <p-fileupload
+        #fu
+        mode="advanced"
+        chooseLabel="Choose"
+        chooseIcon="pi pi-upload"
+        uploadIcon="pi pi-cloud-upload"
+        cancelIcon="pi pi-times"
+        name="demo[]"
+        accept="image/*"
+        maxFileSize="1000000"
+        [showUploadButton]="false"
+        [previewWidth]="200"
+        (onSelect)="onFileChange($event)" />
+    </div>
     <img src="/assets/images/qr-nequi-test.webp" alt="">
+
   </div>
 </section>

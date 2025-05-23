@@ -38,7 +38,7 @@
                 <p-button
                   icon="pi pi-trash"
                   severity="danger"
-                  (onClick)="confirmDelete($event, category.idCategory)" />
+                  (onClick)="confirmDelete($event, category.idCategory!)" />
               </div>
             </div>
           }
@@ -46,4 +46,7 @@
       </p-dataView>
     }
   </div>
+  @if (showModal()) {
+    <p-confirmDialog (onHide)="onDialogHide()"></p-confirmDialog>
+  }
 </section>

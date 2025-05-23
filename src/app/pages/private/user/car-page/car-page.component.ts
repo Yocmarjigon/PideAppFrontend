@@ -28,12 +28,12 @@ import { SendDataComponentsService } from 'src/app/service/utils/send-data-compo
   styleUrl: './car-page.component.scss',
 })
 export class CarPageComponent implements OnInit {
-  car: CarGet = {};
-  products: CarGetProduct[] = [];
-  subtotal = 0;
-  total = 0;
-  shipping = 0;
-  loadding = signal(false);
+  car = signal<CarGet>({});
+  products = signal<CarGetProduct[]>([]);
+  subtotal = signal(0);
+  total = signal(0);
+  shipping = signal(0);
+  loadding = signal(true);
 
   constructor(
     private _carService: CarService,
@@ -50,11 +50,13 @@ export class CarPageComponent implements OnInit {
     this.loadding.set(true);
     this._carService.getCar().subscribe({
       next: res => {
-        this.car = res;
-        this.products = res.products!;
-        this.subtotal = res.subtotal!;
-        this.total = res.total!;
-        this.shipping = res.shipping!;
+
+        console.log(res, " ", +1 );
+        this.car.set(res);
+        this.products.set(res.products!);
+        this.subtotal.set(res.subtotal!);
+        this.total.set(res.total!);
+        this.shipping.set(res.shipping!);
       },
       error: err => {
         console.log(err);
@@ -68,10 +70,11 @@ export class CarPageComponent implements OnInit {
 
   confirmBuy() {
     const car = {
-      products: this.products,
-      total: this.total,
-      shipping: this.shipping,
-      subtotal: this.subtotal,
+      idCar: this.car().idCar,
+      products: this.products(),
+      total: this.total(),
+      shipping: this.shipping(),
+      subtotal: this.subtotal(),
     };
     this._sendDataService.setDataCar(car);
     this.router.navigate(['/layout/sale-page']);
@@ -80,22 +83,22 @@ export class CarPageComponent implements OnInit {
     product.amount = amount;
 
     this._carService.saveCarProduct(product);
-    this.total = this.getTotal();
+    this.total.set(this.getTotal());
   }
 
   getTotal() {
     let total = 0;
-    this.products.forEach(p => {
+    this.products().forEach(p => {
       total += p.price * p.amount!;
     });
     return total;
   }
 
   deleteProduct(product: CarProduct) {
-    this.products = this.products.filter(
-      p => p.idProduct !== product.idProduct
+    this.products.set(
+      this.products().filter(p => p.idProduct !== product.idProduct)
     );
-    this.total = this.getTotal();
+    this.total.set(this.getTotal());
     this._carService.removeCarProduct(product.idProduct!);
   }
 }

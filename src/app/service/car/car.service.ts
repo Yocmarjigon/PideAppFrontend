@@ -29,7 +29,7 @@ export class CarService {
   }
 
   saveCarProduct(carProduct: CarProduct) {
-    this.loadingSaveCar.next(false);
+    this.loadingSaveCar.next(true);
 
     this.getCar().subscribe({
       next: res => {
@@ -56,6 +56,9 @@ export class CarService {
         this.saveCar(car).subscribe({
           next: res => {
             console.log(res);
+
+          },
+          complete: () => {
             this.loadingSaveCar.next(false);
           },
           error: err => {

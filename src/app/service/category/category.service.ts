@@ -10,19 +10,18 @@ import enviroment_export from 'src/app/enviroment_back';
 })
 export class CategoryService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private url = `${enviroment_export}/category`
+  private url = `${enviroment_export}/category`;
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.url}/get`);
   }
 
-  saveCategory(category: Category): Observable<any>{
-    return this.http.post(`${this.url}/save`, category)
+  saveCategory(category: Category): Observable<Response> {
+    return this.http.post<Response>(`${this.url}/save`, category);
   }
 
-  deleteCategory(id: string): Observable<any>{
-    return this.http.delete(`${this.url}/delete/${id}`)
+  deleteCategory(id: string): Observable<Response> {
+    return this.http.delete<Response>(`${this.url}/delete/${id}`);
   }
-
 }

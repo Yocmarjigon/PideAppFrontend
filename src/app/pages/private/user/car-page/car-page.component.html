@@ -4,7 +4,7 @@
     <app-spinner></app-spinner>
   } @else {
     <!-- Lista de productos -->
-    @for (product of products; track $index) {
+    @for (product of products(); track $index) {
       <div class="products-container mt-[20px] mx-[15px] flex flex-col gap-4">
         <div
           class="product flex rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
@@ -64,20 +64,20 @@
       <div class="flex justify-between mb-2 text-sm text-gray-600">
         <span>Subtotal</span>
         <span>{{
-          subtotal | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+          subtotal() | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
         }}</span>
       </div>
       <div class="flex justify-between mb-2 text-sm text-gray-600">
         <span>Envío</span>
         <span>{{
-          shipping | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+          shipping() | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
         }}</span>
       </div>
       <div
         class="flex justify-between text-md font-semibold text-gray-800 border-t border-gray-200 pt-2">
         <span>Total a pagar</span>
         <span>{{
-          total | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
+          total() | currency: 'COP' : 'symbol' : '1.0-0' : 'es-CO'
         }}</span>
       </div>
 

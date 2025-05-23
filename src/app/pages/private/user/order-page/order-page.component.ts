@@ -14,4 +14,6 @@ import { FormsModule } from '@angular/forms';
 export class OrderPageComponent {
   total = 5000;
   value = 1
+
+
 }
