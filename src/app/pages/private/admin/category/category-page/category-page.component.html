@@ -15,7 +15,7 @@
         class="w-full" />
     </p-inputGroup>
   </div>
-  <div>
+  <div class="pt-3 pb-3">
     <p-button
       icon="pi pi-plus"
       severity="success"
@@ -23,7 +23,7 @@
       (onClick)="openCategoryForm()"
       styleClass="p-button-sm md:p-button" />
   </div>
-  <div class="flex-1 overflow-y-auto">
+  <div class="flex-1 overflow-y-auto mt-3">
     @if (loading()) {
       <app-data-view-loading></app-data-view-loading>
     } @else {
